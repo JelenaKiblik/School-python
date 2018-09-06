@@ -10,18 +10,18 @@ def main():
     if scool == "":
         print("School was not inserted!")
     if (name != "") and (scool != ""):
-        print(name + " , welcome to " + scool)
+        print(f"{name} , welcome to {scool}")
 
-    m = float(input("How much do you weigh?"))
-    p = float(input("How tall are you?"))
-    kehamassiindeks = round(m / (p ** 2))
+    m = float(input("Mass (kg): "))
+    p = float(input("Height (m): "))
+    kehamassiindeks = round(m / (p ** 2), 1)
 
     if kehamassiindeks < 18.5:
-        print(str(kehamassiindeks) + ", alakaaluline")
+        print(f"{kehamassiindeks}, alakaaluline")
     elif (kehamassiindeks >= 18.5) and (kehamassiindeks < 24.9):
-        print(str(kehamassiindeks) + ", normaalkaal")
+        print(f"{kehamassiindeks}, normaalkaal")
     else:
-        print(str(kehamassiindeks) + ", ülekaaluline")
+        print(f"{kehamassiindeks}, ülekaaluline")
 
 
 if __name__ == '__main__':
