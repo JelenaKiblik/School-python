@@ -21,7 +21,7 @@ def main():
     elif (kehamassiindeks >= 18.5) and (kehamassiindeks < 24.9):
         print(str(kehamassiindeks) + ", normaalkaal")
     else:
-        print(str(kehamassiindeks) + " ülekaaluline")
+        print(str(kehamassiindeks) + ", ülekaaluline")
 
 
 if __name__ == '__main__':
