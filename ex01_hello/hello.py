@@ -4,17 +4,17 @@
 def main():
     """Write a function which prints message "Hello world!" to the console."""
     name = input("What's your name? ")
-    name_scool = input("Where do you study? ")
+    name_school = input("Where do you study? ")
 
-    if (name == "") and (name_scool != ""):
+    if (name == "") and (name_school != ""):
         print("Name was not inserted!")
-    elif (name_scool == "") and (name != ""):
+    elif (name_school == "") and (name != ""):
         print("School was not inserted!")
-    elif (name_scool == "") and (name == ""):
+    elif (name_school == "") and (name == ""):
         print("Name was not inserted!")
         print("School was not inserted!")
     else:
-        print(f"{name} , welcome to {name_scool}")
+        print(f"{name} , welcome to {name_school}")
         m = float(input("Mass (kg): "))
         p = float(input("Height (m): "))
         kehamassiindeks = round(m / (p ** 2), 1)
