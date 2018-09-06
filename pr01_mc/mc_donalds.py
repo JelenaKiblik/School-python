@@ -2,11 +2,7 @@
 
 
 def main():
-    """
-        Write a function which prints message "Hello world!" to the console.
-
-        The function should not return anything or do anything else except printing the specified message.
-        """
+    """Write a function which prints message "Hello world!" to the console."""
     print("Welcome to McDonald's!")
     drink = input("What do you want to drink?")
     print(drink + " with ice cubes is my favorite too!")
