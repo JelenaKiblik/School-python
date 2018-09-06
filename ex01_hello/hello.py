@@ -4,12 +4,9 @@
 def main():
     """Write a function which prints message "Hello world!" to the console."""
     name = input("What's your name? ")
-    scool = input("Where do you study? ")
     if name == "":
         print("Name was not inserted!")
-    else:
-        print(name + " , welcome to " + scool)
-
+    scool = input("Where do you study? ")
     if scool == "":
         print("School was not inserted!")
     else:
