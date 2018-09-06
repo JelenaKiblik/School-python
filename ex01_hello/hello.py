@@ -12,8 +12,8 @@ def main():
     if (name != "") and (scool != ""):
         print(f"{name} , welcome to {scool}")
 
-    m = float(input("Mass (kg): "))
-    p = float(input("Height (m): "))
+    m = int(input("Mass (kg): "))
+    p = int(input("Height (m): "))
     kehamassiindeks = round(m / (p ** 2), 1)
 
     if kehamassiindeks < 18.5:
