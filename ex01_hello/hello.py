@@ -15,17 +15,16 @@ def main():
         print("School was not inserted!")
     else:
         print(f"{name} , welcome to {name_scool}")
+        m = float(input("Mass (kg): "))
+        p = float(input("Height (m): "))
+        kehamassiindeks = round(m / (p ** 2), 1)
 
-    m = int(input("Mass (kg): "))
-    p = int(input("Height (m): "))
-    kehamassiindeks = round(m / (p ** 2), 1)
-
-    if kehamassiindeks < 18.5:
-        print(f"{kehamassiindeks}, alakaaluline")
-    elif (kehamassiindeks >= 18.5) and (kehamassiindeks < 24.9):
-        print(f"{kehamassiindeks}, normaalkaal")
-    else:
-        print(f"{kehamassiindeks}, ülekaaluline")
+        if kehamassiindeks < 18.5:
+            print(f"{kehamassiindeks}, alakaaluline")
+        elif (kehamassiindeks >= 18.5) and (kehamassiindeks < 24.9):
+            print(f"{kehamassiindeks}, normaalkaal")
+        else:
+            print(f"{kehamassiindeks}, ülekaaluline")
 
 
 if __name__ == '__main__':
