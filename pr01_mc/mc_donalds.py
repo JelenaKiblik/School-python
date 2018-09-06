@@ -1,3 +1,6 @@
+"""Hello world."""
+
+
 def main():
     print("Welcome to McDonald's!")
     drink = input("What do you want to drink?")
@@ -10,7 +13,3 @@ def main():
         print("Hmm, that's weird.")
     else:
         print("We only serve junk food.")
-
-
-if __name__ == '__main__':
-    main()
