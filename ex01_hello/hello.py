@@ -17,11 +17,11 @@ def main():
     kehamassiindeks = round(m / (p ** 2))
 
     if kehamassiindeks < 18.5:
-        print(str(kehamassiindeks) + " Alakaaluline")
+        print(str(kehamassiindeks) + ", alakaaluline")
     elif (kehamassiindeks >= 18.5) and (kehamassiindeks < 24.9):
-        print(str(kehamassiindeks) + " Normaalkaal")
+        print(str(kehamassiindeks) + ", normaalkaal")
     else:
-        print(str(kehamassiindeks) + " ja üle Ülekaaluline")
+        print(str(kehamassiindeks) + " ülekaaluline")
 
 
 if __name__ == '__main__':
