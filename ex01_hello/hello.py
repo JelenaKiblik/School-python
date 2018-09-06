@@ -7,6 +7,9 @@ def main():
     scool = input("Where do you study? ")
     if name == "":
         print("Name was not inserted!")
+    else:
+        print(name + " , welcome to " + scool)
+
     if scool == "":
         print("School was not inserted!")
     else:
