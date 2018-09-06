@@ -14,7 +14,7 @@ def main():
 
     m = float(input("How much do you weigh?"))
     p = float(input("How tall are you?"))
-    kehamassiindeks = float(m / (p ** 2))
+    kehamassiindeks = round(m / (p ** 2))
 
     if kehamassiindeks < 18.5:
         print(str(kehamassiindeks) + " Alakaaluline")
