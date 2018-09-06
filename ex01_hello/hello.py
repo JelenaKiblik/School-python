@@ -9,7 +9,7 @@ def main():
     scool = input("Where do you study? ")
     if scool == "":
         print("School was not inserted!")
-    else:
+    if (name != "") and (scool != ""):
         print(name + " , welcome to " + scool)
 
     m = float(input("How much do you weigh?"))
