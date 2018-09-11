@@ -20,8 +20,8 @@ def find_circle_info(d, x, y):
         place = "perimeter"
     else:
         place = "outside"
-    return f"Circle with perimeter of {perimeter} units and area of {area} units has point ({x},{y}) on its {place}"
+    return f"Circle with perimeter of {perimeter} units and area of {area} units has point ({x},{y}) on its {place}."
 
 
 if __name__ == "__main__":
-    find_circle_info(10, 9, 8)
+    print(find_circle_info(10, 9, 8))
