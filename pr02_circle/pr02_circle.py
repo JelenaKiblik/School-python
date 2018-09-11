@@ -15,6 +15,7 @@ def find_circle_info(d, x, y):
     perimeter = 2 * math.pi * r
     area = math.pi * (r ** 2)
     c = (x ** 2 + y ** 2) ** 0.5
+
     if c < r:
         place = "inside"
     elif c == r:
