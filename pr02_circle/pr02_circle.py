@@ -3,8 +3,7 @@ import math
 
 
 def find_circle_info(d, x, y):
-    """Write a function which finds perimeter, area and where given point is placed in
-    relation to the circle with diameter d."""
+    """Write a function which prints message "Hello world!" to the console."""
     r = d / 2
     perimeter = 2 * math.pi * r
     area = math.pi * (r ** 2)
