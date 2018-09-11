@@ -27,4 +27,4 @@ def find_circle_info(d, x, y):
 
 
 if __name__ == "__main__":
-    print(find_circle_info(10, 9, 8))
+    find_circle_info(10, 9, 8)
