@@ -11,8 +11,8 @@ def convert_polar_to_cartesian(r, phi):
     :param phi: polar angle, or azimuth in degrees.
     :return: tuple, of x- and y-coordinate of the point
     """
-    x = round(r * math.cos(math.radians(phi)),2)
-    y = round(r * math.sin(math.radians(phi)),2)
+    x = round(r * math.cos(math.radians(phi)), 2)
+    y = round(r * math.sin(math.radians(phi)), 2)
     return x, y
 
 
@@ -30,7 +30,14 @@ def convert_cartesian_to_polar(x, y):
     :param y: y-coordinate of given point
     :return: tuple, of polar radius and polar angle in degrees.
     """
-    pass
+    r = (x**2 + y**2)**0.5
+    if y == 0:
+        phi = 1
+    elif x == 0:
+        phi = 2
+    else:
+        phi = 3
+    return r, phi
 
 
 if __name__ == '__main__':
