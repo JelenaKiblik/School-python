@@ -1,6 +1,7 @@
 """Polar and cartesian points converter."""
 
 import math
+from math import radians, degrees, pi
 
 
 def convert_polar_to_cartesian(r, phi):
@@ -31,20 +32,19 @@ def convert_cartesian_to_polar(x, y):
     :return: tuple, of polar radius and polar angle in degrees.
     """
     r = round((x**2 + y**2)**0.5, 2)
-    if x >= 0:
-        phi = 1
+    if x > 0:
+        phi = degrees(math.atan(y / x))
     if (x < 0) and (y >= 0):
-        phi = 2
+        phi = degrees(math.atan(y / x) + math.pi)
     if (x < 0) and (y < 0):
-        phi = 3
+        phi = degrees(math.atan(y / x) - math.pi)
     if (x == 0) and (y > 0):
-        phi = 4
+        phi = degrees(math.pi / 2)
     if (x == 0) and (y < 0):
-        phi = 6
+        phi = degrees(- math.pi / 2)
     if (x == 0) and (y == 0):
-        phi = 0
-
-    return r, phi
+        phi = degrees(0)
+    return r, round(phi, 2)
 
 
 if __name__ == '__main__':
