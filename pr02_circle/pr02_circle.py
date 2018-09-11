@@ -10,10 +10,10 @@ def find_circle_info(d, x, y):
     The function should print "Circle with perimeter of {perimeter} units and area of {area} units has point ({x},{y}) on its {place}".
     :return: None
     """
-    r = d/2
-    perimeter = 2*math.pi*r
-    area = math.pi*r**2
-    place = ""
+    r = d / 2
+    perimeter = 2 * math.pi * r
+    area = math.pi * r ** 2
+    place = "in"
     return f"Circle with perimeter of {perimeter} units and area of {area} units has point ({x},{y}) on its {place}."
 
 
