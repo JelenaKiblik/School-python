@@ -15,16 +15,14 @@ def find_circle_info(d, x, y):
     perimeter = 2 * math.pi * r
     area = math.pi * (r ** 2)
     c = (x ** 2 + y ** 2) ** 0.5
-
     if c < r:
         place = "inside"
     elif c == r:
         place = "perimeter"
     else:
         place = "outside"
-
     return f"Circle with perimeter of {perimeter} units and area of {area} units has point ({x}, {y}) on its {place}"
 
 
 if __name__ == '__main__':
-    print(find_circle_info(10, 9, 8))
+    find_circle_info(10, 9, 8)
