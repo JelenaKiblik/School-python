@@ -17,11 +17,13 @@ def find_circle_info(d, x, y):
     c = (x ** 2 + y ** 2) ** 0.5
     if c < r:
         place = "inside"
+        return f"Circle with perimeter of {perimeter} units and area of {area} units has point ({x}, {y}) on its {place}"
     elif c == r:
         place = "perimeter"
+        return f"Circle with perimeter of {perimeter} units and area of {area} units has point ({x}, {y}) on its {place}"
     else:
         place = "outside"
-    return f"Circle with perimeter of {perimeter} units and area of {area} units has point ({x}, {y}) on its {place}"
+        return f"Circle with perimeter of {perimeter} units and area of {area} units has point ({x}, {y}) on its {place}"
 
 
 if __name__ == "__main__":
