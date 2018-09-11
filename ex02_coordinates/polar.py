@@ -1,7 +1,7 @@
 """Polar and cartesian points converter."""
 
 import math
-from math import radians, degrees, pi
+from math import degrees
 
 
 def convert_polar_to_cartesian(r, phi):
