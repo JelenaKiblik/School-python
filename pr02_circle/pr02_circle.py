@@ -4,11 +4,10 @@ import math
 
 def find_circle_info(d, x, y):
     """
-    Write a function which finds perimeter, area and where given point is placed in relation to the circle with
-    diameter d. Place: inside, perimeter, outside.
+        Summary of the func.
 
-        The function should print "Circle with perimeter of {perimeter} units and area of {area} units has point ({x}, {y}) on its {place}".
-        :return: None
+        Description of the func. This function takes one parameter and does nothing.
+        :return: What the function returns, data type
         """
     r = d / 2
     perimeter = 2 * math.pi * r
