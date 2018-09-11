@@ -25,5 +25,5 @@ def find_circle_info(d, x, y):
     return f"Circle with perimeter of {perimeter} units and area of {area} units has point ({x}, {y}) on its {place}"
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     find_circle_info(10, 9, 8)
