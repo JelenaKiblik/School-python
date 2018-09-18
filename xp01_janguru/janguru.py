@@ -14,7 +14,23 @@ def meet_me(pos1, jump_distance1, sleep1, pos2, jump_distance2, sleep2):
 
     :return: positsioon, kus nad esimest korda kohtuvad
     """
-    pass
+    i = 0
+    if pos1 < pos2:
+        while pos1 < pos2:
+            if (i % sleep1 == 0):
+                pos1 += jump_distance1
+                pos2 += jump_distance2
+            i += 1
+            print(i)
+        pass
+
+    if pos1 > pos2:
+        for i in range(34):
+            pos1 += jump_distance1 / sleep1
+            pos2 += jump_distance2 / sleep2
+        print(pos1)
+        print(pos2)
+        pass
 
 
 if __name__ == '__main__':
