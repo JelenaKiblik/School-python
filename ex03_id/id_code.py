@@ -33,7 +33,10 @@ def check_year_number_two_digits(year_number: int):
     :param year_number: int
     :return: boolean
     """
-    pass
+    if (year_number >= 0) and (year_number <= 99):
+        return True
+    else:
+        return False
 
 
 def check_month_number(month_number: int):
@@ -43,7 +46,10 @@ def check_month_number(month_number: int):
     :param month_number: int
     :return: boolean
     """
-    pass
+    if (month_number >= 0) and (month_number <= 12):
+        return True
+    else:
+        return False
 
 
 def check_day_number(year_number: int, month_number: int, day_number: int):
@@ -56,7 +62,38 @@ def check_day_number(year_number: int, month_number: int, day_number: int):
     :param day_number: int
     :return: boolean
     """
-    pass
+    if year_number % 4 != 0 or (year_number % 100 == 0 and year_number % 400 != 0):
+        if month_number == 1 or 3 or 5 or 7 or 8 or 10 or 12:
+            if day_number == 31:
+                return True
+            else:
+                return False
+        if month_number == 2:
+            if day_number == 29:
+                return True
+            else:
+                return False
+        if month_number == 4 or 6 or 9 or 11:
+            if day_number == 30:
+                return True
+            else:
+                return False
+    else:
+        if month_number == 1 or 3 or 5 or 7 or 8 or 10 or 12:
+            if day_number == 31:
+                return True
+            else:
+                return False
+        if month_number == 2:
+            if day_number == 28:
+                return True
+            else:
+                return False
+        if month_number == 4 or 6 or 9 or 11:
+            if day_number == 30:
+                return True
+            else:
+                return False
 
 
 def check_leap_year(year_number: int):
