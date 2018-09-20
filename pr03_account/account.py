@@ -39,7 +39,7 @@ def print_ok():
 
 def main():
     """Rakenduse kokkupanek."""
-    name = ask_name()
+    ask_name()
     progress_bar("Creating account", 5)
     print_ok()
 
