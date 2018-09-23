@@ -131,24 +131,16 @@ def check_control_number(id_code: str):
     :param id_code: string
     :return: boolean
     """
-    kordajad_1 = (1, 2, 3, 4, 5, 6, 7, 8, 9, 1)
-    kordajad_2 = (3, 4, 5, 6, 7, 8, 9, 1, 2, 3)
-    l1 = [int(n) for n in list(id_code)]
-    l2 = list(kordajad_1)
-    l3 = list(kordajad_2)
-    summa = []
+    if id_code.isalpha() is False:
+        kordajad_1 = (1, 2, 3, 4, 5, 6, 7, 8, 9, 1)
+        kordajad_2 = (3, 4, 5, 6, 7, 8, 9, 1, 2, 3)
+        l1 = [int(n) for n in list(id_code)]
+        l2 = list(kordajad_1)
+        l3 = list(kordajad_2)
+        summa = []
 
-    for i in range(0, len(l2)):
-        summa.append(l2[i] * l1[i])
-    total = sum(summa)
-    if total % 11 != 10:
-        if total % 11 == l1[-1]:
-            return True
-        else:
-            return False
-    else:
         for i in range(0, len(l2)):
-            summa.append(l3[i] * l1[i])
+            summa.append(l2[i] * l1[i])
         total = sum(summa)
         if total % 11 != 10:
             if total % 11 == l1[-1]:
@@ -156,11 +148,22 @@ def check_control_number(id_code: str):
             else:
                 return False
         else:
-            control_number = 0
-            if control_number == l1[-1]:
-                return True
+            for i in range(0, len(l2)):
+                summa.append(l3[i] * l1[i])
+            total = sum(summa)
+            if total % 11 != 10:
+                if total % 11 == l1[-1]:
+                    return True
+                else:
+                    return False
             else:
-                return False
+                control_number = 0
+                if control_number == l1[-1]:
+                    return True
+                else:
+                    return False
+    else:
+        return False
 
 
 if __name__ == '__main__':
@@ -211,14 +214,17 @@ def get_data_from_id(id_code: str):
     :param id_code: str
     :return: str
     """
-    gender = int(id_code[0])
-    year = int(id_code[1:3])
-    month = id_code[3:5]
-    day = id_code[5:7]
-    if check_your_id(id_code) is True:
-        return f"This is a {get_gender(gender)} born on {day}.{month}.{get_full_year(gender, year)}"
+    if id_code.isalpha() is False:
+        gender = int(id_code[0])
+        year = int(id_code[1:3])
+        month = id_code[3:5]
+        day = id_code[5:7]
+        if check_your_id(id_code) is True:
+            return f"This is a {get_gender(gender)} born on {day}.{month}.{get_full_year(gender, year)}"
+        else:
+            return "Given invalid ID code!"
     else:
-        return "Given invalid ID code!"
+        return False
 
 
 def get_gender(gender_number: int):
