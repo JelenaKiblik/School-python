@@ -141,9 +141,10 @@ def check_control_number(id_code: str):
     for i in range(0, len(l2)):
         summa.append(l2[i] * l1[i])
     total = sum(summa)
+    last_number = total % 11
 
-    if total % 11 != 10:
-        if total % 11 == l1[-1]:
+    if (last_number >= 0) and (last_number < 10):
+        if last_number == l1[-1]:
             return True
         else:
             return False
@@ -151,9 +152,10 @@ def check_control_number(id_code: str):
         for i in range(0, len(l3)):
             summa.append(l3[i] * l1[i])
         total = sum(summa)
+        last_number = total % 11
 
-        if total % 11 != 10:
-            if total % 11 == l1[-1]:
+        if (last_number >= 0) and (last_number < 10):
+            if last_number == l1[-1]:
                 return True
             else:
                 return False
