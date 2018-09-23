@@ -133,35 +133,39 @@ def check_control_number(id_code: str):
     """
     kordajad_1 = (1, 2, 3, 4, 5, 6, 7, 8, 9, 1)
     kordajad_2 = (3, 4, 5, 6, 7, 8, 9, 1, 2, 3)
-    l1 = [int(n) for n in list(id_code)]
-    l2 = list(kordajad_1)
-    l3 = list(kordajad_2)
-    summa = []
+    code_list = [int(n) for n in list(id_code)]
+    check_numbers1 = list(kordajad_1)
+    check_numbers2 = list(kordajad_2)
+    multiply = []
 
-    for i in range(0, len(l2)):
-        summa.append(l2[i] * l1[i])
-    total = sum(summa)
-    last_number = total % 11
-    if (last_number >= 0) and (last_number < 10):
-        if last_number == l1[-1]:
+    for i in range(0, len(check_numbers1)):
+        multiply.append(check_numbers1[i] * code_list[i])
+    summa = sum(multiply)
+    check_number = summa % 11
+
+    if (check_number >= 0) and (check_number < 10):
+        if check_number == code_list[-1]:
             return True
         else:
-            for i in range(0, len(l3)):
-                summa.append(l3[i] * l1[i])
-            total = sum(summa)
-            last_number = total % 11
+            return False
 
-            if (last_number >= 0) and (last_number < 10):
-                if last_number == l1[-1]:
+    elif check_number == 10:
+        for i in range(0, len(check_numbers2)):
+            multiply.append(check_numbers2[i] * code_list[i])
+        summa = sum(multiply)
+        check_number2 = summa % 11
+
+        if (check_number2 >= 0) and (check_number2 < 10):
+            if check_number2 == code_list[-1]:
+                return True
+            elif check_number2 == 10:
+                check_number2 = 0
+                if check_number2 == code_list[-1]:
                     return True
                 else:
                     return False
-            else:
-                control_number = 0
-                if control_number == l1[-1]:
-                    return True
-                else:
-                    return False
+    else:
+        return False
 
 
 if __name__ == '__main__':
