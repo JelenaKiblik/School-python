@@ -64,7 +64,7 @@ def check_day_number(year_number: int, month_number: int, day_number: int):
     :param day_number: int
     :return: boolean
     """
-    max_days = 28 + (month_number + math.floor(month_number/8)) % 2 + 2 % month_number + 2 * math.floor(1/month_number)
+    max_days = 28 + (month_number + math.floor(month_number / 8)) % 2 + 2 % month_number + 2 * math.floor( 1 / month_number)
     if check_leap_year(year_number) is False:
         if (day_number > 0) and (day_number <= max_days):
             return True
