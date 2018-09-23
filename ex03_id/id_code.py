@@ -135,7 +135,7 @@ def check_control_number(id_code: str):
             return False
     else:
         for i in range(0, len(l2)):
-            summa.append(l2[i] * l1[i])
+            summa.append(l3[i] * l1[i])
         total = sum(summa)
         if total % 11 != 10:
             if total % 11 == l1[-1]:
@@ -148,7 +148,6 @@ def check_control_number(id_code: str):
                 return True
             else:
                 return False
-
 
 
 def get_data_from_id(id_code: str):
@@ -198,6 +197,7 @@ def get_full_year(gender_number: int, year: int):
         return 1900 + year
     if gender_number == 5 or gender_number == 6:
         return 2000 + year
+
 
 if __name__ == '__main__':
     print(check_your_id("49808270244"))  # -> True
