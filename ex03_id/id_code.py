@@ -9,19 +9,19 @@ def check_your_id(id_code: str):
     :param id_code: str
     :return: boolean
     """
-    gender = int(id_code[0])
-    year = int(id_code[1:3])
-    month = int(id_code[3:5])
-    day = int(id_code[5:7])
-    order = int(id_code[7:10])
+    if id_code.isalpha() is False:
+        gender = int(id_code[0])
+        year = int(id_code[1:3])
+        month = int(id_code[3:5])
+        day = int(id_code[5:7])
+        order = int(id_code[7:10])
 
-    if id_code.isalpha() is True:
-        return False
-    else:
         if (check_gender_number(gender) is True) and (check_year_number_two_digits(year) is True) and (check_month_number(month) is True) and (check_day_number(year, month, day) is True) and (check_born_order(order) is True) and (check_control_number(id_code) is True):
             return True
         else:
             return False
+    else:
+        return False
 
 
 def check_gender_number(gender_number: int):
