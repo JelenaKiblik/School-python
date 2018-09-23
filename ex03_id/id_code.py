@@ -1,4 +1,5 @@
 """Check if given ID code is valid."""
+import math
 
 
 def check_your_id(id_code: str):
@@ -63,22 +64,23 @@ def check_day_number(year_number: int, month_number: int, day_number: int):
     :param day_number: int
     :return: boolean
     """
-    # y = 28 + (x + math.floor(x/8)) % 2 + 2 % x + 2 * math.floor(1/x);
-    if month_number == 1 or 3 or 5 or 7 or 8 or 10 or 12:
-        if day_number == 31:
+    max_days = 28 + (month_number + math.floor(month_number/8)) % 2 + 2 % month_number + 2 * math.floor(1/month_number)
+    if check_leap_year(year_number) is False:
+        if (day_number > 0) and (day_number <= max_days):
             return True
         else:
             return False
-    elif month_number == 4 or 6 or 9 or 11:
-        if day_number == 30:
-            return True
+    if check_leap_year(year_number) is True:
+        if month_number == 2:
+            if (day_number > 0) and (day_number <= 29):
+                return True
+            else:
+                return False
         else:
-            return False
-    elif (month_number == 2) and (check_leap_year is True):
-        if day_number == 29:
-            return True
-        else:
-            return False
+            if (day_number > 0) and (day_number <= max_days):
+                return True
+            else:
+                return False
 
 
 def check_leap_year(year_number: int):
@@ -89,9 +91,9 @@ def check_leap_year(year_number: int):
     :return: boolean
     """
     if year_number % 4 != 0 or (year_number % 100 == 0 and year_number % 400 != 0):
-        return True
-    else:
         return False
+    else:
+        return True
 
 
 def check_born_order(born_order: int):
@@ -101,7 +103,7 @@ def check_born_order(born_order: int):
     :param born_order: int
     :return: boolean
     """
-    if (born_order > 0) and (born_order < 1000):
+    if (born_order >= 0) and (born_order < 1000):
         return True
     else:
         return False
@@ -116,24 +118,37 @@ def check_control_number(id_code: str):
     :param id_code: string
     :return: boolean
     """
-    total = 0
     kordajad_1 = (1, 2, 3, 4, 5, 6, 7, 8, 9, 1)
     kordajad_2 = (3, 4, 5, 6, 7, 8, 9, 1, 2, 3)
-    for element in id_code:
-        for i in kordajad_1:
-            total += int(element) * i
-        return total
-    if total / 11 != 10:
-        return total / 11
-    else:
-        for element in id_code:
-            for i in kordajad_2:
-                total += int(element) * i
-            return total
-        if total / 11 != 10:
-            return total / 10
+    l1 = [int(n) for n in list(id_code)]
+    l2 = list(kordajad_1)
+    l3 = list(kordajad_2)
+    summa = []  # Create empty list
+
+    for i in range(0, len(l2)):
+        summa.append(l2[i] * l1[i])
+    total = sum(summa)
+    if total % 11 != 10:
+        if total % 11 == l1[-1]:
+            return True
         else:
-            return 0
+            return False
+    else:
+        for i in range(0, len(l2)):
+            summa.append(l2[i] * l1[i])
+        total = sum(summa)
+        if total % 11 != 10:
+            if total % 11 == l1[-1]:
+                return True
+            else:
+                return False
+        else:
+            control_number = 0
+            if control_number == l1[-1]:
+                return True
+            else:
+                return False
+
 
 
 def get_data_from_id(id_code: str):
@@ -146,6 +161,10 @@ def get_data_from_id(id_code: str):
     :param id_code: str
     :return: str
     """
+    # if check_your_id(id_code) is True:
+    #     return f"This is a {sugu} born on {sünnikuupäev kujul DD.MM.YYYY}"
+    # else:
+    #     return "Given invalid ID code!"
     pass
 
 
@@ -156,7 +175,10 @@ def get_gender(gender_number: int):
     :param gender_number: int
     :return: str
     """
-    pass
+    if gender_number == 1 or gender_number == 3 or gender_number == 5:
+        return "male"
+    if gender_number == 2 or gender_number == 4 or gender_number == 6:
+        return "female"
 
 
 def get_full_year(gender_number: int, year: int):
@@ -170,4 +192,15 @@ def get_full_year(gender_number: int, year: int):
     :param year: int
     :return: int
     """
-    pass
+    if gender_number == 1 or gender_number == 2:
+        return 1800 + year
+    if gender_number == 3 or gender_number == 4:
+        return 1900 + year
+    if gender_number == 5 or gender_number == 6:
+        return 2000 + year
+
+if __name__ == '__main__':
+    print(check_your_id("49808270244"))  # -> True
+    personal_id = input("here ")  # type your own id in command prompt
+    print(check_your_id(personal_id))  # -> True
+    print(check_your_id("12345678901"))  # -> False
