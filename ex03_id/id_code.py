@@ -142,29 +142,26 @@ def check_control_number(id_code: str):
         summa.append(l2[i] * l1[i])
     total = sum(summa)
     last_number = total % 11
-
     if (last_number >= 0) and (last_number < 10):
         if last_number == l1[-1]:
             return True
         else:
-            return False
-    else:
-        for i in range(0, len(l3)):
-            summa.append(l3[i] * l1[i])
-        total = sum(summa)
-        last_number = total % 11
+            for i in range(0, len(l3)):
+                summa.append(l3[i] * l1[i])
+            total = sum(summa)
+            last_number = total % 11
 
-        if (last_number >= 0) and (last_number < 10):
-            if last_number == l1[-1]:
-                return True
+            if (last_number >= 0) and (last_number < 10):
+                if last_number == l1[-1]:
+                    return True
+                else:
+                    return False
             else:
-                return False
-        else:
-            control_number = 0
-            if control_number == l1[-1]:
-                return True
-            else:
-                return False
+                control_number = 0
+                if control_number == l1[-1]:
+                    return True
+                else:
+                    return False
 
 
 if __name__ == '__main__':
