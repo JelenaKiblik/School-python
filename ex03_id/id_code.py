@@ -9,7 +9,7 @@ def check_your_id(id_code: str):
     :param id_code: str
     :return: boolean
     """
-    if id_code.isalpha() is False:
+    if len(id_code) == 11 and id_code.isdecimal():
         gender = int(id_code[0])
         year = int(id_code[1:3])
         month = int(id_code[3:5])
@@ -131,7 +131,7 @@ def check_control_number(id_code: str):
     :param id_code: string
     :return: boolean
     """
-    if id_code.isalpha() is False:
+    if len(id_code) == 11 and id_code.isdecimal():
         kordajad_1 = (1, 2, 3, 4, 5, 6, 7, 8, 9, 1)
         kordajad_2 = (3, 4, 5, 6, 7, 8, 9, 1, 2, 3)
         l1 = [int(n) for n in list(id_code)]
@@ -214,7 +214,7 @@ def get_data_from_id(id_code: str):
     :param id_code: str
     :return: str
     """
-    if id_code.isalpha() is False:
+    if len(id_code) == 11 and id_code.isdecimal():
         gender = int(id_code[0])
         year = int(id_code[1:3])
         month = id_code[3:5]
