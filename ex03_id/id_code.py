@@ -133,7 +133,7 @@ def check_control_number(id_code: str):
     l1 = [int(n) for n in list(id_code)]
     l2 = list(kordajad_1)
     l3 = list(kordajad_2)
-    summa = []  # Create empty list
+    summa = []
 
     for i in range(0, len(l2)):
         summa.append(l2[i] * l1[i])
