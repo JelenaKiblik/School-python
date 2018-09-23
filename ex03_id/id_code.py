@@ -131,39 +131,38 @@ def check_control_number(id_code: str):
     :param id_code: string
     :return: boolean
     """
-    if len(id_code) == 11 and id_code.isdecimal():
-        kordajad_1 = (1, 2, 3, 4, 5, 6, 7, 8, 9, 1)
-        kordajad_2 = (3, 4, 5, 6, 7, 8, 9, 1, 2, 3)
-        l1 = [int(n) for n in list(id_code)]
-        l2 = list(kordajad_1)
-        l3 = list(kordajad_2)
-        summa = []
+    kordajad_1 = (1, 2, 3, 4, 5, 6, 7, 8, 9, 1)
+    kordajad_2 = (3, 4, 5, 6, 7, 8, 9, 1, 2, 3)
+    l1 = [int(n) for n in list(id_code)]
+    l2 = list(kordajad_1)
+    l3 = list(kordajad_2)
+    summa = []
 
-        for i in range(0, len(l2)):
-            summa.append(l2[i] * l1[i])
+    for i in range(0, len(l2)):
+        summa.append(l2[i] * l1[i])
+    total = sum(summa)
+
+    if total % 11 != 10:
+        if total % 11 == l1[-1]:
+            return True
+        else:
+            return False
+    else:
+        for i in range(0, len(l3)):
+            summa.append(l3[i] * l1[i])
         total = sum(summa)
+
         if total % 11 != 10:
             if total % 11 == l1[-1]:
                 return True
             else:
                 return False
         else:
-            for i in range(0, len(l2)):
-                summa.append(l3[i] * l1[i])
-            total = sum(summa)
-            if total % 11 != 10:
-                if total % 11 == l1[-1]:
-                    return True
-                else:
-                    return False
+            control_number = 0
+            if control_number == l1[-1]:
+                return True
             else:
-                control_number = 0
-                if control_number == l1[-1]:
-                    return True
-                else:
-                    return False
-    else:
-        return False
+                return False
 
 
 if __name__ == '__main__':
