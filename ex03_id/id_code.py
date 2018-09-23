@@ -226,10 +226,3 @@ def get_full_year(gender_number: int, year: int):
         return 1900 + year
     if gender_number == 5 or gender_number == 6:
         return 2000 + year
-
-
-if __name__ == '__main__':
-    print(check_your_id("49808270244"))  # -> True
-    personal_id = input("here ")  # type your own id in command prompt
-    print(check_your_id(personal_id))  # -> True
-    print(check_your_id("12345678901"))  # -> False
