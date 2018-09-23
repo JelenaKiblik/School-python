@@ -17,7 +17,7 @@ def check_your_id(id_code: str):
 
     if id_code.isalpha() is True:
         return False
-    elif id_code.isalpha() is False and len(id_code) == 11:
+    else:
         if (check_gender_number(gender) is True) and (check_year_number_two_digits(year) is True) and (check_month_number(month) is True) and (check_day_number(year, month, day) is True) and (check_born_order(order) is True) and (check_control_number(id_code) is True):
             return True
         else:
