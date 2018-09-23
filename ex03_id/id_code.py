@@ -55,6 +55,7 @@ def check_month_number(month_number: int):
 def check_day_number(year_number: int, month_number: int, day_number: int):
     """
     Check if given value is correct for day number in ID code.
+
     Also, consider leap year and which month has 30 or 31 days.
 
     :param year_number: int
@@ -178,10 +179,12 @@ def get_data_from_id(id_code: str):
     Get possible information about the person.
     Use given ID code and return a short message.
     Follow the template - This is a (gender) born on (DD.MM.YYYY).
+
     :param id_code: str
     :return: str
     """
     pass
+
 
 def get_gender(gender_number: int):
     """
@@ -215,4 +218,3 @@ if __name__ == '__main__':
     print(get_full_year(5, 1))  # -> 2001
     print(get_gender(2))  # -> "female"
     print(get_gender(5))  # -> "male"
-
