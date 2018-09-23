@@ -1,5 +1,4 @@
 """Check if given ID code is valid."""
-import math
 
 
 def check_your_id(id_code: str):
@@ -63,14 +62,7 @@ def check_day_number(year_number: int, month_number: int, day_number: int):
     :param day_number: int
     :return: boolean
     """
-
-    # x номер месяца
-    # y количество дней
-
-    y = 28 + (x + math.floor(x/8)) % 2 + 2 % x + 2 * math.floor(1/x);
-
-
-
+    # y = 28 + (x + math.floor(x/8)) % 2 + 2 % x + 2 * math.floor(1/x);
     if month_number == 1 or 3 or 5 or 7 or 8 or 10 or 12:
         if day_number == 31:
             return True
@@ -86,7 +78,6 @@ def check_day_number(year_number: int, month_number: int, day_number: int):
             return True
         else:
             return False
-
 
 
 def check_leap_year(year_number: int):
@@ -143,9 +134,6 @@ def check_control_number(id_code: str):
             return 0
 
 
-
-
-
 if __name__ == '__main__':
     print("Overall ID check::")
     print(check_your_id("49808270244"))  # -> True
@@ -183,6 +171,7 @@ if __name__ == '__main__':
     print("\nControl number:")
     print(check_control_number("49808270244"))  # -> True
     print(check_control_number("60109200187"))  # -> False, it must be 6
+
 
 def get_data_from_id(id_code: str):
     """
