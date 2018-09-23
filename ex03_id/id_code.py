@@ -110,6 +110,7 @@ def check_born_order(born_order: int):
 def check_control_number(id_code: str):
     """
     Check if given value is correct for control number in ID code.
+
     Use algorithm made for creating this number.
 
     :param id_code: string
@@ -138,6 +139,7 @@ def check_control_number(id_code: str):
 def get_data_from_id(id_code: str):
     """
     Get possible information about the person.
+
     Use given ID code and return a short message.
     Follow the template - This is a (gender) born on (DD.MM.YYYY).
 
@@ -160,6 +162,7 @@ def get_gender(gender_number: int):
 def get_full_year(gender_number: int, year: int):
     """
     Define the 4-digit year when given person was born.
+
     Person gender and year numbers from ID code must help.
     Given year has only two last digits.
 
