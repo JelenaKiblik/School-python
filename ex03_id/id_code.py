@@ -15,27 +15,7 @@ def check_your_id(id_code: str):
     day = int(id_code[5:7])
     order = int(id_code[7:10])
 
-    if check_gender_number(gender) is True:
-        if check_year_number_two_digits(year) is True:
-            if check_month_number(month) is True:
-                if check_day_number(year, month, day) is True:
-                    if check_born_order(order) is True:
-                        if check_control_number(id_code) is True:
-                            return True
-                        else:
-                            return False
-                        return True
-                    else:
-                        return False
-                    return True
-                else:
-                    return False
-                return True
-            else:
-                return False
-            return True
-        else:
-            return False
+    if (check_gender_number(gender) is True) and (check_year_number_two_digits(year) is True) and (check_month_number(month) is True) and (check_day_number(year, month, day) is True) and (check_born_order(order) is True) and (check_control_number(id_code) is True):
         return True
     else:
         return False
@@ -189,11 +169,14 @@ def get_data_from_id(id_code: str):
     :param id_code: str
     :return: str
     """
-    # if check_your_id(id_code) is True:
-    #     return f"This is a {sugu} born on {sünnikuupäev kujul DD.MM.YYYY}"
-    # else:
-    #     return "Given invalid ID code!"
-    pass
+    gender = int(id_code[0])
+    year = int(id_code[1:3])
+    month = id_code[3:5]
+    day = id_code[5:7]
+    if check_your_id(id_code) is True:
+        return f"This is a {get_gender(gender)} born on {day}.{month}.{get_full_year(gender, year)}"
+    else:
+        return "Given invalid ID code!"
 
 
 def get_gender(gender_number: int):
@@ -226,3 +209,14 @@ def get_full_year(gender_number: int, year: int):
         return 1900 + year
     if gender_number == 5 or gender_number == 6:
         return 2000 + year
+
+
+if __name__ == '__main__':
+    print("\nFull message:")
+    print(get_data_from_id("49808270244"))  # -> "This is a female born on 27.08.1998"
+    print(get_data_from_id("60109200187"))  # -> "Given invalid ID code!"
+    print(get_full_year(1, 28))  # -> 1828
+    print(get_full_year(4, 85))  # -> 1985
+    print(get_full_year(5, 1))  # -> 2001
+    print(get_gender(2))  # -> "female"
+    print(get_gender(5))  # -> "male"
