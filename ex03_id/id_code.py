@@ -1,4 +1,5 @@
 """Check if given ID code is valid."""
+import math
 
 
 def check_your_id(id_code: str):
@@ -46,7 +47,7 @@ def check_month_number(month_number: int):
     :param month_number: int
     :return: boolean
     """
-    if (month_number >= 0) and (month_number <= 12):
+    if (month_number > 0) and (month_number <= 12):
         return True
     else:
         return False
@@ -62,38 +63,30 @@ def check_day_number(year_number: int, month_number: int, day_number: int):
     :param day_number: int
     :return: boolean
     """
-    if year_number % 4 != 0 or (year_number % 100 == 0 and year_number % 400 != 0):
-        if month_number == 1 or 3 or 5 or 7 or 8 or 10 or 12:
-            if day_number == 31:
-                return True
-            else:
-                return False
-        if month_number == 2:
-            if day_number == 29:
-                return True
-            else:
-                return False
-        if month_number == 4 or 6 or 9 or 11:
-            if day_number == 30:
-                return True
-            else:
-                return False
-    else:
-        if month_number == 1 or 3 or 5 or 7 or 8 or 10 or 12:
-            if day_number == 31:
-                return True
-            else:
-                return False
-        if month_number == 2:
-            if day_number == 28:
-                return True
-            else:
-                return False
-        if month_number == 4 or 6 or 9 or 11:
-            if day_number == 30:
-                return True
-            else:
-                return False
+
+    # x номер месяца
+    # y количество дней
+
+    y = 28 + (x + math.floor(x/8)) % 2 + 2 % x + 2 * math.floor(1/x);
+
+
+
+    if month_number == 1 or 3 or 5 or 7 or 8 or 10 or 12:
+        if day_number == 31:
+            return True
+        else:
+            return False
+    elif month_number == 4 or 6 or 9 or 11:
+        if day_number == 30:
+            return True
+        else:
+            return False
+    elif (month_number == 2) and (check_leap_year is True):
+        if day_number == 29:
+            return True
+        else:
+            return False
+
 
 
 def check_leap_year(year_number: int):
@@ -103,7 +96,10 @@ def check_leap_year(year_number: int):
     :param year_number: int
     :return: boolean
     """
-    pass
+    if year_number % 4 != 0 or (year_number % 100 == 0 and year_number % 400 != 0):
+        return True
+    else:
+        return False
 
 
 def check_born_order(born_order: int):
@@ -113,7 +109,10 @@ def check_born_order(born_order: int):
     :param born_order: int
     :return: boolean
     """
-    pass
+    if (born_order) > 0 and (born_order < 1000):
+        return True
+    else:
+        return False
 
 
 def check_control_number(id_code: str):
@@ -124,7 +123,27 @@ def check_control_number(id_code: str):
     :param id_code: string
     :return: boolean
     """
-    pass
+    total = 0
+    kordajad_1 = (1, 2, 3, 4, 5, 6, 7, 8, 9, 1)
+    kordajad_2 = (3, 4, 5, 6, 7, 8, 9, 1, 2, 3)
+    for element in id_code:
+        for i in kordajad_1:
+            total += int(element) * i
+        return total
+    if total / 11 != 10:
+        return total / 11
+    else:
+        for element in id_code:
+            for i in kordajad_2:
+                total += int(element) * i
+            return total
+        if total / 11 != 10:
+            return total / 10
+        else:
+            return 0
+
+
+
 
 
 if __name__ == '__main__':
@@ -164,3 +183,47 @@ if __name__ == '__main__':
     print("\nControl number:")
     print(check_control_number("49808270244"))  # -> True
     print(check_control_number("60109200187"))  # -> False, it must be 6
+
+def get_data_from_id(id_code: str):
+    """
+    Get possible information about the person.
+    Use given ID code and return a short message.
+    Follow the template - This is a (gender) born on (DD.MM.YYYY).
+    :param id_code: str
+    :return: str
+    """
+    pass
+
+def get_gender(gender_number: int):
+    """
+    Define the gender according to the number from ID code.
+
+    :param gender_number: int
+    :return: str
+    """
+    pass
+
+
+def get_full_year(gender_number: int, year: int):
+    """
+    Define the 4-digit year when given person was born.
+    Person gender and year numbers from ID code must help.
+    Given year has only two last digits.
+
+    :param gender_number: int
+    :param year: int
+    :return: int
+    """
+    pass
+
+
+if __name__ == '__main__':
+    print("\nFull message:")
+    print(get_data_from_id("49808270244"))  # -> "This is a female born on 27.08.1998"
+    print(get_data_from_id("60109200187"))  # -> "Given invalid ID code!"
+    print(get_full_year(1, 28))  # -> 1828
+    print(get_full_year(4, 85))  # -> 1985
+    print(get_full_year(5, 1))  # -> 2001
+    print(get_gender(2))  # -> "female"
+    print(get_gender(5))  # -> "male"
+
