@@ -15,10 +15,13 @@ def check_your_id(id_code: str):
     day = int(id_code[5:7])
     order = int(id_code[7:10])
 
-    if (check_gender_number(gender) is True) and (check_year_number_two_digits(year) is True) and (check_month_number(month) is True) and (check_day_number(year, month, day) is True) and (check_born_order(order) is True) and (check_control_number(id_code) is True):
-        return True
-    else:
+    if id_code.isalpha() is True:
         return False
+    elif id_code.isalpha() is False and len(id_code) == 11:
+        if (check_gender_number(gender) is True) and (check_year_number_two_digits(year) is True) and (check_month_number(month) is True) and (check_day_number(year, month, day) is True) and (check_born_order(order) is True) and (check_control_number(id_code) is True):
+            return True
+        else:
+            return False
 
 
 def check_gender_number(gender_number: int):
