@@ -158,12 +158,16 @@ def check_control_number(id_code: str):
         if (check_number2 >= 0) and (check_number2 < 10):
             if check_number2 == code_list[-1]:
                 return True
-            elif check_number2 == 10:
+            else:
+                return False
+        elif check_number2 == 10:
                 check_number2 = 0
                 if check_number2 == code_list[-1]:
                     return True
                 else:
                     return False
+        else:
+            return False
     else:
         return False
 
