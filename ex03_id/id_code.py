@@ -143,29 +143,22 @@ def check_control_number(id_code: str):
     summa = sum(multiply)
     check_number = summa % 11
 
-    if (check_number >= 0) and (check_number < 10):
-        if check_number == code_list[-1]:
-            return True
-        else:
-            return False
-
+    if (check_number >= 0) and (check_number < 10) and (check_number == code_list[-1]):
+        return True
     elif check_number == 10:
         for i in range(0, len(check_numbers2)):
             multiply.append(check_numbers2[i] * code_list[i])
         summa = sum(multiply)
         check_number2 = summa % 11
 
-        if (check_number2 >= 0) and (check_number2 < 10):
-            if check_number2 == code_list[-1]:
+        if (check_number2 >= 0) and (check_number2 < 10) and (check_number2 == code_list[-1]):
+            return True
+        elif check_number2 == 10:
+            check_number3 = 0
+            if check_number3 == code_list[-1]:
                 return True
             else:
                 return False
-        elif check_number2 == 10:
-                check_number2 = 0
-                if check_number2 == code_list[-1]:
-                    return True
-                else:
-                    return False
         else:
             return False
     else:
