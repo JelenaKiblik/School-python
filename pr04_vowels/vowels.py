@@ -29,7 +29,6 @@ def word_with_most_vowels(string_list: list):
         if max_count < vowels:
             max_count = vowels
             string_index = i
-
     return string_list[string_index]
 
 
@@ -45,7 +44,6 @@ def sort_list(string_list: list):
         max_vowels = word_with_most_vowels(string_list)
         new_list.append(max_vowels)
         string_list.remove(max_vowels)
-
     return new_list
 
 

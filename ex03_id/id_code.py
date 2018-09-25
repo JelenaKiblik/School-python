@@ -136,20 +136,20 @@ def check_control_number(id_code: str):
     code_list = [int(n) for n in list(id_code)]
     check_numbers1 = list(kordajad_1)
     check_numbers2 = list(kordajad_2)
-    multiply = []
+    new_list = []
 
     for i in range(0, len(check_numbers1)):
-        multiply.append(check_numbers1[i] * code_list[i])
-    summa = sum(multiply)
-    check_number = summa % 11
+        new_list.append(check_numbers1[i] * code_list[i])
+    multiply = sum(new_list)
+    check_number = multiply % 11
 
     if (check_number >= 0) and (check_number < 10) and (check_number == code_list[-1]):
         return True
     elif check_number == 10:
         for i in range(0, len(check_numbers2)):
-            multiply.append(check_numbers2[i] * code_list[i])
-        summa2 = sum(multiply)
-        check_number2 = summa2 % 11
+            new_list.append(check_numbers2[i] * code_list[i])
+        multiply2 = sum(new_list)
+        check_number2 = multiply2 % 11
 
         if (check_number2 >= 0) and (check_number2 < 10) and (check_number2 == code_list[-1]):
             return True
