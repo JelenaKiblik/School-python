@@ -146,6 +146,7 @@ def check_control_number(id_code: str):
     if (check_number >= 0) and (check_number < 10) and (check_number == code_list[-1]):
         return True
     elif check_number == 10:
+        summa = 0
         for i in range(0, len(check_numbers2)):
             multiply.append(check_numbers2[i] * code_list[i])
         summa = sum(multiply)
