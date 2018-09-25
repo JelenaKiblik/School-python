@@ -146,11 +146,10 @@ def check_control_number(id_code: str):
     if (check_number >= 0) and (check_number < 10) and (check_number == code_list[-1]):
         return True
     elif check_number == 10:
-        summa = 0
         for i in range(0, len(check_numbers2)):
             multiply.append(check_numbers2[i] * code_list[i])
-        summa = sum(multiply)
-        check_number2 = summa % 11
+        summa2 = sum(multiply)
+        check_number2 = summa2 % 11
 
         if (check_number2 >= 0) and (check_number2 < 10) and (check_number2 == code_list[-1]):
             return True
@@ -167,41 +166,8 @@ def check_control_number(id_code: str):
 
 
 if __name__ == '__main__':
-    print("Overall ID check::")
-    print(check_your_id("49808270244"))  # -> True
-    personal_id = input()  # type your own id in command prompt
-    print(check_your_id(personal_id))  # -> True
-    print(check_your_id("12345678901"))  # -> False
-    print("\nGender number:")
-    for i in range(9):
-        print(f"{i} {check_gender_number(i)}")
-        # 0 -> False
-        # 1...6 -> True
-        # 7...8 -> False
-    print("\nYear number:")
-    print(check_year_number_two_digits(100))  # -> False
-    print(check_year_number_two_digits(50))  # -> true
-    print("\nMonth number:")
-    print(check_month_number(2))  # -> True
-    print(check_month_number(15))  # -> False
-    print("\nDay number:")
-    print(check_day_number(2005, 12, 25))  # -> True
-    print(check_day_number(1910, 8, 32))  # -> False
-    print(check_leap_year(1804))  # -> True
-    print(check_leap_year(1800))  # -> False
-    print("\nFebruary check:")
-    print(check_day_number(1996, 2, 30))  # -> False (February cannot contain more than 29 days in any circumstances)
-    print(check_day_number(2099, 2, 29))  # -> False (February contains 29 days only during leap year)
-    print(check_day_number(2008, 2, 29))  # -> True
-    print("\nMonth contains 30 or 31 days check:")
-    print(check_day_number(1822, 4, 31))  # -> False (April contains max 30 days)
-    print(check_day_number(2018, 10, 31))  # -> True
-    print(check_day_number(1915, 9, 31))  # -> False (September contains max 30 days)
-    print("\nBorn order number:")
-    print(check_born_order(0))  # -> True
-    print(check_born_order(850))  # -> True
-    print("\nControl number:")
-    print(check_control_number("49808270244"))  # -> True
+
+    print(check_control_number("51809070123"))  # -> True
     print(check_control_number("60109200187"))  # -> False, it must be 6
 
 
