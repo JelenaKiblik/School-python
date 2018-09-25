@@ -48,6 +48,7 @@ def sort_list(string_list: list):
 
     return new_list
 
+
 if __name__ == '__main__':
     print(number_of_vowels("aAe"))  # -> 3
     print(number_of_vowels("klm124"))  # -> 0
