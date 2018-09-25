@@ -40,4 +40,18 @@ def sort_list(string_list: list):
     :param string_list: List of strings that need to be sorted.
     :return: List of strings sorted by the number of vowels.
     """
-    return sorted(string_list, key=number_of_vowels, reverse=True)
+    new_list = []
+    for _ in range(len(string_list)):
+        max_vowels = word_with_most_vowels(string_list)
+        new_list.append(max_vowels)
+        string_list.remove(max_vowels)
+
+    return new_list
+
+if __name__ == '__main__':
+    print(number_of_vowels("aAe"))  # -> 3
+    print(number_of_vowels("klm124"))  # -> 0
+    print(word_with_most_vowels(['Now', "there", "are", 'two', "of", "them"]))  # -> there
+    print(sort_list(['Now', "there", "are", 'two', "of", "them"]))  # -> ['there', 'are', 'Now', 'two', 'of', 'them']
+    print(word_with_most_vowels(["ssh", "n0", "v0w3ls"]))  # -> ssh
+    print(sort_list(["ssh", "n0", "v0w3ls"]))  # -> ['ssh', 'n0', 'v0w3ls']
