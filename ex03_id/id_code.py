@@ -167,7 +167,7 @@ def check_control_number(id_code: str):
 
 if __name__ == '__main__':
 
-    print(check_control_number("51809070123"))  # -> True
+    print(check_control_number("51809070123"))  # -> False
     print(check_control_number("60109200187"))  # -> False, it must be 6
 
 
