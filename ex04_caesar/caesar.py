@@ -30,7 +30,6 @@ def decode(message: str, shift: int, alphabet: str) -> str:
     :param alphabet: Determines the symbols in use. Defaults to the standard latin alphabet.
     :return: Decoded string.
     """
-
     new_message = ""
     for i in message:
         if i.isalpha():
