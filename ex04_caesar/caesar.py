@@ -49,7 +49,7 @@ def decode(message: str, shift: int, alphabet: str) -> str:
     return new_message
 
 
-def func(alphabet="abcdefghijklmnopqrstuvwxyz"):
+def func(alphabet):
     """Function for alphabet."""
     return alphabet
 
@@ -82,5 +82,5 @@ def func(alphabet="abcdefghijklmnopqrstuvwxyz"):
 
 if __name__ == "__main__":
     # simple tests
-    print(encode("hello world", 1, func()))  # ifmmp xpsme
-    print(decode("ifmmp", 1, func()))  # hello\
+    print(encode("hello world", 1, "abcdefghijklmnopqrstuvwxyz"))  # ifmmp xpsme
+    print(decode("ifmmp", 1, "abcdefghijklmnopqrstuvwxyz"))  # hello\
