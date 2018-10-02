@@ -13,6 +13,7 @@ def encode(message: str, shift: int, alphabet: str) -> str:
     :param alphabet: Determines the symbols in use. Defaults to the standard latin alphabet.
     :return: Encoded string.
     """
+    default_alphabet = "abcdefghijklmnopqrstuvwxyz"
     def func(alphabet=default_alphabet):
         """Function for alphabet."""
         return alphabet
@@ -41,6 +42,7 @@ def decode(message: str, shift: int, alphabet: str) -> str:
     :param alphabet: Determines the symbols in use. Defaults to the standard latin alphabet.
     :return: Decoded string.
     """
+    default_alphabet = "abcdefghijklmnopqrstuvwxyz"
     def func(alphabet=default_alphabet):
         """Function for alphabet."""
         return alphabet
@@ -62,5 +64,5 @@ def decode(message: str, shift: int, alphabet: str) -> str:
 
 if __name__ == "__main__":
     # simple tests
-    print(encode("hello world", 1, alphabet=default_alphabet))  # ifmmp xpsme
-    print(decode("ifmmp", 1, alphabet=default_alphabet))  # hello
+    print(encode("hello world", 1, default_alphabet))  # ifmmp xpsme
+    print(decode("ifmmp", 1, "erdgdfg"))  # hello
