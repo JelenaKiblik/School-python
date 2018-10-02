@@ -56,5 +56,5 @@ def func(alphabet):
 
 if __name__ == "__main__":
     # simple tests
-    print(encode("hello world", 1, alphabet = "abcdefghijklmnopqrstuvwxyz"))  # ifmmp xpsme
-    print(decode("ifmmp", 1, alphabet = "abcdefghijklmnopqrstuvwxyz"))  # hello
+    print(encode("hello world", 1, alphabet="abcdefghijklmnopqrstuvwxyz"))  # ifmmp xpsme
+    print(decode("ifmmp", 1, alphabet="abcdefghijklmnopqrstuvwxyz"))  # hello
