@@ -1,9 +1,6 @@
 """Encode and decode Caesar cipher."""
 
 
-default_alphabet = "abcdefghijklmnopqrstuvwxyz"
-
-
 def encode(message: str, shift: int, alphabet: str) -> str:
     """
     Encode the given message using the Caesar cipher principle.
@@ -14,13 +11,14 @@ def encode(message: str, shift: int, alphabet: str) -> str:
     :return: Encoded string.
     """
     default_alphabet = "abcdefghijklmnopqrstuvwxyz"
+
     def func(alphabet=default_alphabet):
         """Function for alphabet."""
         return alphabet
 
     new_message = ""
     for i in message:
-        if i in func():
+        if i in func(alphabet):
             number = ord(i)
             number += shift
             if number > ord(func(alphabet[-1])):
@@ -43,6 +41,7 @@ def decode(message: str, shift: int, alphabet: str) -> str:
     :return: Decoded string.
     """
     default_alphabet = "abcdefghijklmnopqrstuvwxyz"
+
     def func(alphabet=default_alphabet):
         """Function for alphabet."""
         return alphabet
@@ -60,9 +59,3 @@ def decode(message: str, shift: int, alphabet: str) -> str:
         else:
             new_message = new_message + i
     return new_message
-
-
-if __name__ == "__main__":
-    # simple tests
-    print(encode("hello world", 1, default_alphabet))  # ifmmp xpsme
-    print(decode("ifmmp", 1, "erdgdfg"))  # hello
