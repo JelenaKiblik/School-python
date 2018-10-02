@@ -10,7 +10,7 @@ def encode(message: str, shift: int, alphabet: str) -> str:
     :param alphabet: Determines the symbols in use. Defaults to the standard latin alphabet.
     :return: Encoded string.
     """
-    return helper(message, shift)
+    return helper(message, shift, alphabet)
 
 
 def decode(message: str, shift: int, alphabet: str) -> str:
@@ -22,15 +22,14 @@ def decode(message: str, shift: int, alphabet: str) -> str:
     :param alphabet: Determines the symbols in use. Defaults to the standard latin alphabet.
     :return: Decoded string.
     """
-    return helper(message, -shift)
-
+    return helper(message, -shift, alphabet)
 
 def func(alphabet="abcdefghijklmnopqrstuvwxyz"):
     """Function for alphabet."""
     return alphabet
 
 
-def helper(message, shift):
+def helper(message, shift, alphabet):
     """
     Helper for encode and decode.
 
