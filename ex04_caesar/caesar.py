@@ -1,7 +1,7 @@
 """Encode and decode Caesar cipher."""
 
 
-def encode(message: str, shift: int, alphabet: str) -> str:
+def encode(message: str, shift: int, alphabet="abcdefghijklmnopqrstuvwxyz") -> str:
     """
     Encode the given message using the Caesar cipher principle.
 
@@ -10,28 +10,22 @@ def encode(message: str, shift: int, alphabet: str) -> str:
     :param alphabet: Determines the symbols in use. Defaults to the standard latin alphabet.
     :return: Encoded string.
     """
-    default_alphabet = "abcdefghijklmnopqrstuvwxyz"
-
-    def func(alphabet=default_alphabet):
-        """Function for alphabet."""
-        return alphabet
-
     new_message = ""
     for i in message:
-        if i in func(alphabet):
+        if i in alphabet:
             number = ord(i)
             number += shift
-            if number > ord(func(alphabet[-1])):
-                number -= len(func())
-            elif number < ord(func(alphabet[0])):
-                number += len(func())
+            if number > ord(alphabet[-1]):
+                number -= len(alphabet)
+            elif number < ord(alphabet[0]):
+                number += len(alphabet)
             new_message = new_message + chr(number)
         else:
             new_message = new_message + i
     return new_message
 
 
-def decode(message: str, shift: int, alphabet: str) -> str:
+def decode(message: str, shift: int, alphabet="abcdefghijklmnopqrstuvwxyz") -> str:
     """
     Decode the given message already encoded with the caesar cipher principle.
 
@@ -40,22 +34,23 @@ def decode(message: str, shift: int, alphabet: str) -> str:
     :param alphabet: Determines the symbols in use. Defaults to the standard latin alphabet.
     :return: Decoded string.
     """
-    default_alphabet = "abcdefghijklmnopqrstuvwxyz"
-
-    def func(alphabet=default_alphabet):
-        """Function for alphabet."""
-        return alphabet
-
     new_message = ""
     for i in message:
-        if i in func():
+        if i in alphabet:
             number = ord(i)
             number -= shift
-            if number > ord(func(alphabet[-1])):
-                number -= len(func())
-            elif number < ord(func(alphabet[0])):
-                number += len(func())
+            if number > ord(alphabet[-1]):
+                number -= len(alphabet)
+            elif number < ord(alphabet[0]):
+                number += len(alphabet)
             new_message = new_message + chr(number)
         else:
             new_message = new_message + i
     return new_message
+
+
+if __name__ == "__main__":
+    # simple tests
+    print(encode("hello", 1, alphabet="abcdefghijklmnopqrstuvwxyz"))  # ifmmp
+    print(decode("ifmmp", 1, alphabet="abcdefghijklmnopqrstuvwxyz"))  # hello
+
