@@ -49,12 +49,15 @@ def decode(message: str, shift: int, alphabet: str) -> str:
     return new_message
 
 
-def func(alphabet):
+default_alphabet = "abcdefghijklmnopqrstuvwxyz"
+
+
+def func(alphabet=default_alphabet):
     """Function for alphabet."""
     return alphabet
 
 
 if __name__ == "__main__":
     # simple tests
-    print(encode("hello world", 1, alphabet="abcdefghijklmnopqrstuvwxyz"))  # ifmmp xpsme
-    print(decode("ifmmp", 1, alphabet="abcdefghijklmnopqrstuvwxyz"))  # hello
+    print(encode("hello world", 1, default_alphabet))  # ifmmp xpsme
+    print(decode("ifmmp", 1, alphabet="abc"))  # hello
