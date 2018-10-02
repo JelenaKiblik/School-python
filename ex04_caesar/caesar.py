@@ -33,20 +33,22 @@ def helper(message: str, shift: int, alphabet: str):
     :param alphabet: Determines the symbols in use. Defaults to the standard latin alphabet.
     :return: New message.
     """
-    message = message.lower()
     new_message = ""
-    for i in message:
-        if i in alphabet:
-            number = ord(i)
-            number += shift
-            if number > ord(alphabet[-1]):
-                number -= len(alphabet)
-            elif number < ord(alphabet[0]):
-                number += len(alphabet)
-            new_message = new_message + chr(number)
-        else:
-            new_message = new_message + i
-    return new_message
+    if shift == 0:
+        return message
+    else:
+        for i in message:
+            if i in alphabet:
+                number = ord(i)
+                number += shift
+                if number > ord(alphabet[-1]):
+                    number -= len(alphabet)
+                elif number < ord(alphabet[0]):
+                    number += len(alphabet)
+                new_message = new_message + chr(number)
+            else:
+                new_message = new_message + i
+        return new_message
 
 
 if __name__ == "__main__":
