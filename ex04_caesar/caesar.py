@@ -12,13 +12,13 @@ def encode(message: str, shift: int, alphabet: str) -> str:
     """
     new_message = ""
     for i in message:
-        if i in func(alphabet):
+        if i in func():
             number = ord(i)
             number += shift
             if number > ord("z"):
-                number -= len(alphabet)
+                number -= len(func())
             elif number < ord("a"):
-                number += len(alphabet)
+                number += len(func())
             new_message = new_message + chr(number)
         else:
             new_message = new_message + i
@@ -36,13 +36,13 @@ def decode(message: str, shift: int, alphabet: str) -> str:
     """
     new_message = ""
     for i in message:
-        if i in alphabet:
+        if i in func():
             number = ord(i)
             number -= shift
             if number > ord("z"):
-                number -= len(alphabet)
+                number -= len(func())
             elif number < ord("a"):
-                number += len(alphabet)
+                number += len(func())
             new_message = new_message + chr(number)
         else:
             new_message = new_message + i
