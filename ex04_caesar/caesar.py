@@ -12,7 +12,7 @@ def encode(message: str, shift: int, alphabet: str) -> str:
     """
     new_message = ""
     for i in message:
-        if i in alphabet:
+        if i in alphabet==func():
             number = ord(i)
             number += shift
             if number > ord("z"):
