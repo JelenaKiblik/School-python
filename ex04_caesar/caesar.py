@@ -10,10 +10,10 @@ def encode(message: str, shift: int, alphabet: str) -> str:
     :param alphabet: Determines the symbols in use. Defaults to the standard latin alphabet.
     :return: Encoded string.
     """
-    alphabet="abcdefghijklmnopqrstuvwxyz"
+    alphabet = "abcdefghijklmnopqrstuvwxyz"
     new_message = ""
     for i in message:
-        if i in alphabet:
+        if i in func(alphabet):
             number = ord(i)
             number += shift
             if number > ord("z"):
@@ -58,5 +58,5 @@ def func(alphabet):
 
 if __name__ == "__main__":
     # simple tests
-    print(encode("hello world", 1, "abcdefghijklmnopqrstuvwxyz"))  # ifmmp xpsme
-    print(decode("ifmmp", 1, "abcdefghijklmnopqrstuvwxyz"))  # hello\
+    print(encode("hello world", 1, ascii))  # ifmmp xpsme
+    print(decode("ifmmp", 1, "abc"))  # hello\
