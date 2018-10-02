@@ -24,9 +24,10 @@ def decode(message: str, shift: int, alphabet: str) -> str:
     """
     return helper(message, -shift, alphabet)
 
-def func(alphabet="abcdefghijklmnopqrstuvwxyz"):
-    """Function for alphabet."""
-    return alphabet
+
+# def func(alphabet="abcdefghijklmnopqrstuvwxyz"):
+#     """Function for alphabet."""
+#     return alphabet
 
 
 def helper(message, shift, alphabet):
@@ -38,17 +39,17 @@ def helper(message, shift, alphabet):
     :param alphabet: Determines the symbols in use. Defaults to the standard latin alphabet.
     :return: new_message.
     """
-    message = message.lower()
+    # message = message.lower()
     new_message = ""
-    alphabet = func()
+    # alphabet = func()
     for i in message:
         if i in alphabet:
             number = ord(i)
             number += shift
             if number > ord("z"):
-                number -= 26
+                number -= len(alphabet)
             elif number < ord("a"):
-                number += 26
+                number += len(alphabet)
             new_message = new_message + chr(number)
         else:
             new_message = new_message + i
@@ -57,5 +58,5 @@ def helper(message, shift, alphabet):
 
 if __name__ == "__main__":
     # simple tests
-    print(encode("hello world", 1, func()))  # ifmmp xpsme
-    print(decode("ifmmp", 1, func()))  # hello
+    print(encode("hello world", 2, alphabet="abcdefghijklmnopqrstuvwxyz"))  # ifmmp xpsme
+    print(decode("ifmmp", 25, alphabet="abcdefghijklmnopqrstuvwxyz"))  # hello
