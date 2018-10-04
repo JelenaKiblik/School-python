@@ -94,11 +94,13 @@ def min_index_value(nums):
     """
     first_number_index = nums[0]
     second_number_index = nums[-1]
-    list_lenght = len(nums) - 1
-    if (first_number_index >= list_lenght) or (second_number_index >= list_lenght):
+    list_length = len(nums) - 1
+    if (first_number_index >= list_length) or (second_number_index >= list_length):
         return -1
     else:
-        if nums[first_number_index] > nums[second_number_index]:
+        if nums[first_number_index] == nums[second_number_index]:
+            return nums[second_number_index]
+        elif nums[first_number_index] > nums[second_number_index]:
             return nums[second_number_index]
         else:
             return nums[first_number_index]
@@ -118,16 +120,9 @@ def max_duplicate(nums):
     :return: Maximum element with duplicate. None if no duplicate found.
     """
     sorted_nums = sorted(nums, reverse=True)
-    i = 0
-    for i in range((len(sorted_nums)) + 1):
+    for i in range(len(sorted_nums)):
         if sorted_nums[i] == sorted_nums[i + 1]:
-            return sorted_nums[i]
+            result = sorted_nums[i]
         else:
-            return None
-
-
-if __name__ == '__main__':
-    print(max_duplicate([1, 2, 3, 1]))  # 1
-    print(max_duplicate([1, 2, 2]))  # => None
-    print(max_duplicate([1, 2, 2]))  # => 2
-    print(max_duplicate([1, 2, 2, 1, 1]))  # => 2
+            result = None
+        return result
