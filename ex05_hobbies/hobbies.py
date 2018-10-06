@@ -9,9 +9,11 @@ def create_list_from_file(file):
     :param file: original file path
     :return: list of lines
     """
-    file = open(file, "r")
-    new_list = file.readlines()
-    return new_list
+    list = []
+    with open(file, encoding='utf-8') as file:
+        for line in file:
+            list.append(line.strip())
+    return list
 
 
 def create_dictionary(file):
@@ -82,8 +84,8 @@ def write_corrected_database(file, file_to_write):
 
 
 if __name__ == '__main__':
-    dic = create_dictionary("hobbies_database.txt")
-    print(len(create_list_from_file("hobbies_database.txt")))  # -> 100
+    print(create_dictionary("hobbies_database.txt"))
+    print((create_list_from_file("hobbies_database.txt")))  # -> 100
     # print("Check presence of hobbies for chosen person:")
     # print("shopping" in dic["Wendy"])  # -> True
     # print("fitness" in dic["Sophie"])  # -> False
