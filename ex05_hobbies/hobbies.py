@@ -10,7 +10,8 @@ def create_list_from_file(file):
     :return: list of lines
     """
     file = open("hobbies_database.txt", "r")
-    return file.readlines()
+    new_list = file.readlines()
+    return new_list
 
 
 def create_dictionary(file):
