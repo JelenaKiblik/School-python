@@ -27,7 +27,6 @@ def create_dictionary(file):
     list = create_list_from_file(file)
     for i in list:
         new_list.append(i.split(":"))
-    # return new_list
     hobbies_dict = dict()
 
     for line in new_list:
@@ -47,7 +46,9 @@ def find_person_with_most_hobbies(file):
     :param file: original file path
     :return: list
     """
-    pass
+    hobbies_dict = create_dictionary(file)
+    for key, value in hobbies_dict.items():
+        return key
 
 
 def find_person_with_least_hobbies(file):
@@ -57,7 +58,8 @@ def find_person_with_least_hobbies(file):
     :param file: original file path
     :return: list
     """
-    pass
+    hobbies_dict = create_dictionary(file)
+    return [k for k in hobbies_dict.keys() if hobbies_dict[k] == min(hobbies_dict.values(), key=len)]
 
 
 def find_most_popular_hobby(file):
@@ -67,7 +69,9 @@ def find_most_popular_hobby(file):
     :param file: original file path
     :return: list
     """
-    pass
+    hobbies_dict = create_dictionary(file)
+    for key, value in hobbies_dict.items():
+        return max(value)
 
 
 def find_least_popular_hobby(file):
@@ -99,12 +103,11 @@ def write_corrected_database(file, file_to_write):
 
 if __name__ == '__main__':
     dic = create_dictionary("hobbies_database.txt")
-    # print(dic)
-    print((create_list_from_file("hobbies_database.txt")))  # -> 100
-    print("Check presence of hobbies for chosen person:")
-    print("shopping" in dic["Wendy"])  # -> True
-    print("fitness" in dic["Sophie"])  # -> False
-    print("gaming" in dic["Peter"])  # -> True
+    # print((create_list_from_file("hobbies_database.txt")))  # -> 100
+    # print("Check presence of hobbies for chosen person:")
+    # print("shopping" in dic["Wendy"])  # -> True
+    # print("fitness" in dic["Sophie"])  # -> False
+    # print("gaming" in dic["Peter"])  # -> True
     # print("Check if hobbies - person relation is correct:")
     # print("Check if a person(people) with the biggest amount of hobbies is(are) correct:")
     # print(find_person_with_most_hobbies("hobbies_database.txt"))  # -> ['Jack']
@@ -114,8 +117,8 @@ if __name__ == '__main__':
     # print(find_person_with_least_hobbies("hobbies_database.txt"))  # -> ['Molly']
     # print(len(dic["Molly"]))  # -> 5
     # print(len(dic["Sophie"]))  # -> 7
-    # print("Check if the most popular hobby(ies) is(are) correct")
-    # print(find_most_popular_hobby("hobbies_database.txt"))  # -> ['gaming', 'sport', 'football']
+    print("Check if the most popular hobby(ies) is(are) correct")
+    print(find_most_popular_hobby("hobbies_database.txt"))  # -> ['gaming', 'sport', 'football']
     # print("Check if the least popular hobby(ies) is(are) correct")
     # print(find_least_popular_hobby("hobbies_database.txt"))  # -> ['tennis', 'dance', 'puzzles', 'flowers']
     # write_corrected_database("hobbies_database.txt", 'correct_hobbies_database.csv')
