@@ -22,9 +22,16 @@ def get_clean_text(messy_text: str) -> str:
     """
     new_text = ""
     for letter in messy_text:
-        if letter not in ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "&", "@", "#", "$", "%", "^", "(", ")", "_", "+", "|", ">", "<", "~"]:
+        if letter not in ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "&", "@", "#", "$", "%", "^", "(", ")", "_", "+", "|", ">", "<", "~", "!", "?", "/", "*"]:
             new_text += letter
-    new_text = new_text.replace('*', '"').replace(".", ".").replace("!", "#").replace("?", "@").replace("/", ",").replace("#", "?").replace("@", "!")
+        elif letter == "?":
+            new_text += "!"
+        elif letter == "!":
+            new_text += "?"
+        elif letter == "/":
+            new_text += ","
+        elif letter == "*":
+            new_text += '"'
     return new_text
 
 
