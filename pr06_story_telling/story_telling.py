@@ -1,4 +1,5 @@
 """Collect story parts from a messy text."""
+import re
 
 
 def read_file(file) -> str:
@@ -38,6 +39,10 @@ def get_clean_text(messy_text: str) -> str:
             else:
                 new_text += l
     return new_text
+
+    # rtn = re.split('([.!?"] *)', new_text)
+    # final = ''.join([i.capitalize() for i in rtn])
+    # return final
 
 
 if __name__ == "__main__":
