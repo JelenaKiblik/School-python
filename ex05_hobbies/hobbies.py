@@ -23,7 +23,21 @@ def create_dictionary(file):
     :param file: original file path
     :return: dict
     """
-    pass
+    new_list = []
+    list = create_list_from_file(file)
+    for i in list:
+        new_list.append(i.split(":"))
+    # return new_list
+    hobbies_dict = dict()
+
+    for line in new_list:
+        if line[0] in hobbies_dict:
+            # append the new number to the existing array at this slot
+            hobbies_dict[line[0]].append(line[1])
+        else:
+            # create a new array in this slot
+            hobbies_dict[line[0]] = [line[1]]
+    return hobbies_dict
 
 
 def find_person_with_most_hobbies(file):
@@ -84,12 +98,13 @@ def write_corrected_database(file, file_to_write):
 
 
 if __name__ == '__main__':
-    print(create_dictionary("hobbies_database.txt"))
+    dic = create_dictionary("hobbies_database.txt")
+    # print(dic)
     print((create_list_from_file("hobbies_database.txt")))  # -> 100
-    # print("Check presence of hobbies for chosen person:")
-    # print("shopping" in dic["Wendy"])  # -> True
-    # print("fitness" in dic["Sophie"])  # -> False
-    # print("gaming" in dic["Peter"])  # -> True
+    print("Check presence of hobbies for chosen person:")
+    print("shopping" in dic["Wendy"])  # -> True
+    print("fitness" in dic["Sophie"])  # -> False
+    print("gaming" in dic["Peter"])  # -> True
     # print("Check if hobbies - person relation is correct:")
     # print("Check if a person(people) with the biggest amount of hobbies is(are) correct:")
     # print(find_person_with_most_hobbies("hobbies_database.txt"))  # -> ['Jack']
