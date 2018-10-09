@@ -21,17 +21,22 @@ def get_clean_text(messy_text: str) -> str:
     :return: clean string
     """
     new_text = ""
-    for letter in messy_text:
-        if letter not in ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "&", "@", "#", "$", "%", "^", "(", ")", "_", "+", "|", ">", "<", "~", "!", "?", "/", "*"]:
-            new_text += letter
-        elif letter == "?":
-            new_text += "!"
-        elif letter == "!":
-            new_text += "?"
-        elif letter == "/":
-            new_text += ","
-        elif letter == "*":
-            new_text += '"'
+    replace = {
+        "*": "\"",
+        "!": "?",
+        "/": ',',
+        "?": "!"
+    }
+    remove = "1234567890&@#$%^()_+|><~"
+    pls_do_upper = False
+    for l in messy_text:
+        if l in replace:
+            new_text += replace[l]
+        elif l not in remove:
+            if pls_do_upper:
+                new_text += l.upper()
+            else:
+                new_text += l
     return new_text
 
 
