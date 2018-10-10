@@ -69,17 +69,19 @@ def find_most_popular_hobby(file):
     :param file: original file path
     :return: list
     """
-    # count = {}
-    # hobbies_dict = create_dictionary(file)
-    # for key, value in hobbies_dict.items():
-    #     # return max(value)
-    #     if value not in count:
-    #         count[value] = 0
-    #     else:
-    #         count[value] += 1
-    #
-    #     return(max(count, key=count.get))
-    #
+    new_list = []
+    new_dict = {}
+    hobbies_dict = create_dictionary(file)
+    for i in hobbies_dict.keys():
+        value = hobbies_dict.get(i)
+        for n in value:
+            new_dict[n] = new_dict.get(n, 0) + 1
+    dic = sorted(new_dict.items(), key=lambda x: -x[1])
+    max = sorted(new_dict.items(), key=lambda x: -x[1])[0]
+    for i in dic:
+        if i[1] == max[1]:
+            new_list.append(i[0])
+    return new_list
 
 
 def find_least_popular_hobby(file):
@@ -89,7 +91,19 @@ def find_least_popular_hobby(file):
     :param file: original file path
     :return: list
     """
-    pass
+    new_list = []
+    new_dict = {}
+    hobbies_dict = create_dictionary(file)
+    for i in hobbies_dict.keys():
+        value = hobbies_dict.get(i)
+        for n in value:
+            new_dict[n] = new_dict.get(n, 0) + 1
+    dic = sorted(new_dict.items(), key=lambda x: x[1])
+    min = sorted(new_dict.items(), key=lambda x: x[1])[0]
+    for c in dic:
+        if c[1] == min[1]:
+            new_list.append(c[0])
+    return new_list
 
 
 def write_corrected_database(file, file_to_write):
@@ -104,9 +118,11 @@ def write_corrected_database(file, file_to_write):
         name = "Name"
         hobbies = "Hobbies"
         writer.writerow([name, hobbies])
-        # your code goes here
-
-# These examples are based on a given text file from the exercise.
+        hobbies_dict = create_dictionary(file)
+        for i in hobbies_dict.keys():
+            values = "-".join(hobbies_dict.get(i))
+            key = i
+            writer.writerow([key, values])
 
 
 if __name__ == '__main__':
