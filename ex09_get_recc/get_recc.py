@@ -50,7 +50,17 @@ def names_to_be_eliminated(points_dict: dict, names: set = None, lowest_score: i
     :param lowest_score: helper to store current lowest score
     :return: set of names of lowest scoring people.
     """
-    pass
+    list_with_names = list(points_dict.keys())
+    if points_dict == {}:
+        return set()
+    if lowest_score == None or points_dict[list_with_names[0]] < lowest_score:
+        names = [list_with_names[0]]
+        lowest_score = points_dict[list_with_names[0]]
+    elif points_dict[list_with_names[0]] == lowest_score:
+        names.append(list_with_names[0])
+    del points_dict[list_with_names[0]]
+    names_to_be_eliminated(points_dict, names, lowest_score)
+    return names
 
 
 def people_in_the_know(hours_passed, cache: dict = None) -> int:
