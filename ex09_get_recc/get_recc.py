@@ -73,7 +73,7 @@ def people_in_the_know(hours_passed, cache: dict = None) -> int:
     :return: the number of people that have heard the rumor.
     """
     if hours_passed < 0:
-        return "ERROR"
+        return -1
     if hours_passed == 0:
         return 0
     if hours_passed == 1:
