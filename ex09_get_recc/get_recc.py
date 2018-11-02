@@ -50,7 +50,17 @@ def names_to_be_eliminated(points_dict: dict, names: set = None, lowest_score: i
     :param lowest_score: helper to store current lowest score
     :return: set of names of lowest scoring people.
     """
-    pass
+    list_with_names = list(points_dict.keys())
+    if points_dict == {}:
+        return set()
+    if lowest_score == None or points_dict[list_with_names[0]] < lowest_score:
+        names = [list_with_names[0]]
+        lowest_score = points_dict[list_with_names[0]]
+    elif points_dict[list_with_names[0]] == lowest_score:
+        names.append(list_with_names[0])
+    del points_dict[list_with_names[0]]
+    names_to_be_eliminated(points_dict, names, lowest_score)
+    return names
 
 
 def people_in_the_know(hours_passed, cache: dict = None) -> int:
@@ -74,9 +84,13 @@ def people_in_the_know(hours_passed, cache: dict = None) -> int:
     """
     if hours_passed < 0:
         return 0
-    if hours_passed == 1 or hours_passed == 2:
-        return 1
-    return people_in_the_know(hours_passed - 1) + people_in_the_know(hours_passed - 2)
+    # if hours_passed == 1 or hours_passed == 2:
+    #     return 1
+    # return people_in_the_know(hours_passed - 1) + people_in_the_know(hours_passed - 2)
+    if hours_passed in cache: return cache[hours_passed]
+    result = people_in_the_know(hours_passed - 1, cache) + people_in_the_know(hours_passed - 2, cache)
+    cache[hours_passed] = result
+    return result
 
 
 def traversable_coordinates(world_map: list, coord: tuple = (0, 0), traversable_coords: set = None) -> set:
@@ -126,6 +140,8 @@ def traversable_coordinates(world_map: list, coord: tuple = (0, 0), traversable_
 
 if __name__ == '__main__':
     print(count_portions(6, 3))
-    print(people_in_the_know(7))
-    print(people_in_the_know(8))
-    print(people_in_the_know(9))
+    print(people_in_the_know(7, cache={0: 1, 1: 1, 2: 1}))
+    print(people_in_the_know(8, cache={0: 1, 1: 1, 2: 1}))
+    print(people_in_the_know(9, cache={0: 1, 1: 1, 2: 1}))
+    print(names_to_be_eliminated({"Carl": 4, "Bert": 10}))
+    print(names_to_be_eliminated({"Terry": 4, "Pete": 4}))
