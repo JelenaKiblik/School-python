@@ -8,10 +8,10 @@ def recursive_sum(numbers: list) -> int:
     :param numbers: list of randomly ordered numbers
     :return: sum of even numbers
     """
-    if len(numbers) == 0:
-        return 0
-    else:
-        return numbers[0] + recursive_sum(numbers[1:])
+    if not numbers:
+        return 0  # for when the list is empty
+    counter = 0 if numbers[0] % 2 != 0 else numbers[0]
+    return counter + recursive_sum(numbers[1:])
 
 
 def loop_sum(numbers: list) -> int:
@@ -58,4 +58,3 @@ if __name__ == '__main__':
     print(recursive_sum([2, 4, 5, 8]))
     print(loop_sum([1, 3, 5, 7, 9]))
     print(loop_sum([2, 4, 5, 8]))
-
