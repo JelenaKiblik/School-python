@@ -74,12 +74,9 @@ def people_in_the_know(hours_passed, cache: dict = None) -> int:
     """
     if hours_passed < 0:
         return 0
-    if hours_passed == 0:
-        return 0
-    if hours_passed == 1:
+    if hours_passed == 1 or hours_passed == 2:
         return 1
-    else:
-        return people_in_the_know(hours_passed - 1) + people_in_the_know(hours_passed - 2)
+    return people_in_the_know(hours_passed - 1) + people_in_the_know(hours_passed - 2)
 
 
 def traversable_coordinates(world_map: list, coord: tuple = (0, 0), traversable_coords: set = None) -> set:
@@ -129,6 +126,6 @@ def traversable_coordinates(world_map: list, coord: tuple = (0, 0), traversable_
 
 if __name__ == '__main__':
     print(count_portions(6, 3))
-    print(people_in_the_know(-7))
+    print(people_in_the_know(7))
     print(people_in_the_know(8))
     print(people_in_the_know(9))
