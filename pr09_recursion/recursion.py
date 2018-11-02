@@ -1,10 +1,17 @@
+"""Recursion."""
+
+
 def recursive_sum(numbers: list) -> int:
     """
     Find out the sum of all the even numbers using recursion.
+
     :param numbers: list of randomly ordered numbers
     :return: sum of even numbers
     """
-    pass
+    if len(numbers) == 0:
+        return 0
+    else:
+        return numbers[0] + recursive_sum(numbers[1:])
 
 
 def loop_sum(numbers: list) -> int:
