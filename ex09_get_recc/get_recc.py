@@ -73,7 +73,7 @@ def people_in_the_know(hours_passed, cache: dict = None) -> int:
     :return: the number of people that have heard the rumor.
     """
     if hours_passed < 0:
-        return None
+        return "ERROR"
     if hours_passed == 0:
         return 0
     if hours_passed == 1:
@@ -129,6 +129,6 @@ def traversable_coordinates(world_map: list, coord: tuple = (0, 0), traversable_
 
 if __name__ == '__main__':
     print(count_portions(6, 3))
-    print(people_in_the_know(7))
+    print(people_in_the_know(-7))
     print(people_in_the_know(8))
     print(people_in_the_know(9))
