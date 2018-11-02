@@ -14,7 +14,12 @@ def loop_sum(numbers: list) -> int:
     :param numbers: list of randomly ordered numbers
     :return: sum of even numbers
     """
-    pass
+    my_sum = 0
+    for i in numbers:
+        if i % 2 == 0:
+            my_sum = my_sum + i
+            i += 1
+    return my_sum
 
 
 def loop_reverse(s: str) -> str:
@@ -46,5 +51,4 @@ if __name__ == '__main__':
     print(recursive_sum([2, 4, 5, 8]))
     print(loop_sum([1, 3, 5, 7, 9]))
     print(loop_sum([2, 4, 5, 8]))
-    print(recursive_reverse("abcdef"))
-    print(loop_reverse("abcdef"))
+
