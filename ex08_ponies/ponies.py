@@ -8,7 +8,7 @@ def decode(line: str) -> str:
 
 
 def extract_information(line: str) -> dict:
-    """Reads the pony data line after decoding. Returns dictionary data.."""
+    """Read the pony data line after decoding. Returns dictionary data.."""
     ponies_list = line.split()
     ponies_dict = dict()
     new_list = []
@@ -25,7 +25,7 @@ def extract_information(line: str) -> dict:
 
 
 def read(read_file: str) -> list:
-    """Reads file information from the file by line, decodes, reads data and saves."""
+    """Read file information from the file by line, decodes, reads data and saves."""
     with open(read_file, "r") as f:
         ponies_list = []
         for line in f.readlines():
@@ -34,7 +34,7 @@ def read(read_file: str) -> list:
 
 
 def filter_by_location(ponies: list) -> list:
-    """Removes ponies from a predefined order whose assessment location is not specified ('None')."""
+    """Remove ponies from a predefined order whose assessment location is not specified ('None')."""
     sort_location = []
     for i in range(len(ponies)):
         if ponies[i]["location"] != "None":
@@ -43,7 +43,7 @@ def filter_by_location(ponies: list) -> list:
 
 
 def filter_by_kind(ponies: list, kind: str) -> list:
-    """Filters the pony list so that only ponies whose key 'kind' is the corresponding variable is left."""
+    """Filter the pony list so that only ponies whose key 'kind' is the corresponding variable is left."""
     same_ponies_kind = []
     for i in range(len(ponies)):
         if ponies[i]["kind"] == kind:
@@ -52,7 +52,7 @@ def filter_by_kind(ponies: list, kind: str) -> list:
 
 
 def get_points_for_color(color: str) -> int:
-    """Returns the estimated value per color. Colors in the color sequence are the first color with the largest number of points (10)."""
+    """Return the estimated value per color. Colors in the color sequence are the first color with the largest number of points (10)."""
     colors = ['magenta', 'pink', 'purple', 'orange', 'red', 'yellow', 'cyan', 'blue', 'brown', 'green']
     if color not in colors:
         return None
@@ -77,7 +77,7 @@ def add_points(pony: dict) -> dict:
 
 
 def evaluate_ponies(ponies: list) -> list:
-    """Adds to each ponies the result obtained in the contest using the add_points function."""
+    """Add to each ponies the result obtained in the contest using the add_points function."""
     list_with_points = []
     for i in range(len(ponies)):
         list_with_points.append(add_points(ponies[i]))
@@ -85,22 +85,22 @@ def evaluate_ponies(ponies: list) -> list:
 
 
 def sort_by_name(ponies: list) -> list:
-    """Sorts the ponies so that the names of the 'A' are above. Hint: sorted (key = ..)."""
+    """Sort the ponies so that the names of the 'A' are above. Hint: sorted (key = ..)."""
     return sorted(ponies, key=lambda x: x["name"])
 
 
 def sort_by_points(ponies: list) -> list:
-    """Sorts the ponies so that ponies with higher score are above and the ponies with the result of None are excluded."""
+    """Sort the ponies so that ponies with higher score are above and the ponies with the result of None are excluded."""
     return sorted(ponies, key=lambda x: x["points"], reverse=True)
 
 
 def format_line(pony: dict, place: int) -> str:
-    """Returns the string to be printed in a new file per pony."""
+    """Return the string to be printed in a new file per pony."""
     return str(place) + " " * (10 - len(str(place))) + str(pony["points"]) + " " * (10 - len(str(pony["points"]))) + str(pony["name"]) + " " * (20 - len(str(pony["name"]))) + str(pony["kind"]) + " " * (20 - len(str(pony["kind"]))) + str(pony["coat_color"]) + " " * (20 - len(str(pony["coat_color"]))) + str(pony["mane_color"]) + " " * (20 - len(str(pony["mane_color"]))) + str(pony["eye_color"]) + " " * (20 - len(str(pony["eye_color"]))) + str(pony["location"])
 
 
 def write(input_file: str, kind: str):
-    """Ponies are written in a regular format (format_line) text file."""
+    """Pony is written in a regular format (format_line) text file."""
     filtered_list = sort_by_name(evaluate_ponies(filter_by_kind(filter_by_location(read(input_file)), kind)))
     remove_none = []
     for i in range(len(filtered_list)):
