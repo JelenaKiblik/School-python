@@ -26,11 +26,16 @@ def extract_information(line: str) -> dict:
 
 def read(read_file: str) -> list:
     """Read file information from the file by line, decodes, reads data and saves."""
-    with open(read_file, "r") as f:
-        ponies_list = []
-        for line in f.readlines():
-            ponies_list.append(extract_information(decode(line)))
-    return ponies_list
+    try:
+        with open(read_file, "r") as f:
+            list = []
+            next(f)
+            next(f)
+            for line in f.readlines():
+                list.append(extract_information(decode(line)))
+        return list
+    except Exception:
+        raise FileNotFoundError("File not found!")
 
 
 def filter_by_location(ponies: list) -> list:
