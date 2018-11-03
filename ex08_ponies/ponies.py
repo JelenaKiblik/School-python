@@ -119,7 +119,9 @@ def write(input_file: str, kind: str):
             if i > 0:
                 f.write("\n")
             f.write(format_line(finally_sorted[i], i + 1))
-    write("sisendfail.txt", "Unicorn")
+
+
+write("sisendfail.txt", "Unicorn")
 
 
 if __name__ == '__main__':
