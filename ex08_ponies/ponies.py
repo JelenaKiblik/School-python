@@ -28,12 +28,12 @@ def read(read_file: str) -> list:
     """Read file information from the file by line, decodes, reads data and saves."""
     try:
         with open(read_file, "r") as f:
-            list = []
+            pony_list = []
             next(f)
             next(f)
             for line in f.readlines():
-                list.append(extract_information(decode(line)))
-        return list
+                pony_list.append(extract_information(decode(line)))
+        return pony_list
     except Exception:
         raise FileNotFoundError("File not found!")
 
@@ -119,7 +119,7 @@ def write(input_file: str, kind: str):
             if i > 0:
                 f.write("\n")
             f.write(format_line(finally_sorted[i], i + 1))
-    write("test_input.txt", "Unicorn")
+    write("sisendfail.txt", "Unicorn")
 
 
 if __name__ == '__main__':
