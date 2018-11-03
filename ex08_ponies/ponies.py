@@ -121,9 +121,11 @@ def write(input_file: str, kind: str):
             f.write(format_line(finally_sorted[i], i + 1))
 
 
-write("sisendfail.txt", "Unicorn")
-
-
 if __name__ == '__main__':
     print(decode('TWF1ZCBQb21tZWwgICAgICAgICBVbmljb3JuICAgICAgICAgICAgIHBpbmsgICAgICAgICAgICAgICAgZ3JlZW4gICAgICAgICA'
                  + 'gICAgICBjeWFuICAgICAgICAgICAgICAgIENhc3RsZSBvZiBGcmllbmRzaGlw'))
+    print(extract_information(
+        'Maud Pommel         Unicorn             pink                green               cyan                Castle of Friendship'))
+    print(add_points(
+        {'name': 'Maud Pommel', 'kind': 'Unicorn', 'coat_color': 'pink', 'mane_color': 'green', 'eye_color': 'cyan',
+         'location': 'Castle of Friendship'}))
