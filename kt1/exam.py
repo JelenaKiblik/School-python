@@ -52,16 +52,17 @@ def max_block(s: str) -> int:
     max_block("abbCCCddBBBxx") => 3
     max_block("") => 0
     """
-    count = 1
+    count = 2
     string = s.lower()
     if len(string) == 0:
         return 0
     else:
-        for i in range(0, len(string) - 1):
-            if string[i] == string[i + 1]:
+        for i in range(0, len(string) - 2):
+            if (string[i] == string[i + 1]) and (string[i + 1] == string[i + 2]):
                 count += 1
         return count
 
 
 print(max_block("hoopla"))
 print(max_block(""))
+print(max_block("abbCCCddBBBxx"))
