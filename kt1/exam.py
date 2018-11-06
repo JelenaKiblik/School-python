@@ -37,7 +37,7 @@ def sum_half_evens(nums: list) -> int:
             list.append(new_list[i])
     else:
         a = len(new_list) // 2
-        for i in range(a+1):
+        for i in range(a + 1):
             list.append(new_list[i])
     return sum(list)
 
@@ -58,7 +58,7 @@ def max_block(s: str) -> int:
         return 0
     else:
         for i in range(len(s)):
-            if s[i] == s[i+1:]:
+            if s[i] == s[i + 1:]:
                 count += 1
         return count
 
