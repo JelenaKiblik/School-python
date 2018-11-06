@@ -1,6 +1,10 @@
+"""Kontrolltoo."""
+
+
 def capitalize_string(s: str) -> str:
     """
     Return capitalized string. The first char is capitalized, the rest remain as they are.
+
     capitalize_string("abc") => "Abc"
     capitalize_string("ABc") => "ABc"
     capitalize_string("") => ""
@@ -14,6 +18,7 @@ def capitalize_string(s: str) -> str:
 def sum_half_evens(nums: list) -> int:
     """
     Return the sum of first half of even ints in the given array.
+
     If there are odd number of even numbers, then include the middle number.
 
     sum_half_evens([2, 1, 2, 3, 4]) => 4
@@ -47,9 +52,17 @@ def max_block(s: str) -> int:
     max_block("abbCCCddBBBxx") => 3
     max_block("") => 0
     """
-    pass
+    count = 0
+
+    if len(s) == 0:
+        return 0
+    else:
+        for i in range(len(s)):
+            if s[i] == s[i+1:]:
+                count += 1
+        return count
 
 
-print(sum_half_evens([2, 2, 0, 4]))
-print(sum_half_evens([1, 3, 5, 8]))
-print(sum_half_evens([2, 3, 5, 7, 8, 9, 10, 11]))
+print(max_block("hoopla"))
+print(max_block("abbCCCddBBBxx"))
+print(max_block(""))
