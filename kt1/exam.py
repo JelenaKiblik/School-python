@@ -21,7 +21,20 @@ def sum_half_evens(nums: list) -> int:
     sum_half_evens([1, 3, 5, 8]) => 8
     sum_half_evens([2, 3, 5, 7, 8, 9, 10, 11]) => 10
     """
-    pass
+    new_list = []
+    list = []
+    for i in nums:
+        if i % 2 == 0:
+            new_list.append(i)
+    if len(new_list) % 2 == 0:
+        a = len(new_list) // 2
+        for i in range(a):
+            list.append(new_list[i])
+    else:
+        a = len(new_list) // 2
+        for i in range(a+1):
+            list.append(new_list[i])
+    return sum(list)
 
 
 def max_block(s: str) -> int:
@@ -36,6 +49,7 @@ def max_block(s: str) -> int:
     """
     pass
 
-print(capitalize_string("abc"))
-print(capitalize_string("ABc"))
-print(capitalize_string(""))
+
+print(sum_half_evens([2, 2, 0, 4]))
+print(sum_half_evens([1, 3, 5, 8]))
+print(sum_half_evens([2, 3, 5, 7, 8, 9, 10, 11]))
