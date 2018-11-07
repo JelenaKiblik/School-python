@@ -1,5 +1,6 @@
 """Wat."""
 
 
-def hello():
-    return "Hello!"
+def first(n: int):
+    """Function first."""
+    return n
