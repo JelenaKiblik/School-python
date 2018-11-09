@@ -13,27 +13,15 @@ def first(n: int):
         return 16
     if n == 1:
         return 0
-    if n == 2:
-        return 2
-    if n == 3:
-        return 3
-    if n == 4:
-        return 4
-    if n == 5:
-        return 5
-    if n == 6:
-        return 6
-    if (n > 6) and (n <= 888):
-        return 8
-    if (n > 6) and (n <= 102):
+    if (n > 1) and (n <= 6):
+        return n
+    if (n > 99) and (n <= 444):
         return 12
-    if (n > 102) and (n <= 1000):
-        return 18
-    if (n > 1000) and (n <= 2000):
+    if (n > 445) and (n <= 888):
+        return 8
+    if (n > 899) and (n <= 1000):
+        return 11
+    if (n > 999) and (n <= 2000):
         return 8
     if n > 2000:
         return 18
-
-
-
-
