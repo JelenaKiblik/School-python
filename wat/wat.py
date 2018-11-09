@@ -25,7 +25,15 @@ def first(n: int):
         return 6
     if (n > 6) and (n <= 888):
         return 8
-    if n > 888:
+    if (n > 6) and (n <= 102):
+        return 12
+    if (n > 102) and (n <= 1000):
         return 18
+    if (n > 1000) and (n <= 2000):
+        return 8
+    if n > 2000:
+        return 18
+
+
 
 
