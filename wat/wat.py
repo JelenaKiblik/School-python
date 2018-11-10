@@ -29,9 +29,9 @@ def first(n: int):
         return 8
     if ((n > 99) and (n <= 444)) or ((n > 900) and (n <= 950)):
         return 12
-    if n == 702:
+    if (n >= 700) and (n <= 900):
         return 12
-    if ((n > 445) and (n <= 900)) or ((n >= 999) and (n <= 2000)):
+    if ((n > 445) and (n < 700)) or ((n >= 999) and (n <= 2000)):
         return 8
     if n > 2000:
         return 18
