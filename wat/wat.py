@@ -32,9 +32,9 @@ def first(n: int):
     if n == 3:
         return 6
     if n == 4:
-        return 4
-    if n == 5:
         return 6
+    if n == 5:
+        return 4
     if n == 6:
         return 6
     if (n > 6) and (n <= 99):
