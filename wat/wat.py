@@ -5,9 +5,13 @@ def first(n: int):
     """Function first."""
     if n <= -950:
         return 12
-    if ((n > -950) and (n <= -628)) or ((n > 950) and (n < 1000)):
+    if (n > -950) and (n <= -628):
         return 11
-    if (n > -628) and (n <= - 150):
+    if (n > -628) and (n <= - 400):
+        return 14
+    if (n > -400) and (n <= - 300):
+        return 11
+    if (n > -300) and (n <= - 150):
         return 14
     if n == -17:
         return 11
@@ -29,8 +33,10 @@ def first(n: int):
         return 6
     if (n > 6) and (n <= 99):
         return 8
-    if ((n > 99) and (n <= 444)) or ((n > 900) and (n <= 950)):
+    if ((n > 99) and (n <= 444)) or ((n > 900) and (n <= 980)):
         return 12
+    if (n > 980) and (n < 1000):
+        return 11
     if (n >= 700) and (n <= 900):
         return 12
     if ((n > 445) and (n < 700)) or ((n >= 999) and (n <= 2000)):
