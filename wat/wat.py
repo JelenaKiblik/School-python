@@ -27,11 +27,9 @@ def first(n: int):
         return 6
     if n == 6:
         return 6
-    if n > 6:
+    if (n > 6) and (n <= 99):
         return 8
     if ((n > 99) and (n <= 444)) or ((n > 900) and (n <= 950)):
-        return 12
-    if n == 180:
         return 12
     if (n >= 700) and (n <= 900):
         return 12
@@ -39,3 +37,6 @@ def first(n: int):
         return 8
     if (n > 2000) and (n < 3000):
         return 18
+
+
+print(first(2343))
