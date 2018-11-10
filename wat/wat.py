@@ -15,7 +15,11 @@ def first(n: int):
         return 14
     if n == -17:
         return 11
-    if (n > -150) and (n < -1):
+    if (n > -150) and (n < -100):
+        return 12
+    if (n > -100) and (n < -40):
+        return 11
+    if (n > -40) and (n < -1):
         return 12
     if n == -1:
         return 14
@@ -26,6 +30,8 @@ def first(n: int):
     if n == 2:
         return 2
     if n == 3:
+        return 6
+    if n == 4:
         return 4
     if n == 5:
         return 6
