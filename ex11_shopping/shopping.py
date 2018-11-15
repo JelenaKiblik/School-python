@@ -4,9 +4,9 @@
 class ProductCannotBeSold(Exception):
     """Exception."""
 
-    def __init__(self):
+    def __init__(self, message):
         """Exception, which is raised when a full stack is attempted to put an element."""
-        super().__init__()
+        super().__init__(message)
 
 
 class Product:
@@ -51,7 +51,10 @@ class Customer:
         :param age: customer's age
         :param money: customer's money
         """
-        pass
+        self.name = name
+        self.age = age
+        self.money = money
+        self.products = []
 
     def add_item(self, product: Product, amount: int) -> None:
         """
@@ -60,7 +63,7 @@ class Customer:
         :param product: product
         :param amount: amount
         """
-        pass
+        self.products.append(product, amount)
 
     def pay(self, money_to_pay: int) -> None:
         """
@@ -70,7 +73,11 @@ class Customer:
         In other case reduces amount of customer's money.
         :param money_to_pay: money amount needed to be paid
         """
-        pass
+        money_to_pay = self.amount
+        if money_to_pay < self.money:
+            raise ProductCannotBeSold("You do not have enough money to pay for chosen product!")
+        else:
+            self.money -= money_to_pay
 
     def __str__(self) -> str:
         """
@@ -78,7 +85,7 @@ class Customer:
 
         :return: string
         """
-        pass
+        return f" {self.name}'s items: {Customer[product]}; money: {money}"
 
 
 class Store:
@@ -86,7 +93,8 @@ class Store:
 
     def __init__(self) -> None:
         """Class constructor."""
-        pass
+        self.products = []
+        self.money = 0
 
     def buy(self, product: Product, amount: int, customer: Customer) -> str:
         """
@@ -128,7 +136,7 @@ class Store:
 
         :param product:  product name
         """
-        pass
+        self.product = product
 
     def __str__(self) -> str:
         """
@@ -136,23 +144,23 @@ class Store:
 
         :return: string
         """
-        return f"Store items: {self.add_product()}; store money: {self.amount}."
+        return f"Store items: {self.add_product()}; store money: {self.money}."
 
 
 if __name__ == "__main__":
-    print(Product("Toy", 10))  # Product: Toy, price: 10
-    print([Product("Toy", 10), Product("Adult Toy", 20)])  # [Toy, Adult Toy]
-    # john = Customer("John", 20, 300)
-    # bobby = Customer("Bobby", 17, 150)
-    # sandy = Customer("Sandy", 12, 100)
-    #
-    # store = Store()
-    #
-    # beer = Product("beer", 50)
-    # water = Product("water", 30)
-    # choco = Product("chocolate", 45)
-    # pretzel = Product("pretzel", 35)
-    #
+    # print(Product("Toy", 10))  # Product: Toy, price: 10
+    # print([Product("Toy", 10), Product("Adult Toy", 20)])  # [Toy, Adult Toy]
+    john = Customer("John", 20, 300)
+    bobby = Customer("Bobby", 17, 150)
+    sandy = Customer("Sandy", 12, 100)
+
+    store = Store()
+
+    beer = Product("beer", 50)
+    water = Product("water", 30)
+    choco = Product("chocolate", 45)
+    pretzel = Product("pretzel", 35)
+
     # store.add_product(beer)
     # store.add_product(water)
     # for _ in range(3):
