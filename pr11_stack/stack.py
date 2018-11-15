@@ -90,7 +90,10 @@ class Stack:
         Else
             "Stack(capacity={capacity})"
         """
-        return f"{self.capacity}"
+        if self.is_empty():
+            return f"Stack(capacity={stack_capacity})"
+        else:
+            return f"Stack(capacity={stack_capacity}, top_element={self.peek()})"
 
 
 if __name__ == '__main__':
@@ -131,32 +134,32 @@ if __name__ == '__main__':
 
     print("First part is done, should get 4 points for that.")
 
-    # # uncomment this part if ready
+    # uncomment this part if ready
 
-    # # check peek function
-    # peek_stack = Stack(stack_capacity)
-    # peek_stack.push(item_1)
-    # assert peek_stack.peek() == item_1
-    # assert peek_stack.pop() == item_1, "item 1 should still be present in the stack"
-    # assert peek_stack.peek() is None, "empty_stack.peek() should return 0"
-    #
-    # # check is_empty function
-    # empty_stack = Stack(capacity=5)
-    # assert empty_stack.is_empty()
-    #
-    # stack_with_item_1 = Stack(5)
-    # stack_with_item_1.push(item_1)
-    # assert not stack_with_item_1.is_empty()
-    #
-    # # check is_full function
-    # full_stack = Stack(0)
-    # assert full_stack.is_full()
-    #
-    # not_full_stack = Stack(2)
-    # assert not not_full_stack.is_full()
-    #
-    # # check __str__ function
-    # assert str(empty_stack) == "Stack(capacity=5)"
-    # assert str(stack_with_item_1) == "Stack(capacity=5, top_element=first item)"
-    #
-    # print("Ready for submission!")
+    # check peek function
+    peek_stack = Stack(stack_capacity)
+    peek_stack.push(item_1)
+    assert peek_stack.peek() == item_1
+    assert peek_stack.pop() == item_1, "item 1 should still be present in the stack"
+    assert peek_stack.peek() is None, "empty_stack.peek() should return 0"
+
+    # check is_empty function
+    empty_stack = Stack(capacity=5)
+    assert empty_stack.is_empty()
+
+    stack_with_item_1 = Stack(5)
+    stack_with_item_1.push(item_1)
+    assert not stack_with_item_1.is_empty()
+
+    # check is_full function
+    full_stack = Stack(0)
+    assert full_stack.is_full()
+
+    not_full_stack = Stack(2)
+    assert not not_full_stack.is_full()
+
+    # check __str__ function
+    assert str(empty_stack) == "Stack(capacity=5)"
+    assert str(stack_with_item_1) == "Stack(capacity=5, top_element=first item)"
+
+    print("Ready for submission!")
