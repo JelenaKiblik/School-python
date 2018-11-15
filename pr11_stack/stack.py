@@ -4,21 +4,18 @@ from typing import Any
 
 class StackOverflowException(Exception):
     """Exception."""
-    #
-    # def __init__(self):
-    #     """Exception, which is raised when a full stack is attempted to put an element."""
-    #     super().__init__()
-    #
-    pass
+
+    def __init__(self):
+        """Exception, which is raised when a full stack is attempted to put an element."""
+        super().__init__()
 
 
 class StackUnderflowException(Exception):
     """Exception."""
-    #
-    # def __init__(self):
-    #     """Exception, which is lifted when an empty stack is attempted to take an element."""
-    #     super().__init__()
-    pass
+
+    def __init__(self):
+        """Exception, which is lifted when an empty stack is attempted to take an element."""
+        super().__init__()
 
 
 class Stack:
@@ -30,9 +27,9 @@ class Stack:
 
         :param capacity: the maximum number of objects that stack can hold.
         """
-        self.items = []
+        self.stack = list()
         self.capacity = capacity
-        self.count = 0
+        self.top = 0
 
     def push(self, item: Any) -> None:
         """
@@ -40,11 +37,11 @@ class Stack:
 
         If stack has no more room, raises StackOverflowException.
         """
-        try:
-            self.items.append(item)
-            self.count += 1
-        except StackUnderflowException:
-            pass
+        if self.is_full():
+            raise StackOverflowException
+        else:
+            self.stack.append(item)
+            self.top += 1
 
     def pop(self) -> Any:
         """
@@ -53,10 +50,11 @@ class Stack:
         If stack is empty, raises StackUnderflowException.
         """
         if self.is_empty():
-            raise StackOverflowException
+            raise StackUnderflowException
         else:
-            self.count -= 1
-            return self.items.pop()
+            item = self.stack.pop()
+            self.top -= 1
+            return item
 
     def peek(self) -> Any:
         """
@@ -67,18 +65,18 @@ class Stack:
         if self.is_empty():
             return None
         else:
-            return self.items[len(self.items) - 1]
+            return self.stack[len(self.stack) - 1]
 
     def is_empty(self) -> bool:
         """Return the brace that the stack is empty."""
-        if not self.items:
+        if not self.stack:
             return True
         else:
             return False
 
     def is_full(self) -> bool:
         """Return the brawl value of the stack is full."""
-        if self.items:
+        if self.top >= self.capacity:
             return True
         else:
             return False
@@ -92,7 +90,7 @@ class Stack:
         Else
             "Stack(capacity={capacity})"
         """
-        return str(list(reversed(self.items)))
+        return f"{self.capacity}"
 
 
 if __name__ == '__main__':
@@ -120,18 +118,18 @@ if __name__ == '__main__':
     except StackUnderflowException:
         pass
 
-    # # Fill the stack
-    # for i in range(stack_capacity):
-    #     my_stack.push(i)
-    #
-    # # Test that stack overflow exception is thrown
-    # try:
-    #     my_stack.push("Too much items")
-    #     assert False, "StackOverflowException not raised"
-    # except StackOverflowException:
-    #     pass
-    #
-    # print("First part is done, should get 4 points for that.")
+    # Fill the stack
+    for i in range(stack_capacity):
+        my_stack.push(i)
+
+    # Test that stack overflow exception is thrown
+    try:
+        my_stack.push("Too much items")
+        assert False, "StackOverflowException not raised"
+    except StackOverflowException:
+        pass
+
+    print("First part is done, should get 4 points for that.")
 
     # # uncomment this part if ready
 
