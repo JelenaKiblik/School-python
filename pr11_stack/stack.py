@@ -27,7 +27,7 @@ class Stack:
 
         :param capacity: the maximum number of objects that stack can hold.
         """
-        self.lst = []
+        self.items = []
         self.capacity = capacity
 
     def push(self, item: Any) -> None:
@@ -36,7 +36,7 @@ class Stack:
 
         If stack has no more room, raises StackOverflowException.
         """
-        self.lst.append(item)
+        self.items.append(item)
 
     def pop(self) -> Any:
         """
@@ -44,7 +44,7 @@ class Stack:
 
         If stack is empty, raises StackUnderflowException.
         """
-        return self.lst.pop()
+        return self.items.pop()
 
     def peek(self) -> Any:
         """
@@ -52,18 +52,21 @@ class Stack:
 
         If stack is empty returns None.
         """
-        return self.lst[len(self.lst) - 1]
+        return self.items[len(self.items) - 1]
 
     def is_empty(self) -> bool:
         """Return the brace that the stack is empty."""
-        if self.lst.count != 0:
+        if self.items.count != 0:
             return False
         else:
             return True
 
     def is_full(self) -> bool:
         """Return the brawl value of the stack is full."""
-        pass
+        if self.items.count != 0:
+            return True
+        else:
+            return False
 
     def __str__(self) -> str:
         """
