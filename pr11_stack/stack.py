@@ -91,9 +91,9 @@ class Stack:
             "Stack(capacity={capacity})"
         """
         if self.is_empty():
-            return f"Stack(capacity={stack_capacity})"
+            return f"Stack(capacity={self.capacity})"
         else:
-            return f"Stack(capacity={stack_capacity}, top_element={self.peek()})"
+            return f"Stack(capacity={self.capacity}, top_element={self.peek()})"
 
 
 if __name__ == '__main__':
