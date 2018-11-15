@@ -4,6 +4,7 @@ from typing import Any
 
 class StackOverflowException(Exception):
     """Exception."""
+
     def __init__(self):
         """Exception, which is raised when a full stack is attempted to put an element."""
         super().__init__()
@@ -11,6 +12,7 @@ class StackOverflowException(Exception):
 
 class StackUnderflowException(Exception):
     """Exception."""
+
     def __init__(self):
         """Exception, which is lifted when an empty stack is attempted to take an element."""
         super().__init__()
