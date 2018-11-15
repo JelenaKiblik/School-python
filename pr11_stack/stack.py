@@ -4,18 +4,21 @@ from typing import Any
 
 class StackOverflowException(Exception):
     """Exception."""
-
-    def __init__(self):
-        """Exception, which is raised when a full stack is attempted to put an element."""
-        super().__init__()
+    #
+    # def __init__(self):
+    #     """Exception, which is raised when a full stack is attempted to put an element."""
+    #     super().__init__()
+    #
+    pass
 
 
 class StackUnderflowException(Exception):
     """Exception."""
-
-    def __init__(self):
-        """Exception, which is lifted when an empty stack is attempted to take an element."""
-        super().__init__()
+    #
+    # def __init__(self):
+    #     """Exception, which is lifted when an empty stack is attempted to take an element."""
+    #     super().__init__()
+    pass
 
 
 class Stack:
@@ -37,8 +40,11 @@ class Stack:
 
         If stack has no more room, raises StackOverflowException.
         """
-        self.items.append(item)
-        self.count += 1
+        try:
+            self.items.append(item)
+            self.count += 1
+        except StackUnderflowException:
+            pass
 
     def pop(self) -> Any:
         """
@@ -46,11 +52,11 @@ class Stack:
 
         If stack is empty, raises StackUnderflowException.
         """
-        if not self.is_empty():
+        if self.is_empty():
+            raise StackOverflowException
+        else:
             self.count -= 1
             return self.items.pop()
-        else:
-            print("Stack is empty")
 
     def peek(self) -> Any:
         """
@@ -65,14 +71,14 @@ class Stack:
 
     def is_empty(self) -> bool:
         """Return the brace that the stack is empty."""
-        if self.items.count != 0:
-            return False
-        else:
+        if not self.items:
             return True
+        else:
+            return False
 
     def is_full(self) -> bool:
         """Return the brawl value of the stack is full."""
-        if self.items.count != 0:
+        if self.items:
             return True
         else:
             return False
