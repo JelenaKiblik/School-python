@@ -52,7 +52,10 @@ class Stack:
 
         If stack is empty returns None.
         """
-        return self.items[len(self.items) - 1]
+        if self.items.count == 0:
+            return None
+        else:
+            return self.items[len(self.items) - 1]
 
     def is_empty(self) -> bool:
         """Return the brace that the stack is empty."""
