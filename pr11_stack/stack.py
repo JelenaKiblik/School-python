@@ -29,6 +29,7 @@ class Stack:
         """
         self.items = []
         self.capacity = capacity
+        self.count = 0
 
     def push(self, item: Any) -> None:
         """
@@ -37,6 +38,7 @@ class Stack:
         If stack has no more room, raises StackOverflowException.
         """
         self.items.append(item)
+        self.count += 1
 
     def pop(self) -> Any:
         """
@@ -44,6 +46,7 @@ class Stack:
 
         If stack is empty, raises StackUnderflowException.
         """
+        self.count -= 1
         return self.items.pop()
 
     def peek(self) -> Any:
