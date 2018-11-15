@@ -1,5 +1,14 @@
 from typing import Any
-# TODO: create classes for custom exceptions here.
+
+
+class StackOverflowException(Exception):
+    def __init__(self):
+        super().__init__()
+
+
+class StackUnderflowException(Exception):
+    def __init__(self):
+        super().__init__()
 
 
 class Stack:
@@ -11,7 +20,8 @@ class Stack:
 
         :param capacity: the maximum number of objects that stack can hold.
         """
-        self.capacity = []
+        self.lst = []
+        self.capacity = capacity
 
     def push(self, item: Any) -> None:
         """
@@ -19,7 +29,7 @@ class Stack:
 
         If stack has no more room, raises StackOverflowException.
         """
-        self.capacity.append(item)
+        self.lst.append(item)
 
     def pop(self) -> Any:
         """
@@ -27,7 +37,7 @@ class Stack:
 
         If stack is empty, raises StackUnderflowException.
         """
-        return self.capacity.pop()
+        return self.lst.pop()
 
     def peek(self) -> Any:
         """
@@ -35,10 +45,10 @@ class Stack:
 
         If stack is empty returns None.
         """
-        return self.capacity[len(self.capacity) - 1]
+        return self.lst[len(self.lst) - 1]
 
     def is_empty(self) -> bool:
-        if self.capacity.count != 0:
+        if self.lst.count != 0:
             return False
         else:
             return True
