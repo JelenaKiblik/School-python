@@ -46,8 +46,11 @@ class Stack:
 
         If stack is empty, raises StackUnderflowException.
         """
-        self.count -= 1
-        return self.items.pop()
+        if not self.is_empty():
+            self.count -= 1
+            return self.items.pop()
+        else:
+            print("Stack is empty")
 
     def peek(self) -> Any:
         """
@@ -55,7 +58,7 @@ class Stack:
 
         If stack is empty returns None.
         """
-        if self.items.count == 0:
+        if self.is_empty():
             return None
         else:
             return self.items[len(self.items) - 1]
@@ -83,7 +86,7 @@ class Stack:
         Else
             "Stack(capacity={capacity})"
         """
-        pass
+        return str(list(reversed(self.items)))
 
 
 if __name__ == '__main__':
@@ -96,4 +99,60 @@ if __name__ == '__main__':
 
     my_stack.push(item_1)
     my_stack.push(item_2)
+
+    assert my_stack.pop() == item_2, "second item should be on the top of the stack"
+
     my_stack.push(item_3)
+
+    assert my_stack.pop() == item_3, "third item should be on the top of the stack"
+    assert my_stack.pop() == item_1, "first item should be on the top of the stack"
+
+    # Now stack size should be zero, so after pop exception should be raised.
+    try:
+        my_stack.pop()
+        assert False, "StackUnderflowException not raised"
+    except StackUnderflowException:
+        pass
+
+    # # Fill the stack
+    # for i in range(stack_capacity):
+    #     my_stack.push(i)
+    #
+    # # Test that stack overflow exception is thrown
+    # try:
+    #     my_stack.push("Too much items")
+    #     assert False, "StackOverflowException not raised"
+    # except StackOverflowException:
+    #     pass
+    #
+    # print("First part is done, should get 4 points for that.")
+
+    # # uncomment this part if ready
+
+    # # check peek function
+    # peek_stack = Stack(stack_capacity)
+    # peek_stack.push(item_1)
+    # assert peek_stack.peek() == item_1
+    # assert peek_stack.pop() == item_1, "item 1 should still be present in the stack"
+    # assert peek_stack.peek() is None, "empty_stack.peek() should return 0"
+    #
+    # # check is_empty function
+    # empty_stack = Stack(capacity=5)
+    # assert empty_stack.is_empty()
+    #
+    # stack_with_item_1 = Stack(5)
+    # stack_with_item_1.push(item_1)
+    # assert not stack_with_item_1.is_empty()
+    #
+    # # check is_full function
+    # full_stack = Stack(0)
+    # assert full_stack.is_full()
+    #
+    # not_full_stack = Stack(2)
+    # assert not not_full_stack.is_full()
+    #
+    # # check __str__ function
+    # assert str(empty_stack) == "Stack(capacity=5)"
+    # assert str(stack_with_item_1) == "Stack(capacity=5, top_element=first item)"
+    #
+    # print("Ready for submission!")
