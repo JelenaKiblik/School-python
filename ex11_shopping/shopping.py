@@ -125,10 +125,12 @@ class Store:
         :param customer: customer who wants to buy
         :return: message
         """
-        if ((product.name == "beer") or (product.name == "tobacco")) and (customer.age <= 18):
-            raise ProductCannotBeSold(f"You are too young to buy Product: {product.name}!")
-        else:
-            return "Thank you for the purchase!"
+        try:
+            self.allowed_to_buy(product, customer)
+        except ProductCannotBeSold:
+            return f"You are too young to buy Product: {product.name}!"
+        finally:
+            return f"Thank you for the purchase!"
 
     def allowed_to_buy(self, product: Product, customer: Customer):
         """
@@ -188,20 +190,20 @@ if __name__ == "__main__":
 
     store = Store()
 
-    beer = Product("beer", 50)
-    water = Product("water", 30)
-    choco = Product("chocolate", 45)
-    pretzel = Product("pretzel", 35)
+    # beer = Product("beer", 50)
+    # water = Product("water", 30)
+    # choco = Product("chocolate", 45)
+    # pretzel = Product("pretzel", 35)
+    #
+    # store.add_product(beer)
+    # store.add_product(water)
+    # for _ in range(3):
+    #     store.add_product(choco)
+    #     store.add_product(pretzel)
 
-    store.add_product(beer)
-    store.add_product(water)
-    for _ in range(3):
-        store.add_product(choco)
-        store.add_product(pretzel)
-
-    print(store.buy(beer, 1, john))  # -> Thank you for the purchase!
+    # print(store.buy(beer, 1, john))  # -> Thank you for the purchase!
     # print(beer not in store.products)  # -> True
-    print(john)  # -> John's items: beer; money: 250.
+    # print(john)  # -> John's items: beer; money: 250.
 
     tobacco = Product("tobacco", 55)
     store.add_product(tobacco)
