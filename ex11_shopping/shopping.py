@@ -119,12 +119,12 @@ class Store:
     def buy(self, product: Product, amount: int, customer: Customer) -> str:
         """
         Represent how customer buys product.
+
         :param product: product the customer wants
         :param amount: pieces of product
         :param customer: customer who wants to buy
         :return: message
         """
-
         return "Thank you for the purchase!"
 
     def allowed_to_buy(self, product: Product, customer: Customer):
