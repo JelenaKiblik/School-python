@@ -94,7 +94,8 @@ class Store:
 
     def __init__(self) -> None:
         """Class constructor."""
-        self.products = []
+        self.products = {}
+        self.products_amount_in_store = {}
         self.money = 0
 
     def buy(self, product: Product, amount: int, customer: Customer) -> str:
@@ -106,7 +107,10 @@ class Store:
         :param customer: customer who wants to buy
         :return: message
         """
-        pass
+        # if :
+        #     return "Thank you for the purchase!"
+        # else:
+        #     raise ProductCannotBeSold("You do not have enough money to pay for chosen product!")
 
     def allowed_to_buy(self, product: Product, customer: Customer):
         """
@@ -137,7 +141,14 @@ class Store:
 
         :param product:  product name
         """
-        self.product = product
+        # self.products.append(product)
+        if product in self.products:
+            # self.products[product.name] = product.price
+            self.products_amount_in_store[product.name] += 1
+        else:
+            self.products[product.name] = product.price
+            self.products_amount_in_store[product.name] = 1
+
 
     def __str__(self) -> str:
         """
@@ -145,43 +156,47 @@ class Store:
 
         :return: string
         """
-        return f"Store items: {self.add_product()}; store money: {self.money}."
+        return f"Store items: {store.products.keys()}; store money: {self.money}, store amount: {store.products_amount_in_store}"
 
 
 if __name__ == "__main__":
-    print(Product("Toy", 10))  # Product: Toy, price: 10
-    print([Product("Toy", 10), Product("Adult Toy", 20)])  # [Toy, Adult Toy]
-    john = Customer("John", 20, 300)
-    bobby = Customer("Bobby", 17, 150)
-    sandy = Customer("Sandy", 12, 100)
+    # print(Product("Toy", 10))  # Product: Toy, price: 10
+    # print([Product("Toy", 10), Product("Adult Toy", 20)])  # [Toy, Adult Toy]
+
+    # john = Customer("John", 20, 300)
+    # bobby = Customer("Bobby", 17, 150)
+    # sandy = Customer("Sandy", 12, 100)
 
     store = Store()
 
     beer = Product("beer", 50)
     water = Product("water", 30)
-    choco = Product("chocolate", 45)
-    pretzel = Product("pretzel", 35)
+    # choco = Product("chocolate", 45)
+    # pretzel = Product("pretzel", 35)
 
     store.add_product(beer)
     store.add_product(water)
-    for _ in range(3):
-        store.add_product(choco)
-        store.add_product(pretzel)
+    store.add_product(water)
 
-    print(store.buy(beer, 1, john))  # -> Thank you for the purchase!
-    print(beer not in store.products)  # -> True
-    print(john)  # -> John's items: beer; money: 250.
+    # for _ in range(3):
+    #     store.add_product(choco)
+    #     store.add_product(pretzel)
 
-    tobacco = Product("tobacco", 55)
-    store.add_product(tobacco)
-    print(store.buy(tobacco, 1, bobby))  # -> You are too young to buy Product: tobacco, price: 55!
-
-    print(store.buy(water, 2, sandy))  # -> Item is not available in chosen amount!
-
-    candy = Product("candy", 25)
-    print(store.buy(candy, 1, bobby))  # -> Item not found!
-
-    store.buy(choco, 2, bobby)
-    print(bobby.money)  # -> 60
-    store.buy(water, 1, bobby)
-    print(bobby)  # -> Bobby's items: chocolate(2), water; money: 30
+    print(Store())
+    # print(store.buy(beer, 1, john))  # -> Thank you for the purchase!
+    # print(beer not in store.products)  # -> True
+    # print(john)  # -> John's items: beer; money: 250.
+    #
+    # tobacco = Product("tobacco", 55)
+    # store.add_product(tobacco)
+    # print(store.buy(tobacco, 1, bobby))  # -> You are too young to buy Product: tobacco, price: 55!
+    #
+    # print(store.buy(water, 2, sandy))  # -> Item is not available in chosen amount!
+    #
+    # candy = Product("candy", 25)
+    # print(store.buy(candy, 1, bobby))  # -> Item not found!
+    #
+    # store.buy(choco, 2, bobby)
+    # print(bobby.money)  # -> 60
+    # store.buy(water, 1, bobby)
+    # print(bobby)  # -> Bobby's items: chocolate(2), water; money: 30
