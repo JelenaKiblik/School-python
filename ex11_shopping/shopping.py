@@ -125,10 +125,13 @@ class Store:
         :param customer: customer who wants to buy
         :return: message
         """
+        # self.allowed_to_buy(product, customer)
+        # self.check_product_availability(product, amount)
+        # return f"Thank you for the purchase!"
         try:
             self.allowed_to_buy(product, customer)
-        except ProductCannotBeSold:
-            return f"You are too young to buy Product: {product.name}!"
+        except ProductCannotBeSold as e:
+            return f"You are too young to buy Product: {product.name} {e}!"
         finally:
             return f"Thank you for the purchase!"
 
@@ -190,7 +193,7 @@ if __name__ == "__main__":
 
     store = Store()
 
-    # beer = Product("beer", 50)
+    beer = Product("beer", 50)
     # water = Product("water", 30)
     # choco = Product("chocolate", 45)
     # pretzel = Product("pretzel", 35)
