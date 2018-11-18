@@ -142,12 +142,13 @@ class Store:
         :param product:  product name
         """
         # self.products.append(product)
-        if product in self.products:
-            # self.products[product.name] = product.price
+        if product.name in self.products:
             self.products_amount_in_store[product.name] += 1
+            self.money += product.price
         else:
             self.products[product.name] = product.price
             self.products_amount_in_store[product.name] = 1
+            self.money += product.price
 
 
     def __str__(self) -> str:
@@ -156,7 +157,7 @@ class Store:
 
         :return: string
         """
-        return f"Store items: {store.products.keys()}; store money: {self.money}, store amount: {store.products_amount_in_store}"
+        return f"Store items: {list(store.products.keys())}; store money: {store.money}, store amount: {store.products_amount_in_store}"
 
 
 if __name__ == "__main__":
