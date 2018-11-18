@@ -63,7 +63,8 @@ class Customer:
         :param product: product
         :param amount: amount
         """
-        self.products.append(product, amount)
+        self.product = product
+        self.amount = amount
 
     def pay(self, money_to_pay: int) -> None:
         """
@@ -73,11 +74,11 @@ class Customer:
         In other case reduces amount of customer's money.
         :param money_to_pay: money amount needed to be paid
         """
-        money_to_pay = self.amount
-        if money_to_pay < self.money:
+        self.money_to_pay = money_to_pay
+        if self.money_to_pay < self.money:
             raise ProductCannotBeSold("You do not have enough money to pay for chosen product!")
         else:
-            self.money -= money_to_pay
+            self.money -= self.money_to_pay
 
     def __str__(self) -> str:
         """
@@ -161,16 +162,16 @@ if __name__ == "__main__":
     choco = Product("chocolate", 45)
     pretzel = Product("pretzel", 35)
 
-    # store.add_product(beer)
-    # store.add_product(water)
-    # for _ in range(3):
-    #     store.add_product(choco)
-    #     store.add_product(pretzel)
-    #
+    store.add_product(beer)
+    store.add_product(water)
+    for _ in range(3):
+        store.add_product(choco)
+        store.add_product(pretzel)
+
     # print(store.buy(beer, 1, john))  # -> Thank you for the purchase!
     # print(beer not in store.products)  # -> True
     # print(john)  # -> John's items: beer; money: 250.
-    #
+
     # tobacco = Product("tobacco", 55)
     # store.add_product(tobacco)
     # print(store.buy(tobacco, 1, bobby))  # -> You are too young to buy Product: tobacco, price: 55!
