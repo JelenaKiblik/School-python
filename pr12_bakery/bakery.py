@@ -67,9 +67,9 @@ class Bakery:
 
     def remove_baker(self, baker: Baker):
         """Remove baker."""
-        self.baker = baker
-        for baker in self.bakers:
-            self.bakers.remove(baker)
+        if isinstance(baker, Baker):
+            for baker in self.bakers:
+                self.bakers.remove(baker)
 
     def add_recipe(self, name: str):
         """Add recipe."""
