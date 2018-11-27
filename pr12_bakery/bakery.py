@@ -27,7 +27,7 @@ class Pastry:
         self.name = name
         self.complexity_level = complexity_level
 
-    def __str__(self) -> str:
+    def __repr__(self) -> str:
         """
         Pastry object representation in string format.
 
@@ -117,13 +117,13 @@ class Bakery:
         # order by baker.experience level, descending
         pass
 
-    def __str__(self) -> str:
+    def __repr__(self) -> str:
         """
         Bakery object representation in string format.
 
         :return: string
         """
-        return f"Bakery {self.name}: {self.bakers} baker(s)"
+        return f"Bakery {self.name}: {len(self.bakers)} baker(s)"
 
 
 if __name__ == '__main__':
