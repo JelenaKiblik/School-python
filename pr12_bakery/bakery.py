@@ -51,6 +51,7 @@ class Bakery:
 
     def remove_baker(self, baker: Baker):
         """Remove baker."""
+        self.baker = baker
         for baker in self.bakers:
             self.bakers.remove(baker)
 
