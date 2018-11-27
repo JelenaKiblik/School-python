@@ -67,9 +67,8 @@ class Bakery:
 
     def remove_baker(self, baker: Baker):
         """Remove baker."""
-        self.baker = baker
-        for baker in self.bakers:
-            self.bakers.remove(baker)
+        for self.baker in self.bakers:
+            self.bakers.remove(self.baker)
 
     def add_recipe(self, name: str):
         """Add recipe."""
@@ -82,7 +81,13 @@ class Bakery:
 
     def make_order(self, name: str) -> Pastry:
         """Make order."""
-        # 1)check if recipe exist
+        new_list = []
+        if self.name in self.recipes:
+            for self.baker in self.bakers:
+                if self.baker.experience_level >= self.complexity_level:
+                    new_list.append(self.baker)
+        return new_list
+
         # 2) find baker
         # loop over bakers
         # if given baker xp is enough:
@@ -132,31 +137,29 @@ if __name__ == '__main__':
 
     bakery1 = Bakery("Pagariposid", 10, 100)
 
-    bakery1.add_baker(Baker("Ago", 9, 0))
-    baker = Baker("Ago", 100, 100)
-    print(baker)
-    print(bakery1)  # Bakery Pagariposid: 0 baker(s) => Baker Ago was not added because of low experience level (Sorry Ago)
-
-    print(bakery1.make_order("cake"))  # None => No such recipe nor baker in bakery
-
-    ########################################################################
-
-    polly = Baker("Polly", 10, 5)
-    sam = Baker("Sam", 11, 0)
-    emma = Baker("Emma", 12, 6)
-
-    bakery1.add_baker(polly)
-    bakery1.add_baker(sam)
-    bakery1.add_baker(emma)
-
-    # Trying to make order when no recipes are in bakery
-
-    print(bakery1.make_order("cake"))  # None
-
-    bakery1.add_recipe("cake")
-    print(bakery1.budget)  # 96 (100 - len('cake') = 96 => price for recipe)
-    print(bakery1.get_recipes())  # {'cake': 2}
+    # bakery1.add_baker(Baker("Ago", 9, 0))
+    # print(bakery1)  # Bakery Pagariposid: 0 baker(s) => Baker Ago was not added because of low experience level (Sorry Ago)
     #
+    # print(bakery1.make_order("cake"))  # None => No such recipe nor baker in bakery
+    #
+    # ########################################################################
+    #
+    # polly = Baker("Polly", 10, 5)
+    # sam = Baker("Sam", 11, 0)
+    # emma = Baker("Emma", 12, 6)
+    #
+    # bakery1.add_baker(polly)
+    # bakery1.add_baker(sam)
+    # bakery1.add_baker(emma)
+    #
+    # # Trying to make order when no recipes are in bakery
+    #
+    # print(bakery1.make_order("cake"))  # None
+    #
+    # bakery1.add_recipe("cake")
+    # print(bakery1.budget)  # 96 (100 - len('cake') = 96 => price for recipe)
+    # print(bakery1.get_recipes())  # {'cake': 2}
+
     # print(bakery1.make_order("cake"))  # cake
     # print(
     #     bakery1.get_bakers())  # [Baker: Polly(14), Baker: Emma(12), Baker: Sam(11)] =>
