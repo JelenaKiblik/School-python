@@ -20,6 +20,8 @@ class Bakery:
         self.min_experience_level = min_experience_level
         self.budget = budget
         self.bakers = []
+        self.pastries = []
+        self.recipes = {}
 
     def add_baker(self, baker: Baker) -> Baker:
         if isinstance(baker, Baker) and baker.experience_level >= self.min_experience_level:
@@ -29,19 +31,14 @@ class Bakery:
         return None
 
     def remove_baker(self, baker: Baker):
-        self.baker = baker
         for baker in self.bakers:
             self.bakers.remove(baker)
 
     def add_recipe(self, name: str):
-        #calculate cost
-        #1) enough money?
-        #2) recipe not in bakery yet
-        #3) enough bakers?
-        #remove money
-        #calculate complexity
-        #add recipe to dict where key is name value is complexity
-        pass
+        if name not in self.recipes:
+            complexity = len(name) - len(self.bakers)
+            recipe = Recipe(name, complexity)
+            self.recipes[name] = recipe
 
     def make_order(self, name: str) -> Pastry:
         # 1)check if recipe exist
@@ -63,7 +60,11 @@ class Bakery:
         pass
 
     def get_recipes(self) -> dict:
-        return self.recipes
+        # name => complexity level
+        d = {}
+        for name, recipe in self.recipes:
+            d[name] = recipe.complexity_level
+        return d
 
     def get_pastries(self) -> list:
         # sorted()
