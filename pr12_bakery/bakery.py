@@ -16,7 +16,7 @@ class Baker:
 
         :return: string
         """
-        return f" Baker: {self.name}({self.experience_level})"
+        return f"Baker: {self.name}({self.experience_level})"
 
 
 class Pastry:
@@ -133,6 +133,8 @@ if __name__ == '__main__':
     bakery1 = Bakery("Pagariposid", 10, 100)
 
     bakery1.add_baker(Baker("Ago", 9, 0))
+    baker = Baker("Ago", 100, 100)
+    print(baker)
     print(bakery1)  # Bakery Pagariposid: 0 baker(s) => Baker Ago was not added because of low experience level (Sorry Ago)
 
     print(bakery1.make_order("cake"))  # None => No such recipe nor baker in bakery
