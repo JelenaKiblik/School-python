@@ -20,6 +20,15 @@ class Pastry:
         self.complexity_level = complexity_level
 
 
+class Recipe:
+    """Class Recipe."""
+
+    def __init__(self, name: str, complexity_level: int):
+        """Constructor."""
+        self.name = name
+        self.complexity_level = complexity_level
+
+
 class Bakery:
     """Class Bakery."""
 
