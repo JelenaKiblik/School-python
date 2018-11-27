@@ -85,10 +85,10 @@ class Bakery:
         new_list = []
         if name in self.recipes:
             for baker in self.bakers:
-                if isinstance(baker, Baker) and baker.experience_level >= x:
+                if isinstance(baker, Baker) and baker.experience_level >= self.recipe.complexity_level:
                     new_list.append(baker)
 
-            min_baker = min(new_list, key=lambda baker:baker.experience_level)
+            # min_baker = min(new_list, key=lambda baker: baker.experience_level)
 
             money = self.name * 4
             self.budget += money * 0.5
