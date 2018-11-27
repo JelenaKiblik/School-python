@@ -59,15 +59,19 @@ class Bakery:
 
     def add_baker(self, baker: Baker) -> Baker:
         """Add baker."""
-        if isinstance(baker, Baker) and baker.experience_level >= self.min_experience_level:
-            self.bakers.append(baker)
-            set(self.bakers)
+        if isinstance(baker, Baker) and (baker.experience_level >= self.min_experience_level):
+            if baker in self.bakers:
+                self.bakers.append(baker)
+                set(self.bakers)
             return baker
+        return None
+
 
     def remove_baker(self, baker: Baker):
         """Remove baker."""
-        if isinstance(baker, Baker) and baker in self.bakers:
-            del baker
+        if isinstance(baker, Baker):
+            if baker in self.bakers:
+                del baker
 
     def add_recipe(self, name: str):
         """Add recipe."""
