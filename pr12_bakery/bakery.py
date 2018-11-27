@@ -74,11 +74,12 @@ class Bakery:
         """Add recipe."""
         if len(self.bakers) != 0:
             if name not in self.recipes:
+                self.budget = self.budget - len(name)
                 # complexity_level = abs(küpsetise nimetuse pikkus * pagarikojas töötavate pagarite arv - kõige nõrgema pagari experience_level)
                 complexity = len(name) - len(self.bakers)
                 recipe = Recipe(name, complexity)
-                self.budget = self.budget - len(name)
-                self.recipes[name] = recipe
+                if self.budget > 0:
+                    self.recipes[name] = recipe
 
     def make_order(self, name: str) -> Pastry:
         """Make order."""
