@@ -2,20 +2,29 @@
 
 
 class Baker:
+    """Class Baker."""
+
     def __init__(self, name: str, experience_level: int, money: int):
+        """Constructor."""
         self.name = name
         self.experience_level = experience_level
         self.money = money
 
 
 class Pastry:
+    """Class Pastry."""
+
     def __init__(self, name: str, complexity_level: int):
+        """Constructor."""
         self.name = name
         self.complexity_level = complexity_level
 
 
 class Bakery:
+    """Class Bakery."""
+
     def __init__(self, name: str, min_experience_level: int, budget: int):
+        """Constructor."""
         self.name = name
         self.min_experience_level = min_experience_level
         self.budget = budget
@@ -24,6 +33,7 @@ class Bakery:
         self.recipes = {}
 
     def add_baker(self, baker: Baker) -> Baker:
+        """Add baker."""
         if isinstance(baker, Baker) and baker.experience_level >= self.min_experience_level:
             self.bakers.append(baker)
             set(self.bakers)
@@ -31,28 +41,31 @@ class Bakery:
         return None
 
     def remove_baker(self, baker: Baker):
+        """Remove baker."""
         for baker in self.bakers:
             self.bakers.remove(baker)
 
     def add_recipe(self, name: str):
+        """Add recipe."""
         if name not in self.recipes:
             complexity = len(name) - len(self.bakers)
             recipe = Recipe(name, complexity)
             self.recipes[name] = recipe
 
     def make_order(self, name: str) -> Pastry:
+        """Make order."""
         # 1)check if recipe exist
         # 2) find baker
         # loop over bakers
         # if given baker xp is enough:
         #       add baker to list
         #   find the baker with the lower xp in the list
-
+        #
         # loop over bakers:
         #   if baker.xp < enough
         #       if baker.xp < current_lowest:
         #           memorize this baker
-
+        #
         # baker.xp += len(name)
         # calculate profit => bakery, baker
         # store Pastry
@@ -60,6 +73,7 @@ class Bakery:
         pass
 
     def get_recipes(self) -> dict:
+        """Get recipes."""
         # name => complexity level
         d = {}
         for name, recipe in self.recipes:
@@ -67,11 +81,13 @@ class Bakery:
         return d
 
     def get_pastries(self) -> list:
+        """Get pastries."""
         # sorted()
         # order by pastry.complexity_level
         pass
 
     def get_bakers(self) -> list:
+        """Get bakers."""
         # order by baker.experience level, descending
         pass
 
