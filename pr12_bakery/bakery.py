@@ -74,8 +74,10 @@ class Bakery:
     def add_recipe(self, name: str):
         """Add recipe."""
         if name not in self.recipes:
+            # complexity_level = abs(küpsetise nimetuse pikkus * pagarikojas töötavate pagarite arv - kõige nõrgema pagari experience_level)
             complexity = len(name) - len(self.bakers)
             recipe = Recipe(name, complexity)
+            self.budget = self.budget - len(name)
             self.recipes[name] = recipe
 
     def make_order(self, name: str) -> Pastry:
@@ -102,7 +104,7 @@ class Bakery:
         """Get recipes."""
         # name => complexity level
         d = {}
-        for name, recipe in self.recipes:
+        for name, recipe in self.recipes.items():
             d[name] = recipe.complexity_level
         return d
 
@@ -134,24 +136,24 @@ if __name__ == '__main__':
     print(bakery1)  # Bakery Pagariposid: 0 baker(s) => Baker Ago was not added because of low experience level (Sorry Ago)
 
     print(bakery1.make_order("cake"))  # None => No such recipe nor baker in bakery
-    #
-    # ########################################################################
 
-    # polly = Baker("Polly", 10, 5)
-    # sam = Baker("Sam", 11, 0)
-    # emma = Baker("Emma", 12, 6)
-    #
-    # bakery1.add_baker(polly)
-    # bakery1.add_baker(sam)
-    # bakery1.add_baker(emma)
-    #
-    # # Trying to make order when no recipes are in bakery
-    #
-    # print(bakery1.make_order("cake"))  # None
-    #
-    # bakery1.add_recipe("cake")
-    # print(bakery1.budget)  # 96 (100 - len('cake') = 96 => price for recipe)
-    # print(bakery1.get_recipes())  # {'cake': 2}
+    ########################################################################
+
+    polly = Baker("Polly", 10, 5)
+    sam = Baker("Sam", 11, 0)
+    emma = Baker("Emma", 12, 6)
+
+    bakery1.add_baker(polly)
+    bakery1.add_baker(sam)
+    bakery1.add_baker(emma)
+
+    # Trying to make order when no recipes are in bakery
+
+    print(bakery1.make_order("cake"))  # None
+
+    bakery1.add_recipe("cake")
+    print(bakery1.budget)  # 96 (100 - len('cake') = 96 => price for recipe)
+    print(bakery1.get_recipes())  # {'cake': 2}
     #
     # print(bakery1.make_order("cake"))  # cake
     # print(
