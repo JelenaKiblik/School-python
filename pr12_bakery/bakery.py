@@ -63,13 +63,11 @@ class Bakery:
             self.bakers.append(baker)
             set(self.bakers)
             return baker
-        return None
 
     def remove_baker(self, baker: Baker):
         """Remove baker."""
-        if isinstance(baker, Baker):
-            for baker in self.bakers:
-                self.bakers.remove(baker)
+        if isinstance(baker, Baker) and baker in self.bakers:
+            self.bakers.remove(baker)
 
     def add_recipe(self, name: str):
         """Add recipe."""
