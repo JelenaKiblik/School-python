@@ -64,11 +64,6 @@ class Bakery:
             set(self.bakers)
             return baker
 
-    def __eq__(self, other):
-        if not isinstance(other, Baker):
-            return NotImplemented
-        return self.name == other.name
-
     def remove_baker(self, baker: Baker):
         """Remove baker."""
         if baker in self.bakers:
