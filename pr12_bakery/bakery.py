@@ -10,6 +10,14 @@ class Baker:
         self.experience_level = experience_level
         self.money = money
 
+    def __str__(self) -> str:
+        """
+        Baker object representation in string format.
+
+        :return: string
+        """
+        return f""
+
 
 class Pastry:
     """Class Pastry."""
@@ -18,6 +26,14 @@ class Pastry:
         """Constructor."""
         self.name = name
         self.complexity_level = complexity_level
+
+    def __str__(self) -> str:
+        """
+        Pastry object representation in string format.
+
+        :return: string
+        """
+        return f""
 
 
 class Recipe:
@@ -101,26 +117,33 @@ class Bakery:
         # order by baker.experience level, descending
         pass
 
+    def __str__(self) -> str:
+        """
+        Bakery object representation in string format.
+
+        :return: string
+        """
+        return f"Bakery {self.name}: {self.bakers} baker(s)"
+
 
 if __name__ == '__main__':
 
     bakery1 = Bakery("Pagariposid", 10, 100)
-    print(bakery1)  # Bakery Pagariposid: 0 baker(s)
 
-    # bakery1.add_baker(Baker("Ago", 9, 0))
-    # print(bakery1)  # Bakery Pagariposid: 0 baker(s) => Baker Ago was not added because of low experience level (Sorry Ago)
-    #
-    # print(bakery1.make_order("cake"))  # None => No such recipe nor baker in bakery
+    bakery1.add_baker(Baker("Ago", 9, 0))
+    print(bakery1)  # Bakery Pagariposid: 0 baker(s) => Baker Ago was not added because of low experience level (Sorry Ago)
+
+    print(bakery1.make_order("cake"))  # None => No such recipe nor baker in bakery
     #
     # ########################################################################
 
-    polly = Baker("Polly", 10, 5)
-    sam = Baker("Sam", 11, 0)
-    emma = Baker("Emma", 12, 6)
-
-    bakery1.add_baker(polly)
-    bakery1.add_baker(sam)
-    bakery1.add_baker(emma)
+    # polly = Baker("Polly", 10, 5)
+    # sam = Baker("Sam", 11, 0)
+    # emma = Baker("Emma", 12, 6)
+    #
+    # bakery1.add_baker(polly)
+    # bakery1.add_baker(sam)
+    # bakery1.add_baker(emma)
     #
     # # Trying to make order when no recipes are in bakery
     #
