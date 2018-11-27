@@ -67,8 +67,9 @@ class Bakery:
 
     def remove_baker(self, baker: Baker):
         """Remove baker."""
-        for self.baker in self.bakers:
-            self.bakers.remove(self.baker)
+        self.baker = baker
+        for baker in self.bakers:
+            self.bakers.remove(baker)
 
     def add_recipe(self, name: str):
         """Add recipe."""
@@ -82,12 +83,20 @@ class Bakery:
     def make_order(self, name: str) -> Pastry:
         """Make order."""
         new_list = []
-        if self.name in self.recipes:
-            for self.baker in self.bakers:
-                if self.baker.experience_level >= self.complexity_level:
-                    new_list.append(self.baker)
-        return new_list
+        if name in self.recipes:
+            for baker in self.bakers:
+                if isinstance(baker, Baker) and baker.experience_level >= x:
+                    new_list.append(baker)
 
+            min_baker = min(new_list, key=lambda baker:baker.experience_level)
+
+            money = self.name * 4
+            self.budget += money * 0.5
+            self.baker.money += money * 0.5
+            self.pastries.append(self.name)
+            self.bakery.min_experience_level += 1
+
+        # 1)check if recipe exist
         # 2) find baker
         # loop over bakers
         # if given baker xp is enough:
@@ -136,38 +145,37 @@ class Bakery:
 if __name__ == '__main__':
 
     bakery1 = Bakery("Pagariposid", 10, 100)
+    bakery1.add_baker(Baker("Ago", 9, 0))
+    print(bakery1)  # Bakery Pagariposid: 0 baker(s) => Baker Ago was not added because of low experience level (Sorry Ago)
 
-    # bakery1.add_baker(Baker("Ago", 9, 0))
-    # print(bakery1)  # Bakery Pagariposid: 0 baker(s) => Baker Ago was not added because of low experience level (Sorry Ago)
-    #
-    # print(bakery1.make_order("cake"))  # None => No such recipe nor baker in bakery
-    #
-    # ########################################################################
-    #
-    # polly = Baker("Polly", 10, 5)
-    # sam = Baker("Sam", 11, 0)
-    # emma = Baker("Emma", 12, 6)
-    #
-    # bakery1.add_baker(polly)
-    # bakery1.add_baker(sam)
-    # bakery1.add_baker(emma)
-    #
-    # # Trying to make order when no recipes are in bakery
-    #
-    # print(bakery1.make_order("cake"))  # None
-    #
-    # bakery1.add_recipe("cake")
-    # print(bakery1.budget)  # 96 (100 - len('cake') = 96 => price for recipe)
-    # print(bakery1.get_recipes())  # {'cake': 2}
+    print(bakery1.make_order("cake"))  # None => No such recipe nor baker in bakery
 
-    # print(bakery1.make_order("cake"))  # cake
-    # print(
-    #     bakery1.get_bakers())  # [Baker: Polly(14), Baker: Emma(12), Baker: Sam(11)] =>
-    # # Polly was chosen to be the baker because 'cake' complexity and Polly experience lever were the closest
-    # # Polly experience level was increased by len('cake') => 10 + 4 = 14
-    #
-    # print(bakery1.budget)  # 104 (used to be 96: 96 + len('cake') * 2 = 104)
-    # print(polly.money)  # 13 (5 she had + len('cake') * 2 = 13)
+    ########################################################################
+
+    polly = Baker("Polly", 10, 5)
+    sam = Baker("Sam", 11, 0)
+    emma = Baker("Emma", 12, 6)
+
+    bakery1.add_baker(polly)
+    bakery1.add_baker(sam)
+    bakery1.add_baker(emma)
+
+    # Trying to make order when no recipes are in bakery
+
+    print(bakery1.make_order("cake"))  # None
+
+    bakery1.add_recipe("cake")
+    print(bakery1.budget)  # 96 (100 - len('cake') = 96 => price for recipe)
+    print(bakery1.get_recipes())  # {'cake': 2}
+
+    print(bakery1.make_order("cake"))  # cake
+    print(
+        bakery1.get_bakers())  # [Baker: Polly(14), Baker: Emma(12), Baker: Sam(11)] =>
+    # Polly was chosen to be the baker because 'cake' complexity and Polly experience lever were the closest
+    # Polly experience level was increased by len('cake') => 10 + 4 = 14
+
+    print(bakery1.budget)  # 104 (used to be 96: 96 + len('cake') * 2 = 104)
+    print(polly.money)  # 13 (5 she had + len('cake') * 2 = 13)
     #
     # print(bakery1.get_pastries())  # [cake] ("NB! cake is instance of class Pastry, not a string)
     #
