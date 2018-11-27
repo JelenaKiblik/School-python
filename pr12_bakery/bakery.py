@@ -10,7 +10,7 @@ class Baker:
         self.experience_level = experience_level
         self.money = money
 
-    def __str__(self) -> str:
+    def __repr__(self) -> str:
         """
         Baker object representation in string format.
 
