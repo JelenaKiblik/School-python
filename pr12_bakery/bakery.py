@@ -16,7 +16,7 @@ class Baker:
 
         :return: string
         """
-        return f""
+        return f" Baker: {self.name}({self.experience_level})"
 
 
 class Pastry:
@@ -33,7 +33,7 @@ class Pastry:
 
         :return: string
         """
-        return f""
+        return f"{self.name}"
 
 
 class Recipe:
