@@ -48,7 +48,7 @@ class Gym:
 
         :return: string
         """
-        return f"Gym [saali nimi] : [saali liikmete arv] member(s)"
+        return f"Gym {self.name} : {len(self.members)} member(s)"
 
 
 class Member:
@@ -76,7 +76,7 @@ class Member:
 
         :return: string
         """
-        return f"[liikme nimi], [liikme vanus]: [liikme tossud]"
+        return f"{self.name}, {self.age}: {self.trainers}"
 
 
 class Trainers:
@@ -84,7 +84,7 @@ class Trainers:
 
     def __init__(self, stamina: int, color: str):
         """Constructor."""
-        self.stamine = stamina
+        self.staminа = stamina
         self.color = color
 
     def __repr__(self) -> str:
@@ -93,7 +93,7 @@ class Trainers:
 
         :return: string
         """
-        return f" Trainers: [{tossude vastupidavus}, {tossude värv}]"
+        return f" Trainers: [{self.stamina}, {self.color}]"
 
 
 class City:
