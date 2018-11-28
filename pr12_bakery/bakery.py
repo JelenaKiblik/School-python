@@ -117,7 +117,6 @@ class Bakery:
 
     def get_recipes(self) -> dict:
         """Get recipes."""
-        # name => complexity level
         d = {}
         for name, recipe in self.recipes.items():
             d[name] = recipe.complexity_level
@@ -127,12 +126,12 @@ class Bakery:
         """Get pastries."""
         # sorted()
         # order by pastry.complexity_level
-        pass
+        return self.pastries.sort()
 
     def get_bakers(self) -> list:
         """Get bakers."""
         # order by baker.experience level, descending
-        pass
+        return self.bakers.sort()
 
     def __repr__(self) -> str:
         """
