@@ -12,8 +12,11 @@ class Gym:
 
     def add_member(self, member: Member) -> Member:
         """Add member."""
-        if self.can_add_member(member) is True:
+        self.member = member
+        if isinstance(member, Member) and (self.can_add_member(member) is True):
             self.members.append(member)
+            return member
+        return None
 
     def can_add_member(self, member: Member) -> bool:
         """Can add member."""
