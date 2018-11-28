@@ -8,14 +8,19 @@ class Gym:
         """Constructor."""
         self.name = name
         self.max_members_number = max_members_number
+        self.members = []
 
     def add_member(self, member: Member) -> Member:
         """Add member."""
-        self.member = member
+        if self.can_add_member(member) is True:
+            self.members.append(member)
 
     def can_add_member(self, member: Member) -> bool:
         """Can add member."""
-        return False
+        if isinstance(member, Member) and member not in self.members and len(self.members) <= self.max_members_number:
+            return True
+        else:
+            return False
 
     def remove_member(self, member: Member):
         """Remove member."""
