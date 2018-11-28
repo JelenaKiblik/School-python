@@ -12,7 +12,6 @@ class Gym:
 
     def add_member(self, member: Member) -> Member:
         """Add member."""
-        self.member = member
         if isinstance(member, Member) and (self.can_add_member(member) is True):
             self.members.append(member)
             return member
@@ -27,7 +26,8 @@ class Gym:
 
     def remove_member(self, member: Member):
         """Remove member."""
-        pass
+        if isinstance(member, Member):
+            self.members.remove(member)
 
     def get_total_stamina(self) -> int:
         """Get total stamina."""
@@ -108,7 +108,8 @@ class City:
 
     def build_gym(self, gym: Gym) -> Gym:
         """Build gym."""
-        pass
+        if isinstance(gym, Gym):
+            return gym
 
     def can_build_gym(self) -> bool:
         """Can build gym."""
