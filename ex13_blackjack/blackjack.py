@@ -54,6 +54,7 @@ class Hand:
                 aces_list.remove("ACE")
                 self.aces_used -= 1
 
+
 class Deck:
     """Deck of cards. Provided via api over the network."""
 
@@ -66,9 +67,7 @@ class Deck:
         pass
 
     def shuffle(self):
-        """
-        Shuffle the deck.
-        """
+        """Shuffle the deck."""
         pass
 
     def draw(self) -> Card:
