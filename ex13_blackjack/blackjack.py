@@ -64,7 +64,8 @@ class Deck:
 
         :param shuffle: if shuffle option is true, make new shuffled deck.
         """
-        pass
+        if shuffle is True:
+            self.cards_deck = requests.get("https://deckofcardsapi.com/api/deck/new/shuffle").json()
 
     def shuffle(self):
         """Shuffle the deck."""
