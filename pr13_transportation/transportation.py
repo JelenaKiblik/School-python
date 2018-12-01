@@ -60,7 +60,11 @@ def get_next_departure(api_base, region, stop_id):
     :param stop_id: Stop ID
     :return: Next departure from stop
     """
-    return None
+    api = api_base + "/departures/" + str(region) + "/" + str(stop_id)
+    departures = requests.get(api).json()
+    if not departures["departures"]:
+        return None
+    return departures["departures"][0]
 
 
 if __name__ == '__main__':
