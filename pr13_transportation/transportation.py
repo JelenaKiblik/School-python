@@ -15,8 +15,8 @@ def get_nearby_stops(api_base, lat, lng):
     :return: List of all nearby stops
     """
     api = api_base + "/stops/" + str(lat) + "/" + str(lng)
-    data = requests.get(api).json()
-    distance_list = sorted(data, key=lambda k: int(k['distance'].replace(" m", "")))
+    distance_data = requests.get(api).json()
+    distance_list = sorted(distance_data, key=lambda k: int(k['distance'].replace(" m", "")))
     return distance_list
 
 
@@ -29,7 +29,12 @@ def get_nearest_stop(api_base, lat, lng):
     :param lng: Longitude
     :return: Nearest stop
     """
-    return None
+    api = api_base + "/stops/" + str(lat) + "/" + str(lng)
+    distance_data = requests.get(api).json()
+    if not distance_data:
+        return None
+    min_distance = min(distance_data, key=lambda x: int(x['distance'].replace(" m", "")))
+    return min_distance
 
 
 def get_next_departures(api_base, region, stop_id):
