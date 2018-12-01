@@ -46,7 +46,9 @@ def get_next_departures(api_base, region, stop_id):
     :param stop_id: Stop ID
     :return: List of next departures from stop
     """
-    return None
+    api = api_base + "/departures/" + str(region) + "/" + str(stop_id)
+    departures = requests.get(api).json()
+    return departures["departures"]
 
 
 def get_next_departure(api_base, region, stop_id):
