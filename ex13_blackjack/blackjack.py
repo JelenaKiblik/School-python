@@ -64,12 +64,21 @@ class Deck:
 
         :param shuffle: if shuffle option is true, make new shuffled deck.
         """
+        if shuffle is False:
+            self.cards_deck = requests.get("https://deckofcardsapi.com/api/deck/new").json()
+            self.deck_id = self.cards_deck["deck_id"]
+            self.is_shuffled = self.cards_deck["shuffled"]
         if shuffle is True:
             self.cards_deck = requests.get("https://deckofcardsapi.com/api/deck/new/shuffle").json()
+            self.deck_id = self.cards_deck["deck_id"]
+            self.is_shuffled = self.cards_deck["shuffled"]
 
     def shuffle(self):
         """Shuffle the deck."""
-        pass
+        if self.is_shuffled is False:
+            address = f"https://deckofcardsapi.com/api/deck/{self.deck_id}/shuffle"
+            self.is_shuffled = True
+            return requests.get(address)
 
     def draw(self) -> Card:
         """
@@ -77,7 +86,13 @@ class Deck:
 
         :return: card instance.
         """
-        pass
+        address = f"https://deckofcardsapi.com/api/deck/{self.deck_id}/draw"
+        deck = requests.get(address).json()
+        card = deck["cards"][0]
+        code = card["code"]
+        suit = card["suit"]
+        value = card["value"]
+        return Card(value, suit, code)
 
 
 class BlackjackController:
@@ -90,7 +105,45 @@ class BlackjackController:
         :param deck: deck to draw cards from.
         :param view: view to communicate with.
         """
-        pass
+        self.state = {}
+        player = Hand()
+        dealer = Hand()
+        if not deck.is_shuffled:
+            deck.shuffle()
+        for i in range(2):
+            player.add_card(deck.draw())
+            dealer.add_card(deck.draw())
+
+        self.state["player"] = player
+        self.state["dealer"] = dealer
+        self.play(player, dealer, deck, view)
+
+    def play(self, player, dealer, deck: Deck, view: 'BlackjackView'):
+        """Playing the game."""
+        while True:
+            if player.score == 21:
+                view.player_won(self.state)
+                break
+            if player.score > 21:
+                view.player_lost(self.state)
+                break
+            elif player.score < 21:
+                if view.ask_next_move(self.state) == "H":
+                    player.add_card(deck.draw())
+                else:
+                    while True:
+                        if dealer.score < player.score:
+                            dealer.add_card(deck.draw())
+                        else:
+                            view.player_lost(self.state)
+                            break
+                        if dealer.score == 21:
+                            view.player_lost(self.state)
+                            break
+                        elif dealer.score > 21:
+                            view.player_won(self.state)
+                            break
+                    break
 
 
 class BlackjackView:
