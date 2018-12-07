@@ -158,7 +158,13 @@ def remove_duplicate(number_list):
     :param number_list: input list
     :return: new list
     """
-    pass
+    i = 0
+    while i < len(number_list) - 1:
+        if number_list[i] == number_list[i + 1]:
+            del number_list[i]
+        else:
+            i = i + 1
+    return number_list
 
 
 def who_called(calls, name):
@@ -233,11 +239,11 @@ if __name__ == '__main__':
     # assert string_between_string("w  d", " ro ") == "w  or  d"
     # assert string_between_string(".,", ",.") == "..,,"
     #
-    assert get_padded_string("pizza", "bbq") == "bbqpizzabbq"
-    assert get_padded_string("dog", "cat") == "catdogcat"
-    assert get_padded_string("geoff", "giraffe") == "geoffgiraffegeoff"
+    # assert get_padded_string("pizza", "bbq") == "bbqpizzabbq"
+    # assert get_padded_string("dog", "cat") == "catdogcat"
+    # assert get_padded_string("geoff", "giraffe") == "geoffgiraffegeoff"
     #
-    # assert remove_duplicate([1, 1, 2, 2, 3, 3]) == [1, 2, 3]
+    print(remove_duplicate([1, 1, 2, 2, 3, 3]))  # == [1, 2, 3]
     # assert remove_duplicate([1, 2, 3]) == [1, 2, 3]
     # assert remove_duplicate([1, 1, 1, 1, 1, 2, 1, 1, 3]) == [1, 2, 1, 3]
     #
