@@ -102,8 +102,12 @@ def pear_fear(pears, people):
     :param people:
     :return:
     """
-    pass
-
+    if pears == 0 or people == 0:
+        return 0
+    else:
+        fears_pears = people // 3
+        non_pear_fear = people - fears_pears
+        return pears // non_pear_fear
 
 def string_between_string(word1, word2):
     """
@@ -205,19 +209,19 @@ if __name__ == '__main__':
     # print(segment_number(1, 11))  # == [5, 10]
     # print(segment_number(1, 4))  # == []
     # print(segment_number(-20, 20))  # == [-20, -10, -5, 5, 10, 20]
-
+    #
     # print(add_or_subtract([1, 2, 0, 3]))  # == 0
     # print(add_or_subtract([0, 1, 2]))  # == -3
     # print(add_or_subtract([1, 2, 0, 2, 0, 4]))  # == 5
-
-    print(should_get_up_early(True, True, True))  # is True
-    print(should_get_up_early(False, True, False))  # is False
     #
-    # assert pear_fear(10, 3) == 5
-    # assert pear_fear(10, 5) == 2
-    # assert pear_fear(0, 3) == 0
-    # assert pear_fear(17, 2) == 8
-    # assert pear_fear(21, 10) == 3
+    # print(should_get_up_early(True, True, True))  # is True
+    # print(should_get_up_early(False, True, False))  # is False
+    #
+    print(pear_fear(10, 3))  # == 5
+    print(pear_fear(10, 5))  # == 2
+    print(pear_fear(0, 3))  # == 0
+    print(pear_fear(17, 2))  # == 8
+    print(pear_fear(21, 10))  # == 3
     #
     # assert string_between_string("ho", "lle") == "hello"
     # assert string_between_string("", "yas") == "say"
