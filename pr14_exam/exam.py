@@ -43,7 +43,7 @@ def add_or_subtract(numbers):
     :return: the sum of all numbers.
     """
     null = False
-    sum = 0
+    summa = 0
     for i in numbers:
         if i == 0 and null is False:
             null = True
@@ -52,12 +52,12 @@ def add_or_subtract(numbers):
             null = False
             continue
         if i != 0 and null is False:
-            sum += i
+            summa += i
             continue
         if i != 0 and null is True:
-            sum -= i
+            summa -= i
             continue
-    return sum
+    return summa
 
 
 def should_get_up_early(is_weekday, really_tired, first_class_is_programming):
@@ -180,7 +180,10 @@ def who_called(calls, name):
     :param name: name of the receiver
     :return: name of the caller
     """
-    pass
+    if len(calls) == 0:
+        return -1
+    else:
+        return calls[name]
 
 
 def remove_lowest_digit(number):
@@ -243,12 +246,12 @@ if __name__ == '__main__':
     # assert get_padded_string("dog", "cat") == "catdogcat"
     # assert get_padded_string("geoff", "giraffe") == "geoffgiraffegeoff"
     #
-    print(remove_duplicate([1, 1, 2, 2, 3, 3]))  # == [1, 2, 3]
+    # print(remove_duplicate([1, 1, 2, 2, 3, 3]))  # == [1, 2, 3]
     # assert remove_duplicate([1, 2, 3]) == [1, 2, 3]
     # assert remove_duplicate([1, 1, 1, 1, 1, 2, 1, 1, 3]) == [1, 2, 1, 3]
     #
-    # assert who_called({}, "Nathan") == -1
-    # assert who_called({"Alex": "James", "Jeff": "Bill", "James": "Alex", "Daniel": "Matt"}, "Alex") == "James"
+    print(who_called({}, "Nathan"))  # == -1
+    print(who_called({"Alex": "James", "Jeff": "Bill", "James": "Alex", "Daniel": "Matt"}, "Alex"))  # == "James"
     # assert who_called({"Alex": "James", "Jeff": "Bill", "James": "Alex", "Daniel": "Matt"}, "Olaf") == -1
     #
     # assert remove_lowest_digit(123) == 23
