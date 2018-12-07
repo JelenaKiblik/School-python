@@ -180,10 +180,10 @@ def who_called(calls, name):
     :param name: name of the receiver
     :return: name of the caller
     """
-    if len(calls) == 0:
-        return -1
-    else:
+    if name in calls.keys():
         return calls[name]
+    else:
+        return -1
 
 
 def remove_lowest_digit(number):
@@ -252,8 +252,8 @@ if __name__ == '__main__':
     #
     print(who_called({}, "Nathan"))  # == -1
     print(who_called({"Alex": "James", "Jeff": "Bill", "James": "Alex", "Daniel": "Matt"}, "Alex"))  # == "James"
-    # assert who_called({"Alex": "James", "Jeff": "Bill", "James": "Alex", "Daniel": "Matt"}, "Olaf") == -1
-    #
+    assert who_called({"Alex": "James", "Jeff": "Bill", "James": "Alex", "Daniel": "Matt"}, "Olaf") == -1
+
     # assert remove_lowest_digit(123) == 23
     # assert remove_lowest_digit(100) == 10
     # assert remove_lowest_digit(7) == 0
