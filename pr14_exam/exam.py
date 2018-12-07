@@ -58,19 +58,6 @@ def add_or_subtract(numbers):
             continue
     return sum
 
-    count = 0
-    blocked = False
-    #
-    # for n in nums:
-    #     if n == 6:
-    #         blocked = True
-    #         continue
-    #     if n == 7 and blocked:
-    #         blocked = False
-    #         continue
-    #     if not blocked:
-    #         count += n
-
 
 def should_get_up_early(is_weekday, really_tired, first_class_is_programming):
     """
@@ -88,7 +75,15 @@ def should_get_up_early(is_weekday, really_tired, first_class_is_programming):
     :param first_class_is_programming: is the first class a programming class, boolean
     :return: True if you should get up early, otherwise False
     """
-    pass
+    if not is_weekday:
+        return False
+    else:
+        if really_tired is True and first_class_is_programming is False:
+            return False
+        if really_tired is True and first_class_is_programming is True:
+            return True
+        else:
+            return True
 
 
 def pear_fear(pears, people):
@@ -214,8 +209,8 @@ if __name__ == '__main__':
     # print(add_or_subtract([0, 1, 2]))  # == -3
     # print(add_or_subtract([1, 2, 0, 2, 0, 4]))  # == 5
 
-    assert should_get_up_early(True, True, True) is True
-    assert should_get_up_early(False, True, False) is False
+    print(should_get_up_early(True, True, True))  # is True
+    print(should_get_up_early(False, True, False))  # is False
     #
     # assert pear_fear(10, 3) == 5
     # assert pear_fear(10, 5) == 2
