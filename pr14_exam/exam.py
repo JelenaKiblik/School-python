@@ -138,7 +138,10 @@ def get_padded_string(string1, string2):
     :param string2:  String two
     :return: Padded string
     """
-    pass
+    if len(string1) >= len(string2):
+        return string2 + string1 + string2
+    else:
+        return string1 + string2 + string1
 
 
 def remove_duplicate(number_list):
@@ -224,15 +227,15 @@ if __name__ == '__main__':
     # print(pear_fear(17, 2))  # == 8
     # print(pear_fear(21, 10))  # == 3
     #
-    print(string_between_string("ho", "lle"))  # == "hello"
-    assert string_between_string("", "yas") == "say"
-    assert string_between_string("smrt", "a") == "smart"
-    assert string_between_string("w  d", " ro ") == "w  or  d"
-    assert string_between_string(".,", ",.") == "..,,"
+    # print(string_between_string("ho", "lle"))  # == "hello"
+    # assert string_between_string("", "yas") == "say"
+    # assert string_between_string("smrt", "a") == "smart"
+    # assert string_between_string("w  d", " ro ") == "w  or  d"
+    # assert string_between_string(".,", ",.") == "..,,"
     #
-    # assert get_padded_string("pizza", "bbq") == "bbqpizzabbq"
-    # assert get_padded_string("dog", "cat") == "catdogcat"
-    # assert get_padded_string("geoff", "giraffe") == "geoffgiraffegeoff"
+    assert get_padded_string("pizza", "bbq") == "bbqpizzabbq"
+    assert get_padded_string("dog", "cat") == "catdogcat"
+    assert get_padded_string("geoff", "giraffe") == "geoffgiraffegeoff"
     #
     # assert remove_duplicate([1, 1, 2, 2, 3, 3]) == [1, 2, 3]
     # assert remove_duplicate([1, 2, 3]) == [1, 2, 3]
