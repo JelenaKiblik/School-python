@@ -4,6 +4,7 @@
 def segment_number(first_number, last_number):
     """
     Return list with elements dividable by 5 but not dividable by 3 between (inclusive) two arguments.
+
     Return list of numbers where only numbers between first_number
     and last_number (both inclusive) which divide by 5 but do not divide by 3
     are used.
