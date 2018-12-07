@@ -109,6 +109,7 @@ def pear_fear(pears, people):
         non_pear_fear = people - fears_pears
         return pears // non_pear_fear
 
+
 def string_between_string(word1, word2):
     """
     Insert reversed word2 to the center of word1.
@@ -121,7 +122,7 @@ def string_between_string(word1, word2):
     :param word2: Word to reverse and insert. String.
     :return: New word as string.
     """
-    pass
+    return word1[0:len(word1)//2] + word2[::-1] + word1[len(word1)//2:]
 
 
 def get_padded_string(string1, string2):
@@ -217,17 +218,17 @@ if __name__ == '__main__':
     # print(should_get_up_early(True, True, True))  # is True
     # print(should_get_up_early(False, True, False))  # is False
     #
-    print(pear_fear(10, 3))  # == 5
-    print(pear_fear(10, 5))  # == 2
-    print(pear_fear(0, 3))  # == 0
-    print(pear_fear(17, 2))  # == 8
-    print(pear_fear(21, 10))  # == 3
+    # print(pear_fear(10, 3))  # == 5
+    # print(pear_fear(10, 5))  # == 2
+    # print(pear_fear(0, 3))  # == 0
+    # print(pear_fear(17, 2))  # == 8
+    # print(pear_fear(21, 10))  # == 3
     #
-    # assert string_between_string("ho", "lle") == "hello"
-    # assert string_between_string("", "yas") == "say"
-    # assert string_between_string("smrt", "a") == "smart"
-    # assert string_between_string("w  d", " ro ") == "w  or  d"
-    # assert string_between_string(".,", ",.") == "..,,"
+    print(string_between_string("ho", "lle"))  # == "hello"
+    assert string_between_string("", "yas") == "say"
+    assert string_between_string("smrt", "a") == "smart"
+    assert string_between_string("w  d", " ro ") == "w  or  d"
+    assert string_between_string(".,", ",.") == "..,,"
     #
     # assert get_padded_string("pizza", "bbq") == "bbqpizzabbq"
     # assert get_padded_string("dog", "cat") == "catdogcat"
