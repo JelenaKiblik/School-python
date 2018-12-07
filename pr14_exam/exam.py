@@ -122,7 +122,7 @@ def string_between_string(word1, word2):
     :param word2: Word to reverse and insert. String.
     :return: New word as string.
     """
-    return word1[0:len(word1)//2] + word2[::-1] + word1[len(word1)//2:]
+    return word1[0:len(word1) // 2] + word2[::-1] + word1[len(word1) // 2:]
 
 
 def get_padded_string(string1, string2):
