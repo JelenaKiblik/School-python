@@ -197,7 +197,8 @@ def remove_lowest_digit(number):
     :param number: non-negative integer
     :return: non-negative integer
     """
-    pass
+    for digit in str(number):
+        print(digit)
 
 
 def show_highest_grade(grade1, grade2):
@@ -214,7 +215,10 @@ def show_highest_grade(grade1, grade2):
     :param grade2:
     :return:
     """
-    pass
+    if grade1 > grade2:
+        print(f"Highest grade: {grade1}")
+    else:
+        print(f"Highest grade: {grade2}")
 
 
 if __name__ == '__main__':
@@ -250,15 +254,15 @@ if __name__ == '__main__':
     # assert remove_duplicate([1, 2, 3]) == [1, 2, 3]
     # assert remove_duplicate([1, 1, 1, 1, 1, 2, 1, 1, 3]) == [1, 2, 1, 3]
     #
-    print(who_called({}, "Nathan"))  # == -1
-    print(who_called({"Alex": "James", "Jeff": "Bill", "James": "Alex", "Daniel": "Matt"}, "Alex"))  # == "James"
-    assert who_called({"Alex": "James", "Jeff": "Bill", "James": "Alex", "Daniel": "Matt"}, "Olaf") == -1
+    # print(who_called({}, "Nathan"))  # == -1
+    # print(who_called({"Alex": "James", "Jeff": "Bill", "James": "Alex", "Daniel": "Matt"}, "Alex"))  # == "James"
+    # print(who_called({"Alex": "James", "Jeff": "Bill", "James": "Alex", "Daniel": "Matt"}, "Olaf"))  # == -1
 
-    # assert remove_lowest_digit(123) == 23
+    print(remove_lowest_digit(123))   # == 23
     # assert remove_lowest_digit(100) == 10
     # assert remove_lowest_digit(7) == 0
     # assert remove_lowest_digit(171) == 71
-    #
-    # assert show_highest_grade(10, 14) is None
-    # # prints:
-    # # Highest grade: 14
+
+    assert show_highest_grade(10, 14) is None
+    # prints:
+    # Highest grade: 14
