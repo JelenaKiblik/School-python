@@ -180,8 +180,9 @@ def who_called(calls, name):
     :param name: name of the receiver
     :return: name of the caller
     """
-    if name in calls.keys():
-        return calls[name]
+    for k in calls:
+        if name in calls[k]:
+            return k
     else:
         return -1
 
@@ -260,10 +261,6 @@ if __name__ == '__main__':
     # assert remove_duplicate([1, 2, 3]) == [1, 2, 3]
     # assert remove_duplicate([1, 1, 1, 1, 1, 2, 1, 1, 3]) == [1, 2, 1, 3]
     #
-    # print(who_called({}, "Nathan"))  # == -1
-    # print(who_called({"Alex": "James", "Jeff": "Bill", "James": "Alex", "Daniel": "Matt"}, "Alex"))  # == "James"
-    # print(who_called({"Alex": "James", "Jeff": "Bill", "James": "Alex", "Daniel": "Matt"}, "Olaf"))  # == -1
-
     assert who_called({}, "Nathan") == -1
     assert who_called({"Alex": "James", "Jeff": "Bill", "James": "Alex", "Daniel": "Matt"}, "Alex") == "James"
     assert who_called({"Alex": "James", "Jeff": "Bill", "James": "Alex", "Daniel": "Matt"}, "Olaf") == -1
