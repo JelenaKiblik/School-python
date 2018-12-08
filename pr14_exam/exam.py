@@ -264,11 +264,15 @@ if __name__ == '__main__':
     # print(who_called({"Alex": "James", "Jeff": "Bill", "James": "Alex", "Daniel": "Matt"}, "Alex"))  # == "James"
     # print(who_called({"Alex": "James", "Jeff": "Bill", "James": "Alex", "Daniel": "Matt"}, "Olaf"))  # == -1
 
-    print(remove_lowest_digit(123))   # == 23
-    print(remove_lowest_digit(2100))  # == 210
-    print(remove_lowest_digit(7))   # == 0
-    print(remove_lowest_digit(171))  # == 71
+    assert who_called({}, "Nathan") == -1
+    assert who_called({"Alex": "James", "Jeff": "Bill", "James": "Alex", "Daniel": "Matt"}, "Alex") == "James"
+    assert who_called({"Alex": "James", "Jeff": "Bill", "James": "Alex", "Daniel": "Matt"}, "Olaf") == -1
 
-    assert show_highest_grade(10, 14) is None
+    # print(remove_lowest_digit(1231))   # == 231
+    # print(remove_lowest_digit(1000))  # == 100
+    # print(remove_lowest_digit(7))   # == 0
+    # print(remove_lowest_digit(171))  # == 71
+    #
+    # assert show_highest_grade(10, 14) is None
     # prints:
     # Highest grade: 14
