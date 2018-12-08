@@ -197,8 +197,11 @@ def remove_lowest_digit(number):
     :param number: non-negative integer
     :return: non-negative integer
     """
+    new_list = []
     for digit in str(number):
-        print(digit)
+        new_list.append(digit)
+    new_list.remove(min(new_list))
+    return "".join(new_list)
 
 
 def show_highest_grade(grade1, grade2):
