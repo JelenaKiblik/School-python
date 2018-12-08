@@ -201,7 +201,10 @@ def remove_lowest_digit(number):
     for digit in str(number):
         new_list.append(digit)
     new_list.remove(min(new_list))
-    return "".join(new_list)
+    if len(new_list) <= 1:
+        return 0
+    else:
+        return "".join(new_list)
 
 
 def show_highest_grade(grade1, grade2):
@@ -262,9 +265,9 @@ if __name__ == '__main__':
     # print(who_called({"Alex": "James", "Jeff": "Bill", "James": "Alex", "Daniel": "Matt"}, "Olaf"))  # == -1
 
     print(remove_lowest_digit(123))   # == 23
-    # assert remove_lowest_digit(100) == 10
-    # assert remove_lowest_digit(7) == 0
-    # assert remove_lowest_digit(171) == 71
+    print(remove_lowest_digit(2100))  # == 210
+    print(remove_lowest_digit(7))   # == 0
+    print(remove_lowest_digit(171))  # == 71
 
     assert show_highest_grade(10, 14) is None
     # prints:
