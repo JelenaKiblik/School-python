@@ -202,10 +202,10 @@ def remove_lowest_digit(number):
     for digit in str(number):
         new_list.append(digit)
     new_list.remove(min(new_list))
-    if len(new_list) <= 1:
-        return 0
-    else:
+    if len(new_list) >= 1:
         return int("".join(new_list))
+    else:
+        return 0
 
 
 def show_highest_grade(grade1, grade2):
@@ -260,16 +260,16 @@ if __name__ == '__main__':
     # print(remove_duplicate([1, 1, 2, 2, 3, 3]))  # == [1, 2, 3]
     # assert remove_duplicate([1, 2, 3]) == [1, 2, 3]
     # assert remove_duplicate([1, 1, 1, 1, 1, 2, 1, 1, 3]) == [1, 2, 1, 3]
-    #
-    assert who_called({}, "Nathan") == -1
-    assert who_called({"Alex": "James", "Jeff": "Bill", "James": "Alex", "Daniel": "Matt"}, "Alex") == "James"
-    assert who_called({"Alex": "James", "Jeff": "Bill", "James": "Alex", "Daniel": "Matt"}, "Olaf") == -1
 
-    # print(remove_lowest_digit(1231))   # == 231
-    # print(remove_lowest_digit(1000))  # == 100
-    # print(remove_lowest_digit(7))   # == 0
-    # print(remove_lowest_digit(171))  # == 71
+    # assert who_called({}, "Nathan") == -1
+    # assert who_called({"Alex": "James", "Jeff": "Bill", "James": "Alex", "Daniel": "Matt"}, "Alex") == "James"
+    # assert who_called({"Alex": "James", "Jeff": "Bill", "James": "Alex", "Daniel": "Matt"}, "Olaf") == -1
     #
+    # print(remove_lowest_digit(12131))   # == 2131
+    # print(remove_lowest_digit(1000))  # == 100
+    print(remove_lowest_digit(71))   # == 7
+    # print(remove_lowest_digit(171))  # == 71
+
     # assert show_highest_grade(10, 14) is None
     # prints:
     # Highest grade: 14
