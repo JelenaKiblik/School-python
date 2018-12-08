@@ -1,5 +1,8 @@
-"""Pokemin."""
+"""Pokemon."""
 import requests
+
+
+url = "https://pokeapi.co/api/v2/pokemon/"
 
 
 class CannotAddPokemonException(Exception):
@@ -22,7 +25,9 @@ class Person:
         :param name: Name of the Person.
         :param age:  Age of the Person.
         """
-        pass
+        self.name = name
+        self.age = age
+        self.pokemon = None
 
     def add_pokemon(self, pokemon):
         """
@@ -31,7 +36,12 @@ class Person:
         :param pokemon: Pokemon to add.
         :return:
         """
-        pass
+        if self.pokemon not in self.world.pokemons:
+            raise CannotAddPokemonException(f"Must be instance of Pokemon!")
+        if self.pokemon is not None:
+            raise CannotAddPokemonException(f"Person already has a pokemon!")
+        else:
+            self.pokemon = pokemon
 
     def get_pokemon(self):
         """
@@ -39,11 +49,12 @@ class Person:
 
         :return: Pokemon or None.
         """
-        pass
+        return self.pokemon
 
     def remove_pokemon(self):
         """Remove Person's Pokemon."""
-        pass
+        if self.pokemon is not None:
+            del self.pokemon
 
     def __repr__(self):
         """
@@ -51,13 +62,12 @@ class Person:
 
         :return: Person's name, Person's age, Pokemon: Person's pokemon.
         """
-        pass
+        return f"{self.name}, {self.age}, Pokemon: {self.pokemon}"
 
 
 class Data:
     """Class for getting data from API."""
 
-    @staticmethod
     def get_all_pokemons_data(url):
         """
         Make request to API.
@@ -65,7 +75,13 @@ class Data:
         :param endpoint: Address where to make the GET request.
         :return: Response data.
         """
-        pass
+        pokemon_data = url
+        print(pokemon_data)
+        data = requests.get(pokemon_data).json()
+        new_data = data.get('results')
+        return new_data
+
+    print(get_all_pokemons_data("https://pokeapi.co/api/v2/pokemon/"))
 
     @staticmethod
     def get_additional_data(url):
@@ -91,7 +107,11 @@ class Pokemon:
         :param defence: Pokemon's defence level.
         :param types: Pokemon's types.
         """
-        pass
+        self.name = name
+        self.experience = experience
+        self.attack = attack
+        self.defence = defence
+        self.types = []
 
     def get_power(self):
         """
@@ -99,7 +119,8 @@ class Pokemon:
 
         :return: Power.
         """
-        pass
+        power = (self.experience / self.attack + self.defence) * len(self.name)
+        return power
 
     def __str__(self):
         """
@@ -107,7 +128,7 @@ class Pokemon:
 
         :return: Pokemon's name, experience: Pokemon's experience, att: Pokemon's attack level, def: Pokemon's defence level, types: Pokemon's types.
         """
-        pass
+        return f"{self.name} experience: {self.experience} att: {self.attack} def: {self.defence} types: {self.types}"
 
     def __repr__(self):
         """
@@ -115,7 +136,7 @@ class Pokemon:
 
         :return: Pokemon's name
         """
-        pass
+        return f"{self.name}"
 
 
 class World:
@@ -127,7 +148,8 @@ class World:
 
         :param name:
         """
-        pass
+        self.name = name
+        self.pokemons = {}
 
     def add_pokemons(self, no_of_pokemons):
         """
@@ -203,6 +225,7 @@ class World:
         """
         Get the Pokemon(s) which has the minimum experience level.
         """
+        pass
 
 
 class Main:
