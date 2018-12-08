@@ -204,7 +204,7 @@ def remove_lowest_digit(number):
     if len(new_list) <= 1:
         return 0
     else:
-        return "".join(new_list)
+        return int("".join(new_list))
 
 
 def show_highest_grade(grade1, grade2):
