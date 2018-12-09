@@ -49,13 +49,12 @@ class Person:
         :param pokemon: Pokemon to add.
         :return:
         """
-        if isinstance(pokemon, Pokemon):
-            if pokemon not in self.pokemons:
-                raise CannotAddPokemonException(f"Must be instance of Pokemon!")
-            if pokemon is not None:
-                raise CannotAddPokemonException(f"Person already has a pokemon!")
-            else:
-                self.pokemon = pokemon
+        if not isinstance(pokemon, Pokemon):
+            raise CannotAddPokemonException(f"Must be instance of Pokemon!")
+        if self.pokemon is not None:
+            raise CannotAddPokemonException(f"Person already has a pokemon!")
+        else:
+            self.pokemon = pokemon
 
     def get_pokemon(self):
         """
@@ -169,6 +168,7 @@ class World:
         """
         self.name = name
         self.pokemons = []
+        self.available_pokemons = []
 
     def add_pokemons(self, no_of_pokemons):
         """Add Pokemons to world, GET data from the API."""
