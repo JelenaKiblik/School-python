@@ -1,6 +1,8 @@
 """Pokemon."""
-# import requests
-# import json
+import requests
+import json
+import random
+
 url = "https://pokeapi.co/api/v2/pokemon/"
 
 
@@ -67,7 +69,7 @@ class Person:
     def remove_pokemon(self):
         """Remove Person's Pokemon."""
         if self.pokemon is not None:
-            self.pokemon.remove(self)
+            del self.pokemon
 
     def __repr__(self):
         """
@@ -89,12 +91,11 @@ class Data:
         :param endpoint: Address where to make the GET request.
         :return: Response data.
         """
-        # response = requests.get(url)
-        # if response.ok:
-        #     json = response.json()
-        #     data = json.get('results', [])
-        # return data
-        pass
+        response = requests.get(url)
+        if response.ok:
+            json = response.json()
+            data = json.get('results', [])
+        return data
 
     @staticmethod
     def get_additional_data(url):
@@ -104,10 +105,9 @@ class Data:
         :param endpoint: Address where to make the GET request.
         :return: Response data.
         """
-        # response = requests.get(url)
-        # data = json.loads(response.text)
-        # return data
-        pass
+        response = requests.get(url)
+        data = json.loads(response.text)
+        return data
 
 
 class Pokemon:
@@ -170,26 +170,26 @@ class World:
 
     def add_pokemons(self, no_of_pokemons):
         """Add Pokemons to world, GET data from the API."""
-        # for i in range(1, no_of_pokemons + 1):
-        #     num_pokemon = str(i)
-        #     data = Data.get_additional_data("https://pokeapi.co/api/v2/pokemon/" + num_pokemon + "/")
-        #     name = str(data["forms"][0]["name"])
-        #     exp = data["base_experience"]
-        #     types = list(reversed([typ['type']['name'] for typ in data['types']]))
-        #     stats = {stat['stat']['name']: stat['base_stat'] for stat in data['stats']}
-        #     attack = stats['attack']
-        #     defense = stats['defense']
-        #     new_pokemon = {}
-        #     new_pokemon["name"] = name.upper()
-        #     new_pokemon["base_experience"] = exp
-        #     # new_pokemon["stats"] = stats
-        #     new_pokemon['attack'] = attack
-        #     new_pokemon['defence'] = defense
-        #     new_pokemon["types"] = types
-        #     self.pokemons.append(new_pokemon)
+        for i in range(1, no_of_pokemons + 1):
+            num_pokemon = str(i)
+            data = Data.get_additional_data("https://pokeapi.co/api/v2/pokemon/" + num_pokemon + "/")
+            name = str(data["forms"][0]["name"])
+            exp = data["base_experience"]
+            types = list(reversed([typ['type']['name'] for typ in data['types']]))
+            stats = {stat['stat']['name']: stat['base_stat'] for stat in data['stats']}
+            attack = stats['attack']
+            defense = stats['defense']
+            new_pokemon = {}
+            new_pokemon["name"] = name.upper()
+            new_pokemon["base_experience"] = exp
+            # new_pokemon["stats"] = stats
+            new_pokemon['attack'] = attack
+            new_pokemon['defence'] = defense
+            new_pokemon["types"] = types
+            self.pokemons.append(new_pokemon)
+            self.available_pokemons.append(new_pokemon)
         # print(self.pokemons)
-        # return self.pokemons
-        pass
+        return self.pokemons, self.available_pokemons
 
     def get_pokemons_by_type(self):
         """
@@ -197,6 +197,7 @@ class World:
 
         :return: Dict of Pokemons, grouped by types.
         """
+        # return sorted(self.pokemons, key=lambda i: i['types'])
         pass
 
     def hike(self, person: Person):
@@ -205,7 +206,11 @@ class World:
 
         :param person: Person who goes to hike.
         """
-        pass
+        if len(self.available_pokemons) == 0:
+            raise NoAvailablePokemonsInWorldException("Could not find any pokemons.")
+        else:
+            pokemon = random.choice(self.pokemons)
+            person.add_pokemon(pokemon)
 
     def remove_available_pokemon(self, pokemon: Pokemon):
         """
@@ -213,7 +218,7 @@ class World:
 
         :param pokemon: Pokemon to be removed.
         """
-        pass
+
 
     def remove_pokemon_from_world(self, pokemon: Pokemon):
         """
@@ -263,8 +268,8 @@ class Main:
 
     if __name__ == '__main__':
         world = World("Poke land")
-        world.add_pokemons(2)
-        print(len(world.pokemons))  # -> 128
+        world.add_pokemons(12)
+        print(len(world.pokemons))  # -> 12
         # print(len(world.get_pokemons_by_type().keys()))  # -> 16
         # ago = Person("Ago", 10)
         # peeter = Person("Peeter", 11)
