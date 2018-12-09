@@ -1,5 +1,6 @@
 """Pokemon."""
 import requests
+import json
 
 url = "https://pokeapi.co/api/v2/pokemon/"
 
@@ -89,17 +90,12 @@ class Data:
         :param endpoint: Address where to make the GET request.
         :return: Response data.
         """
-        # pokemon_data = url
-        # print(pokemon_data)
-        # data = requests.get(pokemon_data).json()
-        # new_data = data.get('results')
-        # return new_data
-        # response = requests.get(url)
-        #
-        # if response.ok:
-        #     json = response.json()
-        #     pokemons = json.get('results', [])
-        pass
+        response = requests.get(url)
+        if response.ok:
+            json = response.json()
+            data = json.get('results', [])
+        print(data)
+        return data
 
     @staticmethod
     def get_additional_data(url):
@@ -109,7 +105,10 @@ class Data:
         :param endpoint: Address where to make the GET request.
         :return: Response data.
         """
-        pass
+        response = requests.get(url)
+        data = json.loads(response.text)
+        print(data)
+        return data
 
 
 class Pokemon:
@@ -172,7 +171,26 @@ class World:
 
     def add_pokemons(self, no_of_pokemons):
         """Add Pokemons to world, GET data from the API."""
-        pass
+        for i in range(1, no_of_pokemons+1):
+            num_pokemon = str(i)
+            data = Data.get_additional_data("https://pokeapi.co/api/v2/pokemon/" + num_pokemon + "/")
+            name = str(data["forms"][0]["name"])
+            exp = data["base_experience"]
+            types = list(reversed([typ['type']['name'] for typ in data['types']]))
+            stats = {stat['stat']['name']: stat['base_stat'] for stat in data['stats']}
+            attack = stats['attack']
+            defense = stats['defense']
+            new_pokemon = {}
+            new_pokemon["name"] = name.upper()
+            new_pokemon["base_experience"] = exp
+            # new_pokemon["stats"] = stats
+            new_pokemon['attack'] = attack
+            new_pokemon['defence'] = defense
+            new_pokemon["types"] = types
+            self.pokemons.append(new_pokemon)
+        print(self.pokemons)
+        return self.pokemons
+
 
     def get_pokemons_by_type(self):
         """
@@ -246,7 +264,7 @@ class Main:
 
     if __name__ == '__main__':
         world = World("Poke land")
-        # world.add_pokemons(128)
+        world.add_pokemons(2)
         # print(len(world.pokemons))  # -> 128
         # print(len(world.get_pokemons_by_type().keys()))  # -> 16
         # ago = Person("Ago", 10)
