@@ -157,7 +157,7 @@ class World:
         :param name:
         """
         self.name = name
-        self.pokemons = []
+        self.pokemon = []
 
     def add_pokemons(self, no_of_pokemons):
         """Add Pokemons to world, GET data from the API."""
@@ -179,9 +179,9 @@ class World:
             new_pokemon['attack'] = attack
             new_pokemon['defence'] = defense
             new_pokemon["types"] = types
-            self.pokemons.append(new_pokemon)
-        print(self.pokemons)
-        return self.pokemons
+            self.pokemon.append(new_pokemon)
+        print(self.pokemon)
+        return self.pokemon
 
     def get_pokemons_by_type(self):
         """
