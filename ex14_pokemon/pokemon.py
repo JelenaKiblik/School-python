@@ -1,6 +1,6 @@
 """Pokemon."""
 import requests
-
+import json
 
 url = "https://pokeapi.co/api/v2/pokemon/"
 
@@ -68,6 +68,7 @@ class Person:
 class Data:
     """Class for getting data from API."""
 
+    @staticmethod
     def get_all_pokemons_data(url):
         """
         Make request to API.
@@ -80,8 +81,6 @@ class Data:
         data = requests.get(pokemon_data).json()
         new_data = data.get('results')
         return new_data
-
-    print(get_all_pokemons_data("https://pokeapi.co/api/v2/pokemon/"))
 
     @staticmethod
     def get_additional_data(url):
@@ -155,7 +154,29 @@ class World:
         """
         Add Pokemons to world, GET data from the API.
         """
-        pass
+        pokemons = []
+
+        for i in range(1, no_of_pokemons):
+            num_pokemon = str(i)
+            url_data = "https://pokeapi.co/api/v2/pokemon/" + num_pokemon + "/"
+            response = requests.get(url_data)
+            data = json.loads(response.text)
+            name = str(data["forms"][0]["name"])
+            exp = data["base_experience"]
+            types = list(reversed([typ['type']['name'] for typ in data['types']]))
+            stats = {stat['stat']['name']: stat['base_stat'] for stat in data['stats']}
+            attack = stats['attack']
+            defense = stats['defense']
+            new_pokemon = {}
+            new_pokemon["name"] = name.upper()
+            new_pokemon["base_experience"] = exp
+            # new_pokemon["stats"] = stats
+            new_pokemon['attack'] = attack
+            new_pokemon['defence'] = defense
+            new_pokemon["types"] = types
+            pokemons.append(new_pokemon)
+        print(pokemons)
+        return pokemons
 
     def get_pokemons_by_type(self):
         """
@@ -231,15 +252,15 @@ class World:
 class Main:
     if __name__ == '__main__':
         world = World("Poke land")
-        world.add_pokemons(128)
+        world.add_pokemons(5)
         print(len(world.pokemons))  # -> 128
-        print(len(world.get_pokemons_by_type().keys()))  # -> 16
-        ago = Person("Ago", 10)
-        peeter = Person("Peeter", 11)
-        print(len(world.available_pokemons))  # -> 128
-        world.hike(ago)
-        world.hike(peeter)
-        print(len(world.available_pokemons))  # -> 126
-        print(world.get_most_experienced_pokemon())  # -> [CHANSEY]
-        print(world.get_min_experience_pokemon())  # -> [CATERPIE, WEEDLE]
-        print(world.fight(ago, peeter))  # String that says who battled with who and who won.
+        # print(len(world.get_pokemons_by_type().keys()))  # -> 16
+        # ago = Person("Ago", 10)
+        # peeter = Person("Peeter", 11)
+        # print(len(world.available_pokemons))  # -> 128
+        # world.hike(ago)
+        # world.hike(peeter)
+        # print(len(world.available_pokemons))  # -> 126
+        # print(world.get_most_experienced_pokemon())  # -> [CHANSEY]
+        # print(world.get_min_experience_pokemon())  # -> [CATERPIE, WEEDLE]
+        # print(world.fight(ago, peeter))  # String that says who battled with who and who won.
