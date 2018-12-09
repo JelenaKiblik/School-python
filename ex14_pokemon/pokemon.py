@@ -90,12 +90,12 @@ class Data:
         :param endpoint: Address where to make the GET request.
         :return: Response data.
         """
-        response = requests.get(url)
-        if response.ok:
-            json = response.json()
-            data = json.get('results', [])
-        print(data)
-        return data
+        # response = requests.get(url)
+        # if response.ok:
+        #     json = response.json()
+        #     data = json.get('results', [])
+        # return data
+        pass
 
     @staticmethod
     def get_additional_data(url):
@@ -107,7 +107,6 @@ class Data:
         """
         response = requests.get(url)
         data = json.loads(response.text)
-        print(data)
         return data
 
 
@@ -171,7 +170,7 @@ class World:
 
     def add_pokemons(self, no_of_pokemons):
         """Add Pokemons to world, GET data from the API."""
-        for i in range(1, no_of_pokemons+1):
+        for i in range(1, no_of_pokemons + 1):
             num_pokemon = str(i)
             data = Data.get_additional_data("https://pokeapi.co/api/v2/pokemon/" + num_pokemon + "/")
             name = str(data["forms"][0]["name"])
@@ -190,7 +189,6 @@ class World:
             self.pokemons.append(new_pokemon)
         print(self.pokemons)
         return self.pokemons
-
 
     def get_pokemons_by_type(self):
         """
@@ -265,7 +263,7 @@ class Main:
     if __name__ == '__main__':
         world = World("Poke land")
         world.add_pokemons(2)
-        # print(len(world.pokemons))  # -> 128
+        print(len(world.pokemons))  # -> 128
         # print(len(world.get_pokemons_by_type().keys()))  # -> 16
         # ago = Person("Ago", 10)
         # peeter = Person("Peeter", 11)
