@@ -40,6 +40,7 @@ class Person:
         """
         self.name = name
         self.age = age
+        self.pokemon = None
 
     def add_pokemon(self, pokemon):
         """
@@ -65,9 +66,8 @@ class Person:
 
     def remove_pokemon(self):
         """Remove Person's Pokemon."""
-        if isinstance(self.pokemon, Pokemon):
-            del self.pokemon
-
+        if self.pokemon is not None:
+            self.person.remove(self.pokemon)
 
     def __repr__(self):
         """
