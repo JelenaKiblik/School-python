@@ -30,7 +30,6 @@ class NoAvailablePokemonsInWorldException(Exception):
 
 class Person:
     """Simple Person class."""
-    pokemon: None
 
     def __init__(self, name, age):
         """
@@ -66,7 +65,8 @@ class Person:
 
     def remove_pokemon(self):
         """Remove Person's Pokemon."""
-        del self.pokemon
+        if isinstance(self.pokemon, Pokemon):
+            del self.pokemon
 
 
     def __repr__(self):
