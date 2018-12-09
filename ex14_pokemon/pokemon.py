@@ -1,7 +1,6 @@
 """Pokemon."""
-import requests
-import json
-
+# import requests
+# import json
 url = "https://pokeapi.co/api/v2/pokemon/"
 
 
