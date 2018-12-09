@@ -91,11 +91,12 @@ class Data:
         :param endpoint: Address where to make the GET request.
         :return: Response data.
         """
-        response = requests.get(url)
-        if response.ok:
-            json = response.json()
-            data = json.get('results', [])
-        return data
+        # response = requests.get(url)
+        # if response.ok:
+        #     json = response.json()
+        #     data = json.get('results', [])
+        # return data
+        pass
 
     @staticmethod
     def get_additional_data(url):
@@ -105,9 +106,10 @@ class Data:
         :param endpoint: Address where to make the GET request.
         :return: Response data.
         """
-        response = requests.get(url)
-        data = json.loads(response.text)
-        return data
+        # response = requests.get(url)
+        # data = json.loads(response.text)
+        # return data
+        pass
 
 
 class Pokemon:
