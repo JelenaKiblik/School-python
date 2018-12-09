@@ -1,7 +1,5 @@
 """Pokemon."""
 import requests
-import json
-import urllib
 
 url = "https://pokeapi.co/api/v2/pokemon/"
 
@@ -10,16 +8,24 @@ class CannotAddPokemonException(Exception):
     """Custom exception."""
 
     def __init__(self, message):
-        """Exception."""
-        super().__init__(message)
+        """
+        Class constructor.
+
+        :param message: user message
+        """
+        self.message = message
 
 
 class NoAvailablePokemonsInWorldException(Exception):
     """Custom exception."""
 
     def __init__(self, message):
-        """Exception."""
-        super().__init__(message)
+        """
+        Class constructor.
+
+        :param message: user message
+        """
+        self.message = message
 
 
 class Person:
@@ -43,7 +49,7 @@ class Person:
         :param pokemon: Pokemon to add.
         :return:
         """
-        if self.pokemon not in World.pokemons:
+        if self.pokemon not in self.world.pokemons:
             raise CannotAddPokemonException(f"Must be instance of Pokemon!")
         if self.pokemon is not None:
             raise CannotAddPokemonException(f"Person already has a pokemon!")
@@ -75,24 +81,11 @@ class Person:
 class Data:
     """Class for getting data from API."""
 
-    @staticmethod
     def get_all_pokemons_data(url):
         """
         Make request to API.
 
-        :param url: Address where to make the GET request.
-        :return: Response data.
-        """
-        with urllib.request.urlopen(url) as f:
-            contents = f.read()
-            return contents
-
-    @staticmethod
-    def get_additional_data(url):
-        """
-        Make request to API to get additional data for each Pokemon.
-
-        :param url: Address where to make the GET request.
+        :param endpoint: Address where to make the GET request.
         :return: Response data.
         """
         pokemon_data = url
@@ -100,6 +93,18 @@ class Data:
         data = requests.get(pokemon_data).json()
         new_data = data.get('results')
         return new_data
+
+    print(get_all_pokemons_data("https://pokeapi.co/api/v2/pokemon/"))
+
+    @staticmethod
+    def get_additional_data(url):
+        """
+        Make request to API to get additional data for each Pokemon.
+
+        :param endpoint: Address where to make the GET request.
+        :return: Response data.
+        """
+        pass
 
 
 class Pokemon:
@@ -157,31 +162,11 @@ class World:
         :param name:
         """
         self.name = name
-        self.pokemon = []
+        self.pokemons = {}
 
     def add_pokemons(self, no_of_pokemons):
         """Add Pokemons to world, GET data from the API."""
-        for i in range(1, no_of_pokemons):
-            num_pokemon = str(i)
-            url_data = "https://pokeapi.co/api/v2/pokemon/" + num_pokemon + "/"
-            response = requests.get(url_data)
-            data = json.loads(response.text)
-            name = str(data["forms"][0]["name"])
-            exp = data["base_experience"]
-            types = list(reversed([typ['type']['name'] for typ in data['types']]))
-            stats = {stat['stat']['name']: stat['base_stat'] for stat in data['stats']}
-            attack = stats['attack']
-            defense = stats['defense']
-            new_pokemon = {}
-            new_pokemon["name"] = name.upper()
-            new_pokemon["base_experience"] = exp
-            # new_pokemon["stats"] = stats
-            new_pokemon['attack'] = attack
-            new_pokemon['defence'] = defense
-            new_pokemon["types"] = types
-            self.pokemon.append(new_pokemon)
-        print(self.pokemon)
-        return self.pokemon
+        pass
 
     def get_pokemons_by_type(self):
         """
@@ -255,8 +240,8 @@ class Main:
 
     if __name__ == '__main__':
         world = World("Poke land")
-        world.add_pokemons(5)
-        print(len(world.pokemons))  # -> 128
+        # world.add_pokemons(128)
+        # print(len(world.pokemons))  # -> 128
         # print(len(world.get_pokemons_by_type().keys()))  # -> 16
         # ago = Person("Ago", 10)
         # peeter = Person("Peeter", 11)
