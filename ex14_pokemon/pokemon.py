@@ -42,7 +42,7 @@ class Person:
         :param pokemon: Pokemon to add.
         :return:
         """
-        if self.pokemon not in self.world.pokemons:
+        if self.pokemon not in self.pokemons:
             raise CannotAddPokemonException(f"Must be instance of Pokemon!")
         if self.pokemon is not None:
             raise CannotAddPokemonException(f"Person already has a pokemon!")
@@ -157,11 +157,8 @@ class World:
         self.pokemons = {}
 
     def add_pokemons(self, no_of_pokemons):
-        """
-        Add Pokemons to world, GET data from the API.
-        """
+        """Add Pokemons to world, GET data from the API."""
         pokemons = []
-
         for i in range(1, no_of_pokemons):
             num_pokemon = str(i)
             url_data = "https://pokeapi.co/api/v2/pokemon/" + num_pokemon + "/"
@@ -243,19 +240,17 @@ class World:
         pass
 
     def get_most_experienced_pokemon(self):
-        """
-        Get the Pokemon(s) which has the maximum experience level.
-        """
+        """Get the Pokemon(s) which has the maximum experience level."""
         pass
 
     def get_min_experience_pokemon(self):
-        """
-        Get the Pokemon(s) which has the minimum experience level.
-        """
+        """Get the Pokemon(s) which has the minimum experience level."""
         pass
 
 
 class Main:
+    """Main class."""
+
     if __name__ == '__main__':
         world = World("Poke land")
         world.add_pokemons(5)
