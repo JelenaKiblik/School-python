@@ -1,6 +1,7 @@
 """Pokemon."""
 import requests
 import json
+import urllib
 
 url = "https://pokeapi.co/api/v2/pokemon/"
 
@@ -82,21 +83,23 @@ class Data:
         :param url: Address where to make the GET request.
         :return: Response data.
         """
-        pokemon_data = url
-        print(pokemon_data)
-        data = requests.get(pokemon_data).json()
-        new_data = data.get('results')
-        return new_data
+        with urllib.request.urlopen(url) as f:
+            contents = f.read()
+            return contents
 
     @staticmethod
     def get_additional_data(url):
         """
         Make request to API to get additional data for each Pokemon.
 
-        :param endpoint: Address where to make the GET request.
+        :param url: Address where to make the GET request.
         :return: Response data.
         """
-        pass
+        pokemon_data = url
+        print(pokemon_data)
+        data = requests.get(pokemon_data).json()
+        new_data = data.get('results')
+        return new_data
 
 
 class Pokemon:
