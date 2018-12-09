@@ -49,12 +49,13 @@ class Person:
         :param pokemon: Pokemon to add.
         :return:
         """
-        if self.pokemon not in self.world.pokemons:
-            raise CannotAddPokemonException(f"Must be instance of Pokemon!")
-        if self.pokemon is not None:
-            raise CannotAddPokemonException(f"Person already has a pokemon!")
-        else:
-            self.pokemon = pokemon
+        if isinstance(pokemon, Pokemon):
+            if pokemon not in self.pokemons:
+                raise CannotAddPokemonException(f"Must be instance of Pokemon!")
+            if pokemon is not None:
+                raise CannotAddPokemonException(f"Person already has a pokemon!")
+            else:
+                self.pokemon = pokemon
 
     def get_pokemon(self):
         """
@@ -81,6 +82,7 @@ class Person:
 class Data:
     """Class for getting data from API."""
 
+    @staticmethod
     def get_all_pokemons_data(url):
         """
         Make request to API.
@@ -88,13 +90,17 @@ class Data:
         :param endpoint: Address where to make the GET request.
         :return: Response data.
         """
-        pokemon_data = url
-        print(pokemon_data)
-        data = requests.get(pokemon_data).json()
-        new_data = data.get('results')
-        return new_data
-
-    print(get_all_pokemons_data("https://pokeapi.co/api/v2/pokemon/"))
+        # pokemon_data = url
+        # print(pokemon_data)
+        # data = requests.get(pokemon_data).json()
+        # new_data = data.get('results')
+        # return new_data
+        # response = requests.get(url)
+        #
+        # if response.ok:
+        #     json = response.json()
+        #     pokemons = json.get('results', [])
+        pass
 
     @staticmethod
     def get_additional_data(url):
@@ -124,7 +130,7 @@ class Pokemon:
         self.experience = experience
         self.attack = attack
         self.defence = defence
-        self.types = []
+        self.types = types
 
     def get_power(self):
         """
@@ -162,7 +168,7 @@ class World:
         :param name:
         """
         self.name = name
-        self.pokemons = {}
+        self.pokemons = []
 
     def add_pokemons(self, no_of_pokemons):
         """Add Pokemons to world, GET data from the API."""
