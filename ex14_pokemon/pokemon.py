@@ -42,7 +42,7 @@ class Person:
         :param pokemon: Pokemon to add.
         :return:
         """
-        if self.pokemon not in self.pokemons:
+        if self.pokemon not in World.pokemons:
             raise CannotAddPokemonException(f"Must be instance of Pokemon!")
         if self.pokemon is not None:
             raise CannotAddPokemonException(f"Person already has a pokemon!")
@@ -79,7 +79,7 @@ class Data:
         """
         Make request to API.
 
-        :param endpoint: Address where to make the GET request.
+        :param url: Address where to make the GET request.
         :return: Response data.
         """
         pokemon_data = url
@@ -154,11 +154,10 @@ class World:
         :param name:
         """
         self.name = name
-        self.pokemons = {}
+        self.pokemons = []
 
     def add_pokemons(self, no_of_pokemons):
         """Add Pokemons to world, GET data from the API."""
-        pokemons = []
         for i in range(1, no_of_pokemons):
             num_pokemon = str(i)
             url_data = "https://pokeapi.co/api/v2/pokemon/" + num_pokemon + "/"
@@ -177,9 +176,9 @@ class World:
             new_pokemon['attack'] = attack
             new_pokemon['defence'] = defense
             new_pokemon["types"] = types
-            pokemons.append(new_pokemon)
-        print(pokemons)
-        return pokemons
+            self.pokemons.append(new_pokemon)
+        print(self.pokemons)
+        return self.pokemons
 
     def get_pokemons_by_type(self):
         """
