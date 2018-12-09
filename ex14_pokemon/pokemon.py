@@ -208,11 +208,12 @@ class World:
 
         :param person: Person who goes to hike.
         """
-        if len(self.available_pokemons) == 0:
-            raise NoAvailablePokemonsInWorldException("Could not find any pokemons.")
-        else:
-            pokemon = random.choice(self.pokemons)
-            person.add_pokemon(pokemon)
+        # if len(self.available_pokemons) == 0:
+        #     raise NoAvailablePokemonsInWorldException("Could not find any pokemons.")
+        # else:
+        #     pokemon = random.choice(self.pokemons)
+        #     person.add_pokemon(pokemon)
+        pass
 
     def remove_available_pokemon(self, pokemon: Pokemon):
         """
@@ -220,7 +221,7 @@ class World:
 
         :param pokemon: Pokemon to be removed.
         """
-
+        pass
 
     def remove_pokemon_from_world(self, pokemon: Pokemon):
         """
