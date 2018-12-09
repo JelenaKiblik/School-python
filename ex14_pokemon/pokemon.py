@@ -7,12 +7,18 @@ url = "https://pokeapi.co/api/v2/pokemon/"
 
 class CannotAddPokemonException(Exception):
     """Custom exception."""
-    pass
+
+    def __init__(self, message):
+        """Exception."""
+        super().__init__(message)
 
 
 class NoAvailablePokemonsInWorldException(Exception):
     """Custom exception."""
-    pass
+
+    def __init__(self, message):
+        """Exception."""
+        super().__init__(message)
 
 
 class Person:
