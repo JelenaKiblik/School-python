@@ -120,6 +120,22 @@ class Gym:
             total_age += member.age
         return round(total_age / len(self.members), 2)
 
+    def get_count_of_trainers(self, color: str) -> int:
+        """Get the count colored trainers."""
+        count = 0
+        for member in self.members:
+            if member.trainers.color == color:
+                count += 1
+        return count
+
+    def get_name_count(self, name: str) -> int:
+        """Get the count of gym members with given name."""
+        count = 0
+        for member in self.members:
+            if member.name == name:
+                count += 1
+        return count
+
     def __repr__(self) -> str:
         """
         Gym object representation in string format.
@@ -145,7 +161,7 @@ class City:
 
     def can_build_gym(self) -> bool:
         """Can build gym."""
-        if len(self.gyms) < self.max_gym_number:
+        if len(self.gyms) <= self.max_gym_number:
             return True
         else:
             return False
