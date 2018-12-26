@@ -42,7 +42,7 @@ class Member:
 
         :return: string
         """
-        return f"{self.name}, {self.age}: {self.trainers}"
+        return "{}, {}: {}".format(self.name, self.age, self.trainers)
 
 
 class Gym:
@@ -96,8 +96,7 @@ class Gym:
 
     def remove_member(self, member: Member):
         """Remove member."""
-        if isinstance(member, Member):
-            self.members.remove(member)
+        self.members.remove(member)
 
     def get_total_stamina(self) -> int:
         """Get total stamina."""
