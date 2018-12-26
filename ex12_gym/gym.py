@@ -1,6 +1,50 @@
 """EX12 - Gym."""
 
 
+class Trainers:
+    """Class Trainers."""
+
+    def __init__(self, stamina: int, color: str):
+        """Constructor."""
+        self.stamina = stamina
+        self.color = color
+
+    def __repr__(self) -> str:
+        """
+        Trainers object representation in string format.
+
+        :return: string
+        """
+        return "Trainers: [{}, {}]".format(self.stamina, self.color)
+
+
+class Member:
+    """Class Member."""
+
+    def __init__(self, name: str, age: int, trainers: Trainers):
+        """Constructor."""
+        self.name = name
+        self.age = age
+        self.trainers = trainers
+        self.gyms = []
+
+    def get_all_gyms(self) -> list:
+        """Get all gyms."""
+        return self.gyms
+
+    def get_gyms(self) -> list:
+        """Get gyms."""
+        return self.gyms
+
+    def __repr__(self) -> str:
+        """
+        Member object representation in string format.
+
+        :return: string
+        """
+        return f"{self.name}, {self.age}: {self.trainers}"
+
+
 class Gym:
     """Class Gym."""
 
@@ -12,17 +56,43 @@ class Gym:
 
     def add_member(self, member: Member) -> Member:
         """Add member."""
-        if isinstance(member, Member) and (self.can_add_member(member) is True):
-            self.members.append(member)
-            return member
-        return None
+        if self.can_add_member(member):
+            if len(self.members) < self.max_members_number:
+                self.members.append(member)
+                return member
+            else:
+                weakest = self.weakest()
+                for weak_member in weakest:
+                    self.remove_member(weak_member)
+                self.members.append(member)
+                member.gyms.append(self)
+                return member
 
     def can_add_member(self, member: Member) -> bool:
         """Can add member."""
-        if isinstance(member, Member) and member not in self.members and len(self.members) <= self.max_members_number:
-            return True
+        if isinstance(member, Member):
+            if member not in self.members and isinstance(member.trainers, Trainers):
+                if member.trainers.stamina > 0 and member.trainers.color is not None and member.trainers.color != "":
+                    return True
+                else:
+                    return False
+            else:
+                return False
         else:
             return False
+
+    def weakest(self):
+        """Find member with the lowest stamina."""
+        lowest_stamina = 100
+        weakest = []
+        for member in self.members:
+            if member.trainers.stamina < lowest_stamina:
+                lowest_stamina = member.trainers.stamina
+
+        for member in self.members:
+            if member.trainers.stamina == lowest_stamina:
+                weakest.append(member)
+        return weakest
 
     def remove_member(self, member: Member):
         """Remove member."""
@@ -31,19 +101,24 @@ class Gym:
 
     def get_total_stamina(self) -> int:
         """Get total stamina."""
-        pass
+        total_stamina = 0
+        for member in self.members:
+            total_stamina += member.trainers.stamina
 
     def get_members_number(self) -> int:
         """Get members number."""
-        pass
+        return len(self.members)
 
     def get_all_members(self) -> list:
         """Get all members."""
-        pass
+        return self.members
 
     def get_average_age(self) -> float:
         """Get average age."""
-        pass
+        total_age = 0
+        for member in self.members:
+            total_age += member.age
+        return round(total_age / len(self.members), 2)
 
     def __repr__(self) -> str:
         """
@@ -54,98 +129,109 @@ class Gym:
         return f"Gym {self.name} : {len(self.members)} member(s)"
 
 
-class Member:
-    """Class Member."""
-
-    def __init__(self, name: str, age: int, trainers: Trainers):
-        """Constructor."""
-        self.name = name
-        self.age = age
-        self.trainers = trainers
-
-    def get_all_gyms(self) -> list:
-        """Get all gyms."""
-        pass
-
-    def get_gyms(self) -> list:
-        """Get gyms."""
-        pass
-
-    # NB! LISADA TULEB JUURDE HÄSTI  LIHTNE   FUNKTSIOON ^ _ ^
-
-    def __repr__(self) -> str:
-        """
-        Member object representation in string format.
-
-        :return: string
-        """
-        return f"{self.name}, {self.age}: {self.trainers}"
-
-
-class Trainers:
-    """Class Trainers."""
-
-    def __init__(self, stamina: int, color: str):
-        """Constructor."""
-        self.staminа = stamina
-        self.color = color
-
-    def __repr__(self) -> str:
-        """
-        Trainers object representation in string format.
-
-        :return: string
-        """
-        return f" Trainers: [{self.stamina}, {self.color}]"
-
-
 class City:
     """Class City."""
 
     def __init__(self, max_gym_number: int):
         """Constructor."""
         self.max_gym_number = max_gym_number
+        self.gyms = []
 
     def build_gym(self, gym: Gym) -> Gym:
         """Build gym."""
-        if isinstance(gym, Gym):
+        if self.can_build_gym():
+            self.gyms.append(gym)
             return gym
 
     def can_build_gym(self) -> bool:
         """Can build gym."""
-        pass
+        if len(self.gyms) < self.max_gym_number:
+            return True
+        else:
+            return False
 
     def destroy_gym(self):
         """Destroy gym."""
-        pass
+        lowest_member_count = 2000
+        for gym in self.gyms:
+            if gym.get_members_number() < lowest_member_count:
+                lowest_member_count = gym.get_members_number()
+        for gym in self.gyms:
+            if gym.get_members_number() == lowest_member_count:
+                self.gyms.remove(gym)
 
     def get_max_members_gym(self) -> list:
         """Get max members gym."""
-        pass
+        max_members_gyms = []
+        max_members = 0
+        for gym in self.gyms:
+            members_number = gym.get_members_number()
+            if members_number > max_members:
+                max_members = members_number
+        for gym in self.gyms:
+            if gym.get_members_number() == max_members:
+                max_members_gyms.append(gym)
+        return max_members_gyms
 
     def get_max_stamina_gyms(self) -> list:
         """Get max stamina gyms."""
-        pass
+        max_stamina_gyms = []
+        max_stamina = 0
+        for gym in self.gyms:
+            total_stamina = gym.get_total_stamina()
+            if total_stamina > max_stamina:
+                max_stamina = total_stamina
+        for gym in self.gyms:
+            if gym.get_total_stamina() == max_stamina:
+                max_stamina_gyms.append(gym)
+        return max_stamina_gyms
 
     def get_max_average_ages(self) -> list:
         """Get max average ages."""
-        pass
+        max_average_ages = []
+        max_average_age = 0
+        for gym in self.gyms:
+            average_age = gym.get_average_age()
+            if average_age > max_average_age:
+                max_average_age = average_age
+        for gym in self.gyms:
+            if gym.get_average_age() == max_average_age:
+                max_average_ages.append(gym)
+        return max_average_ages
 
     def get_min_average_ages(self) -> list:
         """Get min average ages."""
-        pass
+        min_average_ages = []
+        min_average_age = 100
+        for gym in self.gyms:
+            average_age = gym.get_average_age()
+            if average_age < min_average_age:
+                min_average_age = average_age
+        for gym in self.gyms:
+            if gym.get_average_age() == min_average_age:
+                min_average_ages.append(gym)
+        return min_average_ages
 
     def get_gyms_by_trainers_color(self, color: str) -> list:
         """Get gyms by trainers color."""
-        pass
+        trainers_count_dict = {}
+        for gym in self.gyms:
+            if gym.get_count_of_trainers(color) > 0:
+                trainers_count_dict[gym] = gym.get_count_of_trainers(color)
+        return sorted(trainers_count_dict.keys(), key=trainers_count_dict.get, reverse=True)
 
     def get_gyms_by_name(self, name: str) -> list:
         """Get gyms by name."""
-        pass
+        name_count_dict = {}
+        for gym in self.gyms:
+            if gym.get_name_count(name) > 0:
+                name_count_dict[gym] = gym.get_name_count(name)
+
+        return sorted(name_count_dict.keys(), key=name_count_dict.get, reverse=True)
 
     def get_all_gyms(self) -> list:
         """Get all gyms."""
-        pass
+        return self.gyms
 
 
 if __name__ == "__main__":
@@ -213,12 +299,3 @@ if __name__ == "__main__":
     gym6.add_member(Member("Bob", 50, Trainers(70, "green")))
     gym6.add_member(Member("Sandra", 25, Trainers(30, "pink")))
     gym6.add_member(Member("Bob", 35, Trainers(50, "black")))
-
-    city3.get_max_members_gym()  # [Gym Gym Eesti : 4 member(s)]
-    city3.get_max_stamina_clubs()  # [Gym People Fitness : 2 member(s)]
-    city3.get_max_average_ages()  # [Gym Gym Eesti : 4 member(s)] => average age 37,5
-    city3.get_min_average_ages()  # [Gym People Fitness : 2 member(s)] => average age 19
-    city3.get_gyms_by_trainers_color(
-        "green")  # [Gym Gym Eesti : 4 member(s), Gym People Fitness : 2 member(s)] => Gym Eesti has 2 members with green trainers, People Fitness has 1.
-    city3.get_gyms_by_name(
-        "Bob")  # [Gym Gym Eesti : 4 member(s), Gym Sparta : 2 member(s)] => Gym Eesti has 2 members with name Bob, Sparta has 1.
