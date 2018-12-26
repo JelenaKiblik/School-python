@@ -104,6 +104,7 @@ class Gym:
         total_stamina = 0
         for member in self.members:
             total_stamina += member.trainers.stamina
+        return total_stamina
 
     def get_members_number(self) -> int:
         """Get members number."""
@@ -195,7 +196,7 @@ class City:
         max_stamina = 0
         for gym in self.gyms:
             total_stamina = gym.get_total_stamina()
-            if total_stamina > max_stamina:
+            if int(total_stamina) > int(max_stamina):
                 max_stamina = total_stamina
         for gym in self.gyms:
             if gym.get_total_stamina() == max_stamina:
