@@ -11,7 +11,7 @@ class Trainers:
 
     def __repr__(self) -> str:
         """
-        Trainers object representation in string format.
+        Trainer object representation in string format.
 
         :return: string
         """
