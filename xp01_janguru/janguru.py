@@ -1,4 +1,5 @@
 """Süvapython 01 - Jänguru."""
+from fractions import Fraction
 
 
 def meet_me(pos1, jump_distance1, sleep1, pos2, jump_distance2, sleep2):
@@ -14,24 +15,29 @@ def meet_me(pos1, jump_distance1, sleep1, pos2, jump_distance2, sleep2):
 
     :return: positsioon, kus nad esimest korda kohtuvad
     """
-    if (pos1 >= 0 and pos2 >= 0) and (jump_distance1, jump_distance2 >= 0) and (sleep1, sleep2 > 0):
-        janguru1 = (jump_distance1) / sleep1
-        janguru2 = (jump_distance2) / sleep2
-        if (janguru1 > janguru2) and (pos1 < pos2):
-            meet_time = (pos2 - pos1) / (janguru1 - janguru2)
-            meet_pos = pos1 + (meet_time * janguru1)
-            return round(meet_pos)
-        elif (janguru1 < janguru2) and (pos1 < pos2):
-            return -1
-        elif (janguru1 < janguru2) and (pos1 > pos2):
-            meet_time = (pos1 - pos2) / (janguru2 - janguru1)
-            meet_pos = pos2 + (meet_time * janguru2)
-            return round(meet_pos)
-        elif (janguru1 == janguru2) and (pos1 == pos2):
-            meet_pos = jump_distance1 * 2
-            return round(meet_pos)
+    if pos1 == pos2:
+        pos1 = pos2
+    elif (jump_distance1 / sleep1 > jump_distance2 / sleep2 and pos1 > pos2) or (
+            jump_distance2 / sleep2 > jump_distance1 / sleep1 and pos2 > pos1):
+        pos1 = -1
+    elif jump_distance1 / sleep1 == jump_distance2 / sleep2:
+        pos1 = -1
     else:
-        return -1
+        if pos1 > pos2:
+            while pos1 != pos2:
+                pos1 += Fraction(jump_distance1, sleep1)
+                pos2 += Fraction(jump_distance2, sleep2)
+                if pos2 > pos1:
+                    pos1 = -1
+                    break
+        elif pos2 > pos1:
+            while pos1 != pos2:
+                pos1 += Fraction(jump_distance1, sleep1)
+                pos2 += Fraction(jump_distance2, sleep2)
+                if pos1 > pos2:
+                    pos1 = -1
+                    break
+    return pos1
 
 
 if __name__ == '__main__':
