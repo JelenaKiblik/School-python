@@ -5,6 +5,7 @@ class Person:
     """Represent a person."""
 
     def __init__(self, first_name, last_name, email, gender, age):
+        """Constructor."""
         self.first_name = first_name
         self.last_name = last_name
         self.email = email
@@ -15,6 +16,7 @@ class Person:
 def get_oldest_person(person_list):
     """
     Return the person with the highest age.
+
     If multiple people are of the given age, return the first in the list.
 
     :param person_list: input list
@@ -26,6 +28,7 @@ def get_oldest_person(person_list):
 def get_person_with_shortest_name(person_list):
     """
     Return the person with the shortest name (first name + last name).
+
     If there are multiple, return the first in the list.
 
     :param person_list:
