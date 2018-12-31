@@ -1,5 +1,4 @@
 """PR15 Statistics - lambdas."""
-from functools import reduce
 
 
 class Person:
@@ -32,7 +31,7 @@ def get_person_with_shortest_name(person_list):
     :param person_list:
     :return:
     """
-    return sorted(person_list, key=lambda item: item.last_name+item.first_name)[0]
+    return sorted(person_list, key=lambda item: (item.last_name + item.first_name))[0]
 
 
 def get_all_underage_people(person_list):
