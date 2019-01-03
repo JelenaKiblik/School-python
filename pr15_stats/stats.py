@@ -55,7 +55,7 @@ def filter_list_by_gender(person_list, gender):
     :param gender: string 'Male' or 'Female'
     :return: a list of persons with the given gender
     """
-    return list(filter(lambda x: x.gender, person_list))
+    return list(filter(lambda x: x.gender == gender, person_list))
 
 
 def get_people_with_government_emails(person_list):
