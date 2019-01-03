@@ -22,7 +22,7 @@ def get_oldest_person(person_list):
     :param person_list: input list
     :return: Person object
     """
-    return max(person_list, key=lambda item: item.age)
+    return max(person_list, key=lambda x: x.age)
 
 
 def get_person_with_shortest_name(person_list):
@@ -34,7 +34,7 @@ def get_person_with_shortest_name(person_list):
     :param person_list:
     :return:
     """
-    return sorted(person_list, key=lambda item: (item.last_name + item.first_name))[0]
+    return min(person_list, key=lambda x: (len(x.first_name) + len(x.last_name)))
 
 
 def get_all_underage_people(person_list):
@@ -44,7 +44,7 @@ def get_all_underage_people(person_list):
     :param person_list: input list of Person objects
     :return: list of all underage people
     """
-    pass
+    return list(filter(lambda x: x.age < 18, person_list))
 
 
 def filter_list_by_gender(person_list, gender):
@@ -55,7 +55,7 @@ def filter_list_by_gender(person_list, gender):
     :param gender: string 'Male' or 'Female'
     :return: a list of persons with the given gender
     """
-    pass
+    return list(filter(lambda x: x.gender, person_list))
 
 
 def get_people_with_government_emails(person_list):
@@ -65,7 +65,7 @@ def get_people_with_government_emails(person_list):
     :param person_list: input list
     :return: a list of Person objects with an government email.
     """
-    pass
+    return list(filter(lambda x: x.email.endswith('.gov'), person_list))
 
 
 def sort_list_by_email_length(person_list):
@@ -75,7 +75,7 @@ def sort_list_by_email_length(person_list):
     :param person_list: input list
     :return: a sorted list of Person objects
     """
-    pass
+    return sorted(person_list, key=lambda x: len(x.email))
 
 
 def get_list_of_all_names_in_uppercase(person_list):
@@ -85,7 +85,8 @@ def get_list_of_all_names_in_uppercase(person_list):
     :param person_list: input list
     :return: a list of uppercase first names
     """
-    pass
+    # return list(map(uppercase, person_list))
+    return map(lambda x: x.upper(), person_list)
 
 
 if __name__ == "__main__":
@@ -99,8 +100,8 @@ if __name__ == "__main__":
 
     print(get_oldest_person(person_list))  # hammond
     print(get_person_with_shortest_name(person_list))  # jack
-    # print(get_all_underage_people(person_list))  # [ryac, cassie]
-    # print(filter_list_by_gender(person_list, "Female"))  # [sam, cassie]
-    # print(get_people_with_government_emails(person_list))  # [hammond]
-    # print(sort_list_by_email_length(person_list))  # [sam, jack, ryac, cassie, hammond]
-    # print(get_list_of_all_names_in_uppercase(person_list))  # ["JACK", "SAMANTHA", ...]
+    print(get_all_underage_people(person_list))  # [ryac, cassie]
+    print(filter_list_by_gender(person_list, "Female"))  # [sam, cassie]
+    print(get_people_with_government_emails(person_list))  # [hammond]
+    print(sort_list_by_email_length(person_list))  # [sam, jack, ryac, cassie, hammond]
+    print(get_list_of_all_names_in_uppercase(person_list))  # ["JACK", "SAMANTHA", ...]
