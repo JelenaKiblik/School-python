@@ -85,8 +85,7 @@ def get_list_of_all_names_in_uppercase(person_list):
     :param person_list: input list
     :return: a list of uppercase first names
     """
-    # return list(map(uppercase, person_list))
-    return map(lambda x: x.firts_name.upper(), person_list)
+    return person_list, lambda x: x.upper()
 
 
 if __name__ == "__main__":
