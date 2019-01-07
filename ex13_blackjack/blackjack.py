@@ -64,14 +64,14 @@ class Deck:
 
         :param shuffle: if shuffle option is true, make new shuffled deck.
         """
-        if shuffle:
-            new_dict = requests.get("https://deckofcardsapi.com/api/deck/new/shuffle/").json()
-            self.deck_id = new_dict["deck_id"]
-            self.is_shuffled = True
-        else:
-            new_dict = requests.get("https://deckofcardsapi.com/api/deck/new/").json()
-            self.deck_id = new_dict["deck_id"]
-            self.is_shuffled = False
+        if shuffle is False:
+            self.cards_deck = requests.get("https://deckofcardsapi.com/api/deck/new").json()
+            self.deck_id = self.cards_deck["deck_id"]
+            self.is_shuffled = self.cards_deck["shuffled"]
+        if shuffle is True:
+            self.cards_deck = requests.get("https://deckofcardsapi.com/api/deck/new/shuffle").json()
+            self.deck_id = self.cards_deck["deck_id"]
+            self.is_shuffled = self.cards_deck["shuffled"]
 
     def shuffle(self):
         """Shuffle the deck."""
