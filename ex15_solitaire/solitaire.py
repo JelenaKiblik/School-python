@@ -75,11 +75,7 @@ class Solitaire:
 
     def has_won(self) -> bool:
         """Check for the winning position - no cards left in tableau."""
-        if not self.stock:
-            for col in range(self.columns):
-                if len(self.tableau[col]) > 0:
-                    return False
-            return True
+        return all(not x for x in self.tableau)
 
     def has_lost(self) -> bool:
         """
@@ -96,7 +92,8 @@ class Solitaire:
         """
         Print the game.
 
-        Assumes: Card(decorated=True) by default it is already set to True
+        Assumes:
+        Card(decorated=True) by default it is already set to True
         self.tableau -> a list of lists (each list represents a column of cards)
         self.stock -> a list of Card objects that are in the stock
         self.waste_pile -> a list of Card objects that are in the waste pile
