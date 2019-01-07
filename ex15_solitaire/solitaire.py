@@ -95,8 +95,8 @@ class Solitaire:
     def print_game(self):
         """
         Print the game.
-        Assumes:
-        Card(decorated=True) by default it is already set to True
+
+        Assumes: Card(decorated=True) by default it is already set to True
         self.tableau -> a list of lists (each list represents a column of cards)
         self.stock -> a list of Card objects that are in the stock
         self.waste_pile -> a list of Card objects that are in the waste pile
@@ -164,7 +164,7 @@ class Solitaire:
                     break
 
     def ask_next_move(self):
-        """ Next move from the player."""
+        """Next move from the player."""
         self.print_game()
         while True:
             action = input("Choose your next move > ")
