@@ -33,10 +33,10 @@ class Hand:
 
     def add_card(self, card: Card):
         """Add card."""
-        self.get_score(card)
+        self.add_score(card)
         self.cards.append(card)
 
-    def get_score(self, card: Card):
+    def add_score(self, card: Card):
         """Get player score."""
         if card.value.isdigit():
             self.score += int(card.value)
@@ -64,21 +64,19 @@ class Deck:
 
         :param shuffle: if shuffle option is true, make new shuffled deck.
         """
-        if shuffle is False:
-            self.cards_deck = requests.get("https://deckofcardsapi.com/api/deck/new").json()
-            self.deck_id = self.cards_deck["deck_id"]
-            self.is_shuffled = self.cards_deck["shuffled"]
-        if shuffle is True:
-            self.cards_deck = requests.get("https://deckofcardsapi.com/api/deck/new/shuffle").json()
-            self.deck_id = self.cards_deck["deck_id"]
-            self.is_shuffled = self.cards_deck["shuffled"]
+        if shuffle:
+            new_dict = requests.get("https://deckofcardsapi.com/api/deck/new/shuffle/").json()
+            self.deck_id = new_dict["deck_id"]
+            self.is_shuffled = True
+        else:
+            new_dict = requests.get("https://deckofcardsapi.com/api/deck/new/").json()
+            self.deck_id = new_dict["deck_id"]
+            self.is_shuffled = False
 
     def shuffle(self):
         """Shuffle the deck."""
-        if self.is_shuffled is False:
-            address = f"https://deckofcardsapi.com/api/deck/{self.deck_id}/shuffle"
-            self.is_shuffled = True
-            return requests.get(address)
+        requests.get("https://deckofcardsapi.com/api/deck/{}/shuffle".format(self.deck_id))
+        self.is_shuffled = True
 
     def draw(self) -> Card:
         """
@@ -86,13 +84,8 @@ class Deck:
 
         :return: card instance.
         """
-        address = f"https://deckofcardsapi.com/api/deck/{self.deck_id}/draw"
-        deck = requests.get(address).json()
-        card = deck["cards"][0]
-        code = card["code"]
-        suit = card["suit"]
-        value = card["value"]
-        return Card(value, suit, code)
+        card_list = requests.get("https://deckofcardsapi.com/api/deck/{}/draw".format(self.deck_id)).json()["cards"]
+        return Card(card_list[0]["value"], card_list[0]["suit"], card_list[0]["code"])
 
 
 class BlackjackController:
