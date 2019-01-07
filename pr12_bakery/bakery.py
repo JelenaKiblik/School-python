@@ -53,85 +53,71 @@ class Bakery:
         self.name = name
         self.min_experience_level = min_experience_level
         self.budget = budget
-        self.bakers = []
+        self.bakers = {}
         self.pastries = []
         self.recipes = {}
 
     def add_baker(self, baker: Baker) -> Baker:
         """Add baker."""
-        if isinstance(baker, Baker) and baker.experience_level >= self.min_experience_level:
-            self.bakers.append(baker)
-            set(self.bakers)
+        if baker.experience_level >= self.min_experience_level:
+            self.bakers[baker] = baker.experience_level
             return baker
 
     def remove_baker(self, baker: Baker):
         """Remove baker."""
-        if isinstance(baker, Baker):
-            if baker in self.bakers:
-                self.bakers.remove(baker)
+        if baker in self.bakers:
+            del self.bakers[baker]
 
     def add_recipe(self, name: str):
         """Add recipe."""
-        if len(self.bakers) != 0:
-            if name not in self.recipes:
-                self.budget = self.budget - len(name)
-                # complexity_level = abs(küpsetise nimetuse pikkus * pagarikojas töötavate pagarite arv - kõige nõrgema pagari experience_level)
-                complexity = abs(len(name) * len(self.bakers) - min(self.bakers, key=lambda baker: baker.experience_level))
-                recipe = Recipe(name, complexity)
-                if self.budget >= 0:
-                    self.recipes[name] = recipe
+        price = len(name)
+        if len(self.bakers) == 0:
+            return None
+        if self.budget - price < 0:
+            return None
+        if name in self.recipes:
+            return None
+        self.budget -= price
+        complexity_level = abs(price * len(self.bakers) - min(self.bakers.values()))
+        self.recipes[name] = complexity_level
+        return complexity_level
 
     def make_order(self, name: str) -> Pastry:
         """Make order."""
-        new_list = []
-        if name in self.recipes:
-            for baker in self.bakers:
-                if isinstance(baker, Baker) and baker.experience_level >= self.recipe.complexity_level:
-                    new_list.append(baker)
-
-            # min_baker = min(new_list, key=lambda baker: baker.experience_level)
-
-            money = self.name * 4
-            self.budget += money * 0.5
-            self.baker.money += money * 0.5
-            self.pastries.append(self.name)
-            self.bakery.min_experience_level += 1
-
-        # 1)check if recipe exist
-        # 2) find baker
-        # loop over bakers
-        # if given baker xp is enough:
-        #       add baker to list
-        #   find the baker with the lower xp in the list
-        #
-        # loop over bakers:
-        #   if baker.xp < enough
-        #       if baker.xp < current_lowest:
-        #           memorize this baker
-        #
-        # baker.xp += len(name)
-        # calculate profit => bakery, baker
-        # store Pastry
-        # return Pastry
-        pass
+        if name not in self.recipes:
+            return
+        if self.recipes[name] >= max(self.bakers.values()):
+            return
+        required_exp = self.recipes[name]
+        closest_exp = max(self.bakers.values())
+        baker = list(self.bakers.keys())[list(self.bakers.values()).index(closest_exp)]
+        for cook, exp in self.bakers.items():
+            if required_exp == exp:
+                baker = cook
+                break
+            if exp - required_exp > 0 and (closest_exp - required_exp) > (exp - required_exp):
+                closest_exp = exp
+                baker = cook
+        baker.experience_level += len(name)
+        self.bakers[baker] += len(name)
+        income = len(name) * 4
+        baker.money += int(0.5 * income)
+        self.budget += int(0.5 * income)
+        self.min_experience_level += 1
+        self.pastries.append(Pastry(name, required_exp))
+        return Pastry(name, required_exp)
 
     def get_recipes(self) -> dict:
         """Get recipes."""
-        d = {}
-        for name, recipe in self.recipes.items():
-            d[name] = recipe.complexity_level
-        return d
+        return self.recipes
 
     def get_pastries(self) -> list:
         """Get pastries."""
-        # sorted()
-        # order by pastry.complexity_level
-        return self.pastries.sort()
+        return sorted(self.pastries, key=lambda k: k.complexity_level, reverse=True)
 
     def get_bakers(self) -> list:
         """Get bakers."""
-        # order by baker.experience level, descending
-        return self.bakers.sort()
+        return sorted(self.bakers, key=lambda k: k.experience_level, reverse=True)
 
     def __repr__(self) -> str:
         """
@@ -176,30 +162,30 @@ if __name__ == '__main__':
 
     print(bakery1.budget)  # 104 (used to be 96: 96 + len('cake') * 2 = 104)
     print(polly.money)  # 13 (5 she had + len('cake') * 2 = 13)
-    #
-    # print(bakery1.get_pastries())  # [cake] ("NB! cake is instance of class Pastry, not a string)
-    #
-    # ########################################################################
-    #
-    # bakery2 = Bakery("Pihlaka", 11, 100)
-    #
-    # john = Baker("John", 11, 5)
-    # megane = Baker("Megane", 17, 4)
-    # kate = Baker("Megane", 18, 8)
-    #
-    # bakery2.add_baker(john)
-    # bakery2.add_baker(megane)
-    # bakery2.add_baker(kate)
-    #
-    # bakery2.add_recipe("muffin")
-    # bakery2.add_recipe("cupcake")
-    # bakery2.add_recipe("biscuits")
-    #
-    # print(bakery2.get_recipes())  # {'muffin': 7, 'cupcake': 10, 'biscuits': 13}
-    #
-    # print(
-    #     bakery2.get_bakers())  # [Baker: Megane(18), Baker: Megane(17), Baker: John(11)]
-    # bakery2.make_order("biscuits")
-    # print(
-    #     bakery2.get_bakers())  # [Baker: Megane(25), Baker: Megane(18), Baker: John(11)]
-    # # Magane was chosen to be the baker as the most closest experience (which is also greater than complexity) was 17.
+
+    print(bakery1.get_pastries())  # [cake] ("NB! cake is instance of class Pastry, not a string)
+
+    ########################################################################
+
+    bakery2 = Bakery("Pihlaka", 11, 100)
+
+    john = Baker("John", 11, 5)
+    megane = Baker("Megane", 17, 4)
+    kate = Baker("Megane", 18, 8)
+
+    bakery2.add_baker(john)
+    bakery2.add_baker(megane)
+    bakery2.add_baker(kate)
+
+    bakery2.add_recipe("muffin")
+    bakery2.add_recipe("cupcake")
+    bakery2.add_recipe("biscuits")
+
+    print(bakery2.get_recipes())  # {'muffin': 7, 'cupcake': 10, 'biscuits': 13}
+
+    print(
+        bakery2.get_bakers())  # [Baker: Megane(18), Baker: Megane(17), Baker: John(11)]
+    bakery2.make_order("biscuits")
+    print(
+        bakery2.get_bakers())  # [Baker: Megane(25), Baker: Megane(18), Baker: John(11)]
+    # Magane was chosen to be the baker as the most closest experience (which is also greater than complexity) was 17.
