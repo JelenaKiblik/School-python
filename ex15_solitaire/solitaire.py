@@ -88,7 +88,8 @@ class Solitaire:
         Losing position: no cards left in stock and no possible moves.
         """
         for column in range(len(self.tableau)):
-            return self.can_move(self.tableau[column][-1])
+            if self.can_move(self.tableau[column][-1]):
+                return False
         return True
 
     def print_game(self):
