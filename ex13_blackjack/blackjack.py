@@ -146,7 +146,6 @@ class BlackjackController:
                             break
 
 
-
 class BlackjackView:
     """Minimalistic UI/view for the blackjack game."""
 
