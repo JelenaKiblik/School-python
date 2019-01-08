@@ -29,7 +29,6 @@ class Solitaire:
         self.tableau = []  # -> list of (columns[lists] (where each list -> cards_in_column * Card instances))
         self.waste = []  # -> list of Card instances
         self.stock = []  # -> list of Card instances
-
         self.deck.shuffle_deck()  # ->  shuffle_deck() from package cards
         for column in range(self.columns):
             column = []
@@ -49,9 +48,8 @@ class Solitaire:
         Example: 8 is adjacent to 7 and 9. Ace is only adjacent to 2.
         King is only adjacent to Queen.
         """
-        for column in range(self.columns):
-            if card == self.tableau[column][-1]:
-                return abs(card.rank - self.waste[-1].rank) == 1
+        if card in [card[-1] for card in self.tableau if card]:
+            return abs(card.rank - self.waste[-1].rank) == 1
         return False
 
     def move_card(self, col: int):
