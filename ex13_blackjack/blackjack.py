@@ -40,25 +40,25 @@ class Hand:
         aces_list = []
         if card.value.isdigit():
             self.score += int(card.value)
-        # if card.value == "ACE":
-        #     self.aces += 1
-        #     self.score += 11
+        if card.value == "ACE":
+            self.aces += 1
+            self.score += 11
         if card.value in ["JACK", "QUEEN", "KING"]:
             self.score += 10
 
-        # if self.score > 21 and self.aces > 0:
-        #     for card in self.cards:
-        #         aces_list.append(card.value)
-        #     while self.score > 21 and self.aces != 0:
-        #         self.score -= 10
-        #         aces_list.remove("ACE")
-        #         self.aces -= 1
-        if aces_list:
-            for index, ace in enumerate(aces_list):
-                if len(aces_list) - 1 != index or self.score + 11 > 21:
-                    self.score += 1
-                else:
-                    self.score += 11
+        if self.score > 21 and self.aces > 0:
+            for card in self.cards:
+                aces_list.append(card.value)
+            while self.score > 21 and self.aces != 0:
+                self.score -= 10
+                aces_list.remove("ACE")
+                self.aces -= 1
+        # if aces_list:
+        #     for index, ace in enumerate(aces_list):
+        #         if len(aces_list) - 1 != index or self.score + 11 > 21:
+        #             self.score += 1
+        #         else:
+        #             self.score += 11
 
 
 class Deck:
