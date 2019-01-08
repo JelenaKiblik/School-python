@@ -128,7 +128,7 @@ class BlackjackController:
             if player.score == 21:
                 view.player_won(self.state)
                 break
-            if player.score < 21:
+            elif player.score < 21:
                 if view.ask_next_move(self.state) == "H":
                     player.add_card(deck.draw())
                 else:
