@@ -73,16 +73,16 @@ class Deck:
         if shuffle is False:
             self.deck = requests.get("https://deckofcardsapi.com/api/deck/new").json()
             self.deck_id = self.deck["deck_id"]
-            self.if_shuffled = True
+            self.is_shuffled = True
         if shuffle is True:
             self.deck = requests.get("https://deckofcardsapi.com/api/deck/new/shuffle").json()
             self.deck_id = self.deck["deck_id"]
-            self.if_shuffled = False
+            self.is_shuffled = False
 
     def shuffle(self):
         """Shuffle the deck."""
         requests.get("https://deckofcardsapi.com/api/deck/{}/shuffle".format(self.deck_id))
-        self.if_shuffled = True
+        self.is_shuffled = True
 
     def draw(self) -> Card:
         """
@@ -111,7 +111,7 @@ class BlackjackController:
         self.state["player"] = player
         self.state["dealer"] = dealer
 
-        if not deck.if_shuffled:
+        if not deck.is_shuffled:
             deck.shuffle()
         for i in range(2):
             player.add_card(deck.draw())
