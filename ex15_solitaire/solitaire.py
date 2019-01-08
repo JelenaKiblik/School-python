@@ -1,7 +1,6 @@
 """Golf solitaire."""
 from itertools import zip_longest
 from textwrap import dedent
-
 from cards import Deck
 
 
@@ -50,7 +49,7 @@ class Solitaire:
         Example: 8 is adjacent to 7 and 9. Ace is only adjacent to 2.
         King is only adjacent to Queen.
         """
-        if card in [x[-1] for x in self.tableau if x]:
+        if card in [card[-1] for card in self.tableau if card]:
             return abs(card.rank - self.waste[-1].rank) == 1
         return False
 
@@ -75,7 +74,7 @@ class Solitaire:
 
     def has_won(self) -> bool:
         """Check for the winning position - no cards left in tableau."""
-        return all(not x for x in self.tableau)
+        return all(not card for card in self.tableau)
 
     def has_lost(self) -> bool:
         """
@@ -83,7 +82,7 @@ class Solitaire:
 
         Losing position: no cards left in stock and no possible moves.
         """
-        return not self.stock and all(not self.can_move(x) for x in [x[-1] for x in self.tableau if x])
+        return not self.stock and all(not self.can_move(card) for card in [card[-1] for card in self.tableau if card])
 
     def print_game(self):
         """
