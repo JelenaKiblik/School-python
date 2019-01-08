@@ -53,12 +53,6 @@ class Hand:
                 self.score -= 10
                 aces_list.remove("ACE")
                 self.aces -= 1
-        # if aces_list:
-        #     for index, ace in enumerate(aces_list):
-        #         if len(aces_list) - 1 != index or self.score + 11 > 21:
-        #             self.score += 1
-        #         else:
-        #             self.score += 11
 
 
 class Deck:
@@ -73,11 +67,11 @@ class Deck:
         if shuffle is False:
             self.deck = requests.get("https://deckofcardsapi.com/api/deck/new").json()
             self.deck_id = self.deck["deck_id"]
-            self.is_shuffled = True
+            self.is_shuffled = self.cards_deck["shuffled"]
         if shuffle is True:
             self.deck = requests.get("https://deckofcardsapi.com/api/deck/new/shuffle").json()
             self.deck_id = self.deck["deck_id"]
-            self.is_shuffled = False
+            self.is_shuffled = self.cards_deck["shuffled"]
 
     def shuffle(self):
         """Shuffle the deck."""
@@ -145,7 +139,6 @@ class BlackjackController:
                             view.player_won(self.state)
                             break
                     break
-
 
 
 class BlackjackView:
