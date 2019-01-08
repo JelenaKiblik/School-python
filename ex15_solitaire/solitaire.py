@@ -49,8 +49,9 @@ class Solitaire:
         Example: 8 is adjacent to 7 and 9. Ace is only adjacent to 2.
         King is only adjacent to Queen.
         """
-        if card in [card[-1] for card in self.tableau if card]:
-            return abs(card.rank - self.waste[-1].rank) == 1
+        for card in self.tableau:
+            if card in card[-1]:
+                return abs(card.rank - self.waste[-1].rank) == 1
         return False
 
     def move_card(self, col: int):
