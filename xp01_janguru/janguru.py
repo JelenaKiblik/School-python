@@ -3,18 +3,7 @@ from fractions import Fraction
 
 
 def meet_me(pos1, jump_distance1, sleep1, pos2, jump_distance2, sleep2):
-    """
-    Convert point from polar coordinates to cartesian coordinates.
-
-    :param pos1: kui kaugel (mitu ühikut) ta purskkaevust on.
-    :param jump_distance1: kui kaugele (mitu ühikut) jänguru ühe hüppega hüppab.
-    :param sleep1: peale hüpet tahab jänguru puhata. Näitab, kui kaua (mitu ajaühikut) jänguru puhkab kahe hüppe vahel.
-    :param pos2: kui kaugel (mitu ühikut) ta purskkaevust on.
-    :param jump_distance2: kui kaugele (mitu ühikut) jänguru ühe hüppega hüppab.
-    :param sleep2: peale hüpet tahab jänguru puhata. Näitab, kui kaua (mitu ajaühikut) jänguru puhkab kahe hüppe vahel.
-
-    :return: positsioon, kus nad esimest korda kohtuvad
-    """
+    """Convert point from polar coordinates to cartesian coordinates."""
     if pos1 == pos2:
         pos1 = pos2
     elif (jump_distance1 / sleep1 > jump_distance2 / sleep2 and pos1 > pos2) or (
@@ -24,12 +13,14 @@ def meet_me(pos1, jump_distance1, sleep1, pos2, jump_distance2, sleep2):
         pos1 = -1
     else:
         if pos1 > pos2:
+            counter = 0
             while pos1 != pos2:
-                pos1 += Fraction(jump_distance1, sleep1)
-                pos2 += Fraction(jump_distance2, sleep2)
-                if pos2 > pos1:
-                    pos1 = -1
-                    break
+                counter += 1
+                if counter == pos1:
+                    pos1 += jump_distance1
+                if counter == pos2:
+                    pos2 += jump_distance2
+            return pos1
         elif pos2 > pos1:
             while pos1 != pos2:
                 pos1 += Fraction(jump_distance1, sleep1)
