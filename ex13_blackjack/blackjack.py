@@ -67,11 +67,11 @@ class Deck:
         if shuffle is False:
             self.deck = requests.get("https://deckofcardsapi.com/api/deck/new").json()
             self.deck_id = self.deck["deck_id"]
-            self.is_shuffled = self.cards_deck["shuffled"]
+            self.is_shuffled = self.deck["shuffled"]
         if shuffle is True:
             self.deck = requests.get("https://deckofcardsapi.com/api/deck/new/shuffle").json()
             self.deck_id = self.deck["deck_id"]
-            self.is_shuffled = self.cards_deck["shuffled"]
+            self.is_shuffled = self.deck["shuffled"]
 
     def shuffle(self):
         """Shuffle the deck."""
