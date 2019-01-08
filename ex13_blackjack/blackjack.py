@@ -1,6 +1,5 @@
 """Simple game of blackjack."""
 from textwrap import dedent
-
 import requests
 
 
@@ -29,7 +28,7 @@ class Hand:
         """Constructor."""
         self.score = 0
         self.cards = []
-        self.aces_used = 0
+        self.aces = 0
 
     def add_card(self, card: Card):
         """Add card."""
@@ -38,21 +37,28 @@ class Hand:
 
     def add_score(self, card: Card):
         """Get player score."""
+        aces_list = []
         if card.value.isdigit():
             self.score += int(card.value)
+        # if card.value == "ACE":
+        #     self.aces += 1
+        #     self.score += 11
         if card.value in ["JACK", "QUEEN", "KING"]:
             self.score += 10
-        if card.value == "ACE":
-            self.aces_used += 1
-            self.score += 11
-        if self.score > 21 and self.aces_used > 0:
-            aces_list = []
-            for card in self.cards:
-                aces_list.append(card.value)
-            while self.score > 21 and self.aces_used != 0:
-                self.score -= 10
-                aces_list.remove("ACE")
-                self.aces_used -= 1
+
+        # if self.score > 21 and self.aces > 0:
+        #     for card in self.cards:
+        #         aces_list.append(card.value)
+        #     while self.score > 21 and self.aces != 0:
+        #         self.score -= 10
+        #         aces_list.remove("ACE")
+        #         self.aces -= 1
+        if aces_list:
+            for index, ace in enumerate(aces_list):
+                if len(aces_list) - 1 != index or self.score + 11 > 21:
+                    self.score += 1
+                else:
+                    self.score += 11
 
 
 class Deck:
@@ -65,18 +71,18 @@ class Deck:
         :param shuffle: if shuffle option is true, make new shuffled deck.
         """
         if shuffle is False:
-            self.cards_deck = requests.get("https://deckofcardsapi.com/api/deck/new").json()
-            self.deck_id = self.cards_deck["deck_id"]
-            self.is_shuffled = self.cards_deck["shuffled"]
+            self.deck = requests.get("https://deckofcardsapi.com/api/deck/new").json()
+            self.deck_id = self.deck["deck_id"]
+            self.if_shuffled = True
         if shuffle is True:
-            self.cards_deck = requests.get("https://deckofcardsapi.com/api/deck/new/shuffle").json()
-            self.deck_id = self.cards_deck["deck_id"]
-            self.is_shuffled = self.cards_deck["shuffled"]
+            self.deck = requests.get("https://deckofcardsapi.com/api/deck/new/shuffle").json()
+            self.deck_id = self.deck["deck_id"]
+            self.if_shuffled = False
 
     def shuffle(self):
         """Shuffle the deck."""
         requests.get("https://deckofcardsapi.com/api/deck/{}/shuffle".format(self.deck_id))
-        self.is_shuffled = True
+        self.if_shuffled = True
 
     def draw(self) -> Card:
         """
@@ -84,8 +90,8 @@ class Deck:
 
         :return: card instance.
         """
-        card_list = requests.get("https://deckofcardsapi.com/api/deck/{}/draw".format(self.deck_id)).json()["cards"]
-        return Card(card_list[0]["value"], card_list[0]["suit"], card_list[0]["code"])
+        draw_card = requests.get("https://deckofcardsapi.com/api/deck/{}/draw".format(self.deck_id)).json()["cards"]
+        return Card(draw_card[0]["value"], draw_card[0]["suit"], draw_card[0]["code"])
 
 
 class BlackjackController:
@@ -99,28 +105,24 @@ class BlackjackController:
         :param view: view to communicate with.
         """
         self.state = {}
+        self.deck = deck
         player = Hand()
         dealer = Hand()
-        if not deck.is_shuffled:
+        self.state["player"] = player
+        self.state["dealer"] = dealer
+
+        if not deck.if_shuffled:
             deck.shuffle()
         for i in range(2):
             player.add_card(deck.draw())
             dealer.add_card(deck.draw())
 
-        self.state["player"] = player
-        self.state["dealer"] = dealer
         self.play(player, dealer, deck, view)
 
     def play(self, player, dealer, deck: Deck, view: 'BlackjackView'):
         """Playing the game."""
         while True:
-            if player.score == 21:
-                view.player_won(self.state)
-                break
-            if player.score > 21:
-                view.player_lost(self.state)
-                break
-            elif player.score < 21:
+            if player.score < 21:
                 if view.ask_next_move(self.state) == "H":
                     player.add_card(deck.draw())
                 else:
@@ -136,7 +138,12 @@ class BlackjackController:
                         elif dealer.score > 21:
                             view.player_won(self.state)
                             break
-                    break
+            if player.score > 21:
+                view.player_lost(self.state)
+                break
+            if player.score == 21:
+                view.player_won(self.state)
+                break
 
 
 class BlackjackView:
