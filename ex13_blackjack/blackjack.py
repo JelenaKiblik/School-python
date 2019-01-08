@@ -144,6 +144,8 @@ class BlackjackController:
                         elif dealer.score > 21:
                             view.player_won(self.state)
                             break
+                    break
+
 
 
 class BlackjackView:
