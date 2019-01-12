@@ -18,7 +18,7 @@ def meet_me(pos1, jump_distance1, sleep1, pos2, jump_distance2, sleep2):
             # print("code3")
             return pos1
         else:
-            y = abs((pos2 - pos1)/(jump_distance2 - (jump_distance1 * (sleep2/sleep1))))
+            y = abs((pos2 - pos1) / (jump_distance2 - (jump_distance1 * (sleep2 / sleep1))))
             # print("code4")
             return int(pos2 + y * jump_distance2)
     if (pos1 != pos2) and (jump_distance1 - jump_distance2 != 0) and ((sleep1 % sleep2 == 0) or (sleep2 % sleep1 == 0)):
@@ -48,4 +48,3 @@ if __name__ == '__main__':
     print(meet_me(0, 1, 1, 1, 1, 1))  # => -1
     print(meet_me(10, 7, 7, 5, 8, 6))   # => 45
     print(meet_me(1, 7, 1, 15, 5, 1))   # => 50
-
