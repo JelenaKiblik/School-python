@@ -1,7 +1,7 @@
 """Pokemon."""
-# import requests
-# import json
-# import random
+import requests
+import json
+import random
 url = "https://pokeapi.co/api/v2/pokemon/"
 
 
@@ -90,12 +90,11 @@ class Data:
         :param endpoint: Address where to make the GET request.
         :return: Response data.
         """
-        # response = requests.get(url)
-        # if response.ok:
-        #     json = response.json()
-        #     data = json.get('results', [])
-        # return data
-        pass
+        response = requests.get(url)
+        if response.ok:
+            json = response.json()
+            data = json.get('results', [])
+        return data
 
     @staticmethod
     def get_additional_data(url):
@@ -105,10 +104,9 @@ class Data:
         :param endpoint: Address where to make the GET request.
         :return: Response data.
         """
-        # response = requests.get(url)
-        # data = json.loads(response.text)
-        # return data
-        pass
+        response = requests.get(url)
+        data = json.loads(response.text)
+        return data
 
 
 class Pokemon:
@@ -169,29 +167,20 @@ class World:
         self.pokemons = []
         self.available_pokemons = []
 
-    def add_pokemons(self, no_of_pokemons):
+    def add_pokemons(self, nr_of_pokemons):
         """Add Pokemons to world, GET data from the API."""
-        # for i in range(1, no_of_pokemons + 1):
-        #     num_pokemon = str(i)
-        #     data = Data.get_additional_data("https://pokeapi.co/api/v2/pokemon/" + num_pokemon + "/")
-        #     name = str(data["forms"][0]["name"])
-        #     exp = data["base_experience"]
-        #     types = list(reversed([typ['type']['name'] for typ in data['types']]))
-        #     stats = {stat['stat']['name']: stat['base_stat'] for stat in data['stats']}
-        #     attack = stats['attack']
-        #     defense = stats['defense']
-        #     new_pokemon = {}
-        #     new_pokemon["name"] = name.upper()
-        #     new_pokemon["base_experience"] = exp
-        #     # new_pokemon["stats"] = stats
-        #     new_pokemon['attack'] = attack
-        #     new_pokemon['defence'] = defense
-        #     new_pokemon["types"] = types
-        #     self.pokemons.append(new_pokemon)
-        #     self.available_pokemons.append(new_pokemon)
-        # # print(self.pokemons)
-        # return self.pokemons, self.available_pokemons
-        pass
+        for i in range(1, nr_of_pokemons + 1):
+            num_pokemon = str(i)
+            data = Data.get_additional_data("https://pokeapi.co/api/v2/pokemon/" + num_pokemon + "/")
+            name = (str(data["forms"][0]["name"])).upper()
+            experience = data["base_experience"]
+            types = list(reversed([typ['type']['name'] for typ in data['types']]))
+            stats = {stat['stat']['name']: stat['base_stat'] for stat in data['stats']}
+            attack = stats['attack']
+            defense = stats['defense']
+            self.pokemons.append(Pokemon(name, experience, attack, defense, types))
+        print(self.pokemons)
+        return self.pokemons
 
     def get_pokemons_by_type(self):
         """
