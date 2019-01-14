@@ -185,7 +185,7 @@ class City:
             if int(total_stamina) > int(max_stamina):
                 max_stamina = total_stamina
         for x in self.gyms:
-            if gym.get_total_stamina() == max_stamina:
+            if x.get_total_stamina() == max_stamina:
                 max_stamina_gyms.append(x)
         return max_stamina_gyms
 
