@@ -1,3 +1,5 @@
+"""Formula."""
+
 import re
 import math
 
@@ -77,7 +79,7 @@ def free_number_finder(equation, eq_pos):
 
 def space_insert(checked):
     """Insert space."""
-    p = re.compile('(\+|-)')
+    p = re.compile(r'(\+|-)')
     var1 = p.search(checked)
     if var1 is not None and checked[1] != ' ':
         checked = checked[0] + ' ' + checked[1:]
@@ -86,7 +88,7 @@ def space_insert(checked):
 
 def one_checker(checked):
     """Checker."""
-    d = re.compile('r(\s)1x2?')
+    d = re.compile(r'(\s)1x2?')
     if d.search(checked) is not None:
         if checked[0] == '-' or checked[0] == '+':
             checked = checked[:2] + checked[3:]
@@ -181,6 +183,7 @@ def normalize_equation(equation):
 
 
 def solve_equation(equation):
+    """Solve equation."""
     a_str = (re.search(r'(-?\d+)x2', equation)).group()
     a = int(a_str[0])
     b_str = (re.search(r'([+-] ?\d+)x', equation)).group()
@@ -194,17 +197,17 @@ def solve_equation(equation):
 
 
 if __name__ == '__main__':
-    # def print_regex_results(regex, f):
-    #     for match in re.finditer(regex, f):
-    #         print(match.group(1))
-    #
-    #
-    # f = "3x2 - 4x + 1"
-    #
-    # print_regex_results(regex_a, f)  # 3
-    # print_regex_results(regex_b, f)  # - 4
-    # print_regex_results(regex_c, f)  # 1
+    def print_regex_results(regex, f):
+        for match in re.finditer(regex, f):
+            print(match.group(1))
+
+
+    f = "3x2 - 4x + 1"
+
+    print_regex_results(regex_a, f)  # 3
+    print_regex_results(regex_b, f)  # - 4
+    print_regex_results(regex_c, f)  # 1
 
     print(normalize_equation("x2 + 2x = 3"))  # = > "x2 + 2x - 3 = 0"
-    #
-    # print(solve_equation("2x2 + 3x - 2 = 0"))  # = > "x1 = -2.0, x2 = 0.5"
+
+    print(solve_equation("2x2 + 3x - 2 = 0"))  # = > "x1 = -2.0, x2 = 0.5"
