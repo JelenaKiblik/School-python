@@ -3,6 +3,8 @@ from PIL import Image
 
 
 class Fractal:
+    """Fractal."""
+
     def __init__(self, size, scale, computation):
         """Constructor.
 
@@ -18,9 +20,7 @@ class Fractal:
         self.img = Image.new("RGB", (size[0], size[1]))
 
     def compute(self):
-        """
-        Create the fractal by computing every pixel value.
-        """
+        """Create the fractal by computing every pixel value."""
         for y in range(self.size[1]):
             for x in range(self.size[0]):
                 i = self.pixel_value((x, y))[0]
