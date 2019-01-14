@@ -1,7 +1,6 @@
 """Pokemon."""
 import requests
 import json
-import random
 url = "https://pokeapi.co/api/v2/pokemon/"
 
 
@@ -67,8 +66,7 @@ class Person:
 
     def remove_pokemon(self):
         """Remove Person's Pokemon."""
-        if self.pokemon is not None:
-            del self.pokemon
+        del self
 
     def __repr__(self):
         """
