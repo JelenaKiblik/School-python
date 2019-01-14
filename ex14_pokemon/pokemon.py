@@ -40,7 +40,7 @@ class Person:
         """
         self.name = name
         self.age = age
-        self.pokemon = []
+        self.pokemon = None
 
     def add_pokemon(self, pokemon):
         """
@@ -51,10 +51,10 @@ class Person:
         """
         if not isinstance(pokemon, Pokemon):
             raise CannotAddPokemonException(f"Must be instance of Pokemon!")
-        if len(self.pokemon) != 0:
+        if self.pokemon is not None:
             raise CannotAddPokemonException(f"Person already has a pokemon!")
         else:
-            self.pokemonappend(pokemon)
+            self.pokemon = pokemon
 
     def get_pokemon(self):
         """
