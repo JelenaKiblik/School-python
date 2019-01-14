@@ -120,7 +120,7 @@ def side_swapper(var1):
 
 
 def minus(square, linear, free):
-    """Find minus"""
+    """Find minus."""
     if square != '':
         if square[0] == '-':
             square = side_swapper(square)
@@ -198,9 +198,9 @@ def solve_equation(equation):
 
 if __name__ == '__main__':
     def print_regex_results(regex, f):
+        """Public function."""
         for match in re.finditer(regex, f):
             print(match.group(1))
-
 
     f = "3x2 - 4x + 1"
 
