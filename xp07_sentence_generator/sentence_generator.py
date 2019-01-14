@@ -8,8 +8,21 @@ def helper(lis):
             yield i
 
 
+rules = """
+noun = koer | porgand | madis | kurk | tomat
+target = koera | porgandit | madist | kurki | tomatit
+verb = sööb | lööb | jagab | tahab | ei taha
+adjective = ilus | kole | pahane | magus | sinu
+targetadjective = ilusat | koledat | pahast | magusat | sinu
+sentence = noun verb target .
+beautifulsentence = adjective noun verb targetadjective target .
+twosentences = sentence sentence
+"""
+
+
 class SentenceGenerator:
     """Class."""
+
     def __init__(self, rules_string):
         """Constructor."""
         rules_dict = {}
@@ -37,7 +50,7 @@ class SentenceGenerator:
 
 
 if __name__ == '__main__':
-    g = SentenceGenerator("noun = koer | porgand | madis | kurk | tomat")
+    g = SentenceGenerator(rules)
     gg = g.sentence_generator("noun")
     print(next(gg))
     print(next(gg))
