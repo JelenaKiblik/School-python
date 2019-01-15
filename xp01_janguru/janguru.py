@@ -13,12 +13,9 @@ def meet_me(pos1, jump_distance1, sleep1, pos2, jump_distance2, sleep2):
         slower = 2
 
     distance_between = None
-
     slower_just_moved = False
-
     current_position_1 = pos1
     current_position_2 = pos2
-
     current_sleep_remaining_1 = 0
     current_sleep_remaining_2 = 0
 
@@ -28,19 +25,15 @@ def meet_me(pos1, jump_distance1, sleep1, pos2, jump_distance2, sleep2):
             current_sleep_remaining_1 = sleep1
             if slower == 1:
                 slower_just_moved = True
-
         if current_sleep_remaining_2 == 0:
             current_position_2 += jump_distance2
             current_sleep_remaining_2 = sleep2
             if slower == 2:
                 slower_just_moved = True
-
         current_sleep_remaining_1 -= 1
         current_sleep_remaining_2 -= 1
-
         if current_position_1 == current_position_2:
             return current_position_1
-
         if slower_just_moved:
             if slower == 1:
                 if current_position_1 < current_position_2:
@@ -54,7 +47,6 @@ def meet_me(pos1, jump_distance1, sleep1, pos2, jump_distance2, sleep2):
                     distance_between = current_position_1 - current_position_2
                     if previous_distance_between is not None and distance_between >= previous_distance_between:
                         return -1
-
         slower_just_moved = False
 
 
