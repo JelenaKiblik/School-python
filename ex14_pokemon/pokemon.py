@@ -66,7 +66,8 @@ class Person:
 
     def remove_pokemon(self):
         """Remove Person's Pokemon."""
-        del self.pokemon
+        if self.pokemon is not None:
+            del self.pokemon
 
     def __repr__(self):
         """
@@ -90,8 +91,8 @@ class Data:
         """
         response = requests.get(url)
         if response.ok:
-            json = response.json()
-            data = json.get('results', [])
+            json_data = response.json()
+            data = json_data.get('results', [])
         return data
 
     @staticmethod
@@ -186,8 +187,7 @@ class World:
 
         :return: Dict of Pokemons, grouped by types.
         """
-        # return sorted(self.pokemons, key=lambda i: i['types'])
-        pass
+        return sorted(self.pokemons, key=lambda i: i.types)
 
     def hike(self, person: Person):
         """
