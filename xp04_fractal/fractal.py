@@ -62,38 +62,31 @@ if __name__ == "__main__":
         c = complex(pixel[0], pixel[1])
         z = 0
         iterations = 0
-
         for i in range(1000):
             if abs(z) >= 2.0:
                 break
             z = z ** 2 + c
             iterations += 1
-
         return iterations, z
-
 
     def julia_computation(pixel):
         """Return integer -> how many iterations it takes for the pixel to escape the mandelbrot set."""
         c = complex(-0.1, 0.651)
         z = complex(pixel[0], pixel[1])
         iterations = 0
-
         for i in range(255):
             if abs(z) >= 2.0:
                 break
             z = z ** 2 + c
             iterations += 1
-
         return iterations, z
 
     mandelbrot = Fractal((1000, 1000), [(-2, -2), (2, 2)], mandelbrot_computation)
     mandelbrot.compute()
     mandelbrot.save_image("mandelbrot15.png")
-
     # mandelbrot2 = Fractal((1000, 1000), [(-0.74877, 0.065053), (-0.74872, 0.065103)], mandelbrot_computation)
     # mandelbrot2.compute()
     # mandelbrot2.save_image("mandelbrot2png")
-
-    # mandelbrot = Fractal((1000, 1000), [(-2, -2), (2, 2)], julia_computation)
-    # mandelbrot.compute()
-    # mandelbrot.save_image("mandelbrot_julia.png")
+    # mandelbrot3 = Fractal((1000, 1000), [(-2, -2), (2, 2)], julia_computation)
+    # mandelbrot3.compute()
+    # mandelbrot3.save_image("mandelbrot_julia.png")
