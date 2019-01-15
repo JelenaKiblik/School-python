@@ -24,11 +24,11 @@ class Fractal:
         for y in range(self.size[1]):
             for x in range(self.size[0]):
                 i = self.pixel_value((x, y))[0]
-                quotient = i / 1000
-                color = int(max(0.0, min(quotient, 1.0)) * 255.999)
+                ratio = i / 100
+                color = int(max(0.0, min(ratio, 1.0)) * 955.999)
 
-                if quotient > 0.5:
-                    self.img.putpixel((x, y), (color, 255, color))
+                if ratio > 0.5:
+                    self.img.putpixel((x, y), (color, 955, color))
                 else:
                     self.img.putpixel((x, y), (0, color, 0))
 
@@ -71,9 +71,29 @@ if __name__ == "__main__":
 
         return iterations, z
 
+
+    def julia_computation(pixel):
+        """Return integer -> how many iterations it takes for the pixel to escape the mandelbrot set."""
+        c = complex(-0.1, 0.651)
+        z = complex(pixel[0], pixel[1])
+        iterations = 0
+
+        for i in range(255):
+            if abs(z) >= 2.0:
+                break
+            z = z ** 2 + c
+            iterations += 1
+
+        return iterations, z
+
     mandelbrot = Fractal((1000, 1000), [(-2, -2), (2, 2)], mandelbrot_computation)
     mandelbrot.compute()
-    mandelbrot.save_image("mandelbrot.png")
+    mandelbrot.save_image("mandelbrot15.png")
+
     # mandelbrot2 = Fractal((1000, 1000), [(-0.74877, 0.065053), (-0.74872, 0.065103)], mandelbrot_computation)
     # mandelbrot2.compute()
-    # mandelbrot2.save_image("mandelbrot2.png")
+    # mandelbrot2.save_image("mandelbrot2png")
+
+    # mandelbrot = Fractal((1000, 1000), [(-2, -2), (2, 2)], julia_computation)
+    # mandelbrot.compute()
+    # mandelbrot.save_image("mandelbrot_julia.png")
