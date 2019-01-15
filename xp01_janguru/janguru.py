@@ -1,41 +1,61 @@
 """Süvapython 01 - Jänguru."""
+from fractions import Fraction
 
 
 def meet_me(pos1, jump_distance1, sleep1, pos2, jump_distance2, sleep2):
-    """Convert point from polar coordinates to cartesian coordinates."""
-    if (pos1 != pos2) and (jump_distance1 - jump_distance2 != 0) and ((sleep1 % sleep2 != 0) and (sleep2 % sleep1 != 0)):
-        x = abs(pos1 - pos2) / abs(jump_distance1 - jump_distance2)
-        if (((sleep2 * x) - 1) <= ((sleep1 * x) - 1)) and (((sleep2 * x) - 1) >= (sleep1 * (x - 1))):
-            # print("code1")
-            return int(pos1 + (jump_distance1 * x))
-        elif (jump_distance1 / sleep1 > jump_distance2 / sleep2 and pos1 > pos2) or (
-                jump_distance2 / sleep2 > jump_distance1 / sleep1 and pos2 > pos1):
-            pos1 = -1
-            # print("code2")
-            return pos1
-        elif jump_distance1 / sleep1 == jump_distance2 / sleep2:
-            pos1 = -1
-            # print("code3")
-            return pos1
-        else:
-            y = abs((pos2 - pos1) / (jump_distance2 - (jump_distance1 * (sleep2 / sleep1))))
-            # print("code4")
-            return int(pos2 + y * jump_distance2)
-    if (pos1 != pos2) and (jump_distance1 - jump_distance2 != 0) and ((sleep1 % sleep2 == 0) or (sleep2 % sleep1 == 0)):
-        if sleep1 > sleep2:
-            y = sleep1 / sleep2
-            pos = pos2 + jump_distance2 * (y - 1)
-            # print("code5")
-            return int(pos)
-    if (pos1 == pos2) and (jump_distance1 == jump_distance2):
-        # print("code6")
-        return pos1 + jump_distance1
-    if (sleep1 == sleep2) and (jump_distance1 != jump_distance2):
-        x = abs(pos1 - pos2) / abs(jump_distance2 - jump_distance1)
-        # print("code7")
-        return int(pos1 + jump_distance1 * x)
+    """Function that returns the position they meet for the first time or -1 if they don't meet."""
+    speed_1 = Fraction(jump_distance1, sleep1)
+    speed_2 = Fraction(jump_distance2, sleep2)
+
+    if speed_2 >= speed_1:
+        slower = 1
     else:
-        return -1
+        slower = 2
+
+    distance_between = None
+
+    slower_just_moved = False
+
+    current_position_1 = pos1
+    current_position_2 = pos2
+
+    current_sleep_remaining_1 = 0
+    current_sleep_remaining_2 = 0
+
+    while True:
+        if current_sleep_remaining_1 == 0:
+            current_position_1 += jump_distance1
+            current_sleep_remaining_1 = sleep1
+            if slower == 1:
+                slower_just_moved = True
+
+        if current_sleep_remaining_2 == 0:
+            current_position_2 += jump_distance2
+            current_sleep_remaining_2 = sleep2
+            if slower == 2:
+                slower_just_moved = True
+
+        current_sleep_remaining_1 -= 1
+        current_sleep_remaining_2 -= 1
+
+        if current_position_1 == current_position_2:
+            return current_position_1
+
+        if slower_just_moved:
+            if slower == 1:
+                if current_position_1 < current_position_2:
+                    previous_distance_between = distance_between
+                    distance_between = current_position_2 - current_position_1
+                    if previous_distance_between is not None and distance_between >= previous_distance_between:
+                        return -1
+            if slower == 2:
+                if current_position_2 < current_position_1:
+                    previous_distance_between = distance_between
+                    distance_between = current_position_1 - current_position_2
+                    if previous_distance_between is not None and distance_between >= previous_distance_between:
+                        return -1
+
+        slower_just_moved = False
 
 
 if __name__ == '__main__':
