@@ -66,7 +66,7 @@ class Person:
 
     def remove_pokemon(self):
         """Remove Person's Pokemon."""
-        self.pokemon.remove(self)
+        del self
 
     def __repr__(self):
         """
