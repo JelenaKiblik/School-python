@@ -3,7 +3,7 @@ from fractions import Fraction
 
 
 def meet_me(pos1, jump_distance1, sleep1, pos2, jump_distance2, sleep2):
-    """Convert point from polar coordinates to cartesian coordinates."""
+    """"Function that returns the position they meet for the first time or -1 if they don't meet."""
     speed_1 = Fraction(jump_distance1, sleep1)
     speed_2 = Fraction(jump_distance2, sleep2)
 
@@ -14,7 +14,11 @@ def meet_me(pos1, jump_distance1, sleep1, pos2, jump_distance2, sleep2):
         slower = 2
 
     distance_between = None
+
     slower_just_moved = False
+
+    current_position_1 = pos1
+    current_position_2 = pos2
 
     # How long do they have left to sleep?
     current_sleep_remaining_1 = 0
@@ -24,13 +28,13 @@ def meet_me(pos1, jump_distance1, sleep1, pos2, jump_distance2, sleep2):
     while True:
         # Check if the Jänguru are still sleeping, and if not, jump and reset the sleep timer.
         if current_sleep_remaining_1 == 0:
-            pos1 += jump_distance1
+            current_position_1 += jump_distance1
             current_sleep_remaining_1 = sleep1
             if slower == 1:
                 slower_just_moved = True
 
         if current_sleep_remaining_2 == 0:
-            pos2 += jump_distance2
+            current_position_2 += jump_distance2
             current_sleep_remaining_2 = sleep2
             if slower == 2:
                 slower_just_moved = True
@@ -39,22 +43,22 @@ def meet_me(pos1, jump_distance1, sleep1, pos2, jump_distance2, sleep2):
         current_sleep_remaining_2 -= 1
 
         # Check to see if they're at the same position.
-        if pos1 == pos2:
-            return pos1
+        if current_position_1 == current_position_2:
+            return current_position_1
 
         # Check if they will never meet. If the slower Jänguru is behind the faster one, and after moving gets further behind,
         # or stays same distance as it was the previous time it jumped, then it will never catch up.
         if slower_just_moved:
             if slower == 1:
-                if pos1 < pos2:
+                if current_position_1 < current_position_2:
                     previous_distance_between = distance_between
-                    distance_between = pos2 - pos1
+                    distance_between = current_position_2 - current_position_1
                     if previous_distance_between is not None and distance_between >= previous_distance_between:
                         return -1
             if slower == 2:
-                if pos2 < pos1:
+                if current_position_2 < current_position_1:
                     previous_distance_between = distance_between
-                    distance_between = pos1 - pos2
+                    distance_between = current_position_1 - current_position_2
                     if previous_distance_between is not None and distance_between >= previous_distance_between:
                         return -1
 
